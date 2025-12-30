@@ -1,20 +1,21 @@
+import 'dart:async';
+import 'dart:developer';
+
+import 'package:boby_ai_case/core/setup/setup_bindings.dart';
+import 'package:boby_ai_case/movie_app.dart';
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const MainApp());
-}
+void main() async {
+  runZonedGuarded(
+    () async {
+      setupBindings();
 
-class MainApp extends StatelessWidget {
-  const MainApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
-        ),
-      ),
-    );
-  }
+      runApp(const MovieApp());
+    },
+    (error, stack) {
+      // For debugging purposes
+      log('Error: ${error.toString()}');
+      log('Stack: ${stack.toString()}');
+    },
+  );
 }
