@@ -59,10 +59,10 @@ extension BuildContextTextStyleExt on BuildContext {
     );
   }
 
-  TextStyle get fs24W600 {
+  TextStyle get fs24W700 {
     return TextStyle(
       fontSize: 24.sp,
-      fontWeight: FontWeight.w600,
+      fontWeight: FontWeight.w700,
       color: labelColor,
     );
   }
