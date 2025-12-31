@@ -1,13 +1,82 @@
-import 'package:boby_ai_case/core/extensions/theme/build_context_text_style_ext.dart';
+import 'package:boby_ai_case/presentation/home/home_page.dart';
+import 'package:boby_ai_case/presentation/onboarding/store/onboarding_store.dart';
+import 'package:boby_ai_case/presentation/onboarding/widgets/onboarding_continue_button.dart';
+import 'package:boby_ai_case/presentation/onboarding/widgets/onboarding_genre_selection_step.dart';
+import 'package:boby_ai_case/presentation/onboarding/widgets/onboarding_movie_selection_step.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:mobx/mobx.dart';
+import 'package:provider/provider.dart';
 
-class OnboardingPage extends StatelessWidget {
+class OnboardingPage extends StatefulWidget {
   const OnboardingPage({super.key});
 
   @override
+  State<OnboardingPage> createState() => _OnboardingPageState();
+}
+
+class _OnboardingPageState extends State<OnboardingPage> {
+  late final OnboardingStore _onboardingStore;
+  late ReactionDisposer _onboardingCompletedReaction;
+
+  @override
+  void initState() {
+    super.initState();
+    _onboardingStore = Provider.of<OnboardingStore>(context, listen: false);
+
+    _onboardingCompletedReaction = reaction(
+      (_) => _onboardingStore.onboardingCompleted,
+      (bool completed) {
+        if (completed && mounted) {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => const HomePage()),
+          );
+        }
+      },
+    );
+  }
+
+  @override
+  void dispose() {
+    _onboardingStore.dispose();
+    _onboardingCompletedReaction();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(child: Text('Onboarding Page', style: context.fs12W400)),
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: SystemUiOverlayStyle.light,
+      child: Scaffold(
+        body: Stack(
+          children: [
+            Positioned.fill(
+              child: PageView(
+                controller: _onboardingStore.pageController,
+                physics: const NeverScrollableScrollPhysics(),
+                children: [
+                  OnboardingMovieSelectionStep(
+                    onboardingStore: _onboardingStore,
+                  ),
+                  OnboardingGenreSelectionStep(
+                    onboardingStore: _onboardingStore,
+                  ),
+                ],
+              ),
+            ),
+            Positioned(
+              bottom: 79.h,
+              left: 0,
+              right: 0,
+              child: OnboardingContinueButton(
+                onboardingStore: _onboardingStore,
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

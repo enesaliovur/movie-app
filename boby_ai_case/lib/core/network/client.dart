@@ -45,11 +45,13 @@ class Client {
 
   Future<Response<dynamic>> post(
     String path, {
+    dynamic data,
     Map<String, dynamic>? queryParameters,
     Options? options,
   }) async {
     return await _dioInstance.post(
       path,
+      data: data,
       queryParameters: queryParameters,
       options: options,
     );

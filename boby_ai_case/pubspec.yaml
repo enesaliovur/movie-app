@@ -19,6 +19,11 @@ dependencies:
   flutter_mobx: ^2.2.1+1
   shared_preferences: ^2.5.4
   get_it: ^9.2.0
+  sembast: ^3.8.6
+  rxdart: ^0.28.0
+  provider: ^6.1.5+1
+  cached_network_image: ^3.4.1
+  shimmer: ^3.0.0
 
 dev_dependencies:
   flutter_test:

@@ -8,6 +8,8 @@ extension BuildContextTextStyleExt on BuildContext {
       fontSize: 8.sp,
       fontWeight: FontWeight.w400,
       color: labelColor,
+      letterSpacing: 0,
+      height: 1,
     );
   }
 
@@ -16,6 +18,8 @@ extension BuildContextTextStyleExt on BuildContext {
       fontSize: 12.sp,
       fontWeight: FontWeight.w400,
       color: labelColor,
+      letterSpacing: 0,
+      height: 1,
     );
   }
 
@@ -24,6 +28,8 @@ extension BuildContextTextStyleExt on BuildContext {
       fontSize: 14.sp,
       fontWeight: FontWeight.w400,
       color: labelColor,
+      letterSpacing: 0,
+      height: 1,
     );
   }
 
@@ -32,6 +38,8 @@ extension BuildContextTextStyleExt on BuildContext {
       fontSize: 14.sp,
       fontWeight: FontWeight.w600,
       color: labelColor,
+      letterSpacing: 0,
+      height: 1,
     );
   }
 
@@ -40,6 +48,8 @@ extension BuildContextTextStyleExt on BuildContext {
       fontSize: 16.sp,
       fontWeight: FontWeight.w600,
       color: labelColor,
+      letterSpacing: 0,
+      height: 1,
     );
   }
 
@@ -48,6 +58,18 @@ extension BuildContextTextStyleExt on BuildContext {
       fontSize: 18.sp,
       fontWeight: FontWeight.w600,
       color: labelColor,
+      letterSpacing: 0,
+      height: 1,
+    );
+  }
+
+  TextStyle get fs20W500 {
+    return TextStyle(
+      fontSize: 20.sp,
+      fontWeight: FontWeight.w500,
+      color: labelColor,
+      letterSpacing: 0,
+      height: 1,
     );
   }
 
@@ -56,6 +78,8 @@ extension BuildContextTextStyleExt on BuildContext {
       fontSize: 20.sp,
       fontWeight: FontWeight.w600,
       color: labelColor,
+      letterSpacing: 0,
+      height: 1,
     );
   }
 
@@ -64,6 +88,8 @@ extension BuildContextTextStyleExt on BuildContext {
       fontSize: 24.sp,
       fontWeight: FontWeight.w700,
       color: labelColor,
+      letterSpacing: 0,
+      height: 1,
     );
   }
 
@@ -80,6 +106,8 @@ extension BuildContextTextStyleExt on BuildContext {
       fontSize: 28.sp,
       fontWeight: FontWeight.w600,
       color: labelColor,
+      letterSpacing: 0,
+      height: 1,
     );
   }
 
@@ -88,6 +116,8 @@ extension BuildContextTextStyleExt on BuildContext {
       fontSize: 32.sp,
       fontWeight: FontWeight.w800,
       color: labelColor,
+      letterSpacing: 0,
+      height: 1,
     );
   }
 }

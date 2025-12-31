@@ -15,4 +15,14 @@ class SharedPrefCacheService implements ICacheService {
   Future<void> writeBool(CacheKey key, bool value) {
     return _sharedPref.setBool(key.value, value);
   }
+
+  @override
+  List<String>? readStringList(CacheKey key) {
+    return _sharedPref.getStringList(key.value);
+  }
+
+  @override
+  Future<void> writeStringList(CacheKey key, List<String> value) {
+    return _sharedPref.setStringList(key.value, value);
+  }
 }
