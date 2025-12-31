@@ -1,6 +1,6 @@
 name: boby_ai_case
 description: "boby.ai case"
-publish_to: 'none'
+publish_to: "none"
 version: 0.1.0
 
 environment:
@@ -56,4 +56,3 @@ flutter:
           weight: 200
         - asset: assets/fonts/Inter_18pt-Thin.ttf
           weight: 100
- 

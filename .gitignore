@@ -1,7 +1,6 @@
 # Miscellaneous
 *.class
 *.log
-*.lock
 *.pyc
 *.swp
 .DS_Store
@@ -9,8 +8,8 @@
 .buildlog/
 .history
 .svn/
+*.lock
 .env
-
 
 # IntelliJ related
 *.iml
@@ -49,4 +48,3 @@ android/app/key.jks
 
 # iOS build
 ios/build/
-
