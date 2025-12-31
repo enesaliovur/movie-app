@@ -3,16 +3,10 @@ import 'package:boby_ai_case/core/failure/failure.dart';
 import 'package:boby_ai_case/core/network/client.dart';
 import 'package:boby_ai_case/core/network/mixin/http_failure_handler.dart';
 import 'package:boby_ai_case/core/network/utilities/response_decoder.dart';
+import 'package:boby_ai_case/data/datasources/movie/i_movie_data_source.dart';
 import 'package:boby_ai_case/data/models/movie/movie_genre_data.dart';
 import 'package:boby_ai_case/data/models/movie/movie_information_data.dart';
 import 'package:dartz/dartz.dart';
-
-abstract class IMovieDataSource {
-  Future<FailureOr<MovieInformationData>> getMovies({int page = 1});
-  Future<FailureOr<List<MovieGenreData>>> getGenres();
-  Future<FailureOr<MovieInformationData>> getRecommendations(int movieId);
-  Future<FailureOr<MovieInformationData>> searchMovies(String query);
-}
 
 class MovieDataSource extends IMovieDataSource with HttpFailureHandlerMixin {
   MovieDataSource(this._client, this._httpFailureHandler);
@@ -71,9 +65,9 @@ class MovieDataSource extends IMovieDataSource with HttpFailureHandlerMixin {
   }
 
   @override
-  Future<FailureOr<MovieInformationData>> getRecommendations(
-    int movieId,
-  ) async {
+  Future<FailureOr<MovieInformationData>> getRecommendations({
+    required int movieId,
+  }) async {
     try {
       final response = await _client.get(
         EndpointConstants.recommendations(movieId),
@@ -97,7 +91,9 @@ class MovieDataSource extends IMovieDataSource with HttpFailureHandlerMixin {
   }
 
   @override
-  Future<FailureOr<MovieInformationData>> searchMovies(String query) async {
+  Future<FailureOr<MovieInformationData>> searchMovies({
+    required String query,
+  }) async {
     try {
       final response = await _client.get(
         EndpointConstants.searchMovies,

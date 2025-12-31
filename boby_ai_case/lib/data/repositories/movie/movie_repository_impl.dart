@@ -1,13 +1,15 @@
 import 'package:boby_ai_case/core/failure/failure.dart';
 import 'package:boby_ai_case/core/network/mixin/http_failure_handler.dart';
-import 'package:boby_ai_case/data/datasources/movie/movie_data_source.dart';
+import 'package:boby_ai_case/data/datasources/movie/i_movie_data_source.dart';
 import 'package:boby_ai_case/data/models/movie/movie_genre_data.dart';
 import 'package:boby_ai_case/data/models/movie/movie_information_data.dart';
 import 'package:boby_ai_case/domain/repositories/movie/i_movie_repository.dart';
 import 'package:dartz/dartz.dart';
 
-class MovieRepository with HttpFailureHandlerMixin implements IMovieRepository {
-  const MovieRepository(this._dataSource, this._httpFailureHandler);
+class MovieRepositoryImpl
+    with HttpFailureHandlerMixin
+    implements IMovieRepository {
+  const MovieRepositoryImpl(this._dataSource, this._httpFailureHandler);
   final IMovieDataSource _dataSource;
   final HttpFailureHandler _httpFailureHandler;
 
@@ -35,11 +37,11 @@ class MovieRepository with HttpFailureHandlerMixin implements IMovieRepository {
   }
 
   @override
-  Future<FailureOr<MovieInformationData>> getRecommendations(
-    int movieId,
-  ) async {
+  Future<FailureOr<MovieInformationData>> getRecommendations({
+    required int movieId,
+  }) async {
     try {
-      final result = await _dataSource.getRecommendations(movieId);
+      final result = await _dataSource.getRecommendations(movieId: movieId);
       return result;
     } catch (e) {
       return left(handleErrorsAndExceptions(e));
@@ -47,9 +49,11 @@ class MovieRepository with HttpFailureHandlerMixin implements IMovieRepository {
   }
 
   @override
-  Future<FailureOr<MovieInformationData>> searchMovies(String query) async {
+  Future<FailureOr<MovieInformationData>> searchMovies({
+    required String query,
+  }) async {
     try {
-      final result = await _dataSource.searchMovies(query);
+      final result = await _dataSource.searchMovies(query: query);
       return result;
     } catch (e) {
       return left(handleErrorsAndExceptions(e));
