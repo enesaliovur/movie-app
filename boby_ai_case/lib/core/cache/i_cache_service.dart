@@ -3,4 +3,6 @@ import 'cache_key.dart';
 abstract class ICacheService {
   bool? readBool(CacheKey key);
   Future<void> writeBool(CacheKey key, bool value);
+  List<String>? readStringList(CacheKey key);
+  Future<void> writeStringList(CacheKey key, List<String> value);
 }

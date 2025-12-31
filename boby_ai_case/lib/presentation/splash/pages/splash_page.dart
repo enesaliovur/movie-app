@@ -3,12 +3,13 @@ import 'package:boby_ai_case/core/constants/asset_constants.dart';
 import 'package:boby_ai_case/core/di/setup_injector.dart';
 import 'package:boby_ai_case/core/extensions/theme/build_context_text_style_ext.dart';
 import 'package:boby_ai_case/presentation/home/home_page.dart';
-import 'package:boby_ai_case/presentation/common/movie/store/movie_store.dart';
 import 'package:boby_ai_case/presentation/onboarding/onboarding_page.dart';
+import 'package:boby_ai_case/presentation/onboarding/store/onboarding_store.dart';
 import 'package:boby_ai_case/presentation/splash/store/splash_store.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
@@ -19,7 +20,7 @@ class SplashPage extends StatefulWidget {
 
 class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
   late final SplashStore _splashStore;
-  late final MovieStore _movieStore;
+  late final OnboardingStore _onboardingStore;
   late AnimationController _initialAnimationController;
   late AnimationController _pulseAnimationController;
   late Animation<double> _fadeAnimation;
@@ -31,7 +32,7 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
     super.initState();
 
     _splashStore = getIt<SplashStore>();
-    _movieStore = getIt<MovieStore>();
+    _onboardingStore = getIt<OnboardingStore>();
 
     _setupAnimations();
     _loadInitialData();
@@ -41,11 +42,18 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
     // Initialize splash store (onboarding check)
     await _splashStore.init();
 
-    // Load movies and genres in parallel
-    await Future.wait([_movieStore.getMovies(), _movieStore.getGenres()]);
+    if (_splashStore.showOnboarding) {
+      // Load movies and genres in parallel
+      await Future.wait([
+        _onboardingStore.getMovies(),
+        _onboardingStore.getGenres(),
+      ]);
+    } else {
+      // TODO: home page
+    }
 
     // Check if requests were successful (no failure)
-    if (!_movieStore.hasError) {
+    if (!_onboardingStore.hasError) {
       Future.delayed(const Duration(milliseconds: 500), _handleNavigation);
     }
   }
@@ -90,7 +98,7 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
 
     _initialAnimationController.forward();
   }
- 
+
   @override
   void dispose() {
     _initialAnimationController.dispose();
@@ -104,7 +112,12 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
     if (_splashStore.showOnboarding) {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => const OnboardingPage()),
+        MaterialPageRoute(
+          builder: (_) => Provider(
+            create: (_) => _onboardingStore,
+            child: const OnboardingPage(),
+          ),
+        ),
       );
     } else {
       Navigator.pushReplacement(
