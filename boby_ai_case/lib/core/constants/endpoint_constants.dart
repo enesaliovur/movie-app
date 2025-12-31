@@ -8,7 +8,8 @@ class EndpointConstants {
   }
 
   // Account endpoints
-  static const String account = '/account';
-  static const String favorite = '/account/null/favorite';
-  static const String favoriteMovies = '/account/null/favorite/movies';
+  static const String accountDetails = 'account';
+  static String favorite(String? accountId) => 'account/$accountId/favorite';
+  static String favoriteMovies(String? accountId) =>
+      'account/$accountId/favorite/movies';
 }
