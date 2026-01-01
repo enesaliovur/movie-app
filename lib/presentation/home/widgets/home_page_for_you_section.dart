@@ -1,4 +1,4 @@
-part of '../home_page.dart';
+part of '../pages/home_page.dart';
 
 class HomePageForYouSection extends StatelessWidget {
   const HomePageForYouSection({super.key});

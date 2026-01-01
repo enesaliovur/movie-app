@@ -1,4 +1,4 @@
-import 'package:boby_ai_case/presentation/home/home_page.dart';
+import 'package:boby_ai_case/presentation/home/pages/home_page.dart';
 import 'package:boby_ai_case/presentation/onboarding/store/onboarding_store.dart';
 import 'package:boby_ai_case/presentation/onboarding/widgets/onboarding_continue_button.dart';
 import 'package:boby_ai_case/presentation/onboarding/widgets/onboarding_genre_selection_step.dart';

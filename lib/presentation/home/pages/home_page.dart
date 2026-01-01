@@ -14,10 +14,10 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer/shimmer.dart';
 
-part 'widgets/home_page_for_you_section.dart';
-part 'widgets/home_page_movies_section.dart';
-part 'widgets/genre_chip.dart';
-part 'widgets/category_section.dart';
+part '../widgets/home_page_for_you_section.dart';
+part '../widgets/home_page_movies_section.dart';
+part '../widgets/genre_chip.dart';
+part '../widgets/category_section.dart';
 
 class HomePage extends StatelessWidget {
   static const String path = '/home';

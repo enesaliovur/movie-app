@@ -1,4 +1,4 @@
-part of '../home_page.dart';
+part of '../pages/home_page.dart';
 
 class GenreChip extends StatelessWidget {
   const GenreChip({
