@@ -1,7 +1,8 @@
 import 'package:boby_ai_case/core/failure/failure.dart';
 import 'package:boby_ai_case/data/datasources/account/i_account_data_source.dart';
+import 'package:boby_ai_case/data/mappers/movie_mapper.dart';
 import 'package:boby_ai_case/data/models/account/account.dart';
-import 'package:boby_ai_case/data/models/movie/movie_information_data.dart';
+import 'package:boby_ai_case/domain/entities/movie/paginated_movies_entity.dart';
 import 'package:boby_ai_case/domain/repositories/account/i_account_repository.dart';
 import 'package:dartz/dartz.dart';
 
@@ -25,7 +26,11 @@ class AccountRepositoryImpl implements IAccountRepository {
   }
 
   @override
-  Future<FailureOr<MovieInformationData>> getFavorites() async {
-    return _dataSource.getFavorites();
+  Future<FailureOr<PaginatedMoviesEntity>> getFavorites() async {
+    final result = await _dataSource.getFavorites();
+    return result.fold(
+      (failure) => left(failure),
+      (data) => right(MovieMapper.toPaginatedEntity(data)),
+    );
   }
 }

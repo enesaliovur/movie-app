@@ -11,6 +11,7 @@ import 'package:boby_ai_case/data/repositories/movie/movie_repository_impl.dart'
 import 'package:boby_ai_case/domain/repositories/account/i_account_repository.dart';
 import 'package:boby_ai_case/domain/repositories/movie/i_movie_repository.dart';
 import 'package:boby_ai_case/presentation/common/movie/store/movie_store.dart';
+import 'package:boby_ai_case/presentation/home/store/recommendation_store.dart';
 import 'package:boby_ai_case/presentation/onboarding/store/onboarding_store.dart';
 import 'package:boby_ai_case/presentation/splash/store/splash_store.dart';
 import 'package:get_it/get_it.dart';
@@ -55,11 +56,16 @@ Future<void> setupInjector() async {
   );
 
   // Onboarding
-  getIt.registerFactory<OnboardingStore>(
-    () => OnboardingStore(
+  getIt.registerSingleton<OnboardingStore>(
+    OnboardingStore(
       getIt<ICacheService>(),
       getIt<IAccountRepository>(),
       getIt<IMovieRepository>(),
     ),
+  );
+
+  // Recommendation
+  getIt.registerSingleton<RecommendationStore>(
+    RecommendationStore(getIt<IMovieRepository>(), getIt<IAccountRepository>()),
   );
 }

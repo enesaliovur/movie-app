@@ -1,9 +1,9 @@
 import 'package:boby_ai_case/core/cache/cache_key.dart';
 import 'package:boby_ai_case/core/cache/i_cache_service.dart';
 import 'package:boby_ai_case/core/failure/failure.dart';
-import 'package:boby_ai_case/data/models/movie/movie_data.dart';
-import 'package:boby_ai_case/data/models/movie/movie_genre_data.dart';
-import 'package:boby_ai_case/data/models/movie/movie_information_data.dart';
+import 'package:boby_ai_case/domain/entities/movie/movie_entity.dart';
+import 'package:boby_ai_case/domain/entities/movie/movie_genre_entity.dart';
+import 'package:boby_ai_case/domain/entities/movie/paginated_movies_entity.dart';
 import 'package:boby_ai_case/domain/repositories/movie/i_movie_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
@@ -30,8 +30,8 @@ abstract class _OnboardingStore with Store {
   ObservableList<int> selectedMovieIds = ObservableList<int>();
 
   @observable
-  ObservableList<MovieGenreData> selectedGenres =
-      ObservableList<MovieGenreData>();
+  ObservableList<MovieGenreEntity> selectedGenres =
+      ObservableList<MovieGenreEntity>();
 
   @observable
   bool isProcessing = false;
@@ -56,13 +56,13 @@ abstract class _OnboardingStore with Store {
   Failure? genresFailure;
 
   @observable
-  MovieInformationData movieInformation = MovieInformationData.empty();
+  PaginatedMoviesEntity movieInformation = PaginatedMoviesEntity.empty();
 
   @observable
-  List<MovieGenreData> genres = [];
+  List<MovieGenreEntity> genres = [];
 
   @computed
-  List<MovieData> get movies => movieInformation.movies;
+  List<MovieEntity> get movies => movieInformation.movies;
 
   @computed
   bool get hasMorePages => movieInformation.page < movieInformation.totalPages;
@@ -95,17 +95,17 @@ abstract class _OnboardingStore with Store {
   }
 
   @action
-  void addFavoriteGenre(MovieGenreData genre) {
+  void addFavoriteGenre(MovieGenreEntity genre) {
     if (selectedGenres.length == 2) return;
     selectedGenres.add(genre);
   }
 
   @action
-  void removeFavoriteGenre(MovieGenreData genre) {
+  void removeFavoriteGenre(MovieGenreEntity genre) {
     selectedGenres.remove(genre);
   }
 
-  bool isFavoriteGenre(MovieGenreData genre) {
+  bool isFavoriteGenre(MovieGenreEntity genre) {
     return selectedGenres.contains(genre);
   }
 
@@ -155,7 +155,7 @@ abstract class _OnboardingStore with Store {
 
     result.fold((error) => moviesFailure = error, (data) {
       if (loadMore) {
-        movieInformation = MovieInformationData(
+        movieInformation = PaginatedMoviesEntity(
           movies: [...movieInformation.movies, ...data.movies],
           page: data.page,
           totalPages: data.totalPages,

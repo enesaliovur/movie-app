@@ -1,0 +1,234 @@
+part of '../pages/home_page.dart';
+
+class HomePageMoviesSection extends StatefulWidget {
+  const HomePageMoviesSection({super.key});
+
+  @override
+  State<HomePageMoviesSection> createState() => _HomePageMoviesSectionState();
+}
+
+class _HomePageMoviesSectionState extends State<HomePageMoviesSection> {
+  late final MovieStore _movieStore;
+
+  late final ScrollController _moviesScrollController;
+
+  late final ScrollController _chipScrollController;
+
+  final Map<int, GlobalKey> _sectionKeys = {};
+
+  final Map<int, GlobalKey> _chipKeys = {};
+
+  bool _isUserScrolling = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _movieStore = getIt<MovieStore>();
+    _moviesScrollController = ScrollController();
+    _chipScrollController = ScrollController();
+
+    _moviesScrollController.addListener(_onMoviesScroll);
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _selectFirstGenreIfNeeded();
+    });
+  }
+
+  @override
+  void dispose() {
+    _moviesScrollController.removeListener(_onMoviesScroll);
+    _moviesScrollController.dispose();
+    _chipScrollController.dispose();
+    super.dispose();
+  }
+
+  void _selectFirstGenreIfNeeded() {
+    final genres = _movieStore.availableGenres;
+    if (genres.isNotEmpty && _movieStore.selectedGenreId == null) {
+      _movieStore.selectGenre(genres.first.id);
+    }
+  }
+
+  void _onMoviesScroll() {
+    if (!_isUserScrolling) return;
+    if (!_moviesScrollController.hasClients) return;
+
+    final genres = _movieStore.availableGenres;
+    if (genres.isEmpty) return;
+
+    const double referenceY = 320.0;
+
+    int? selectedGenreId;
+
+    for (final genre in genres) {
+      final key = _sectionKeys[genre.id];
+      if (key?.currentContext == null) continue;
+
+      final renderBox = key!.currentContext!.findRenderObject() as RenderBox?;
+      if (renderBox == null || !renderBox.hasSize) continue;
+
+      final position = renderBox.localToGlobal(Offset.zero);
+      final titleTop = position.dy;
+      final titleHeight = renderBox.size.height;
+      final titleBottom = titleTop + titleHeight;
+
+      if (titleBottom >= referenceY && titleTop < referenceY + 200) {
+        selectedGenreId = genre.id;
+        break;
+      }
+    }
+
+    if (selectedGenreId != null &&
+        selectedGenreId != _movieStore.selectedGenreId) {
+      _movieStore.selectGenre(selectedGenreId);
+      _scrollChipToCenter(selectedGenreId);
+    }
+  }
+
+  void _onGenreTap(int genreId) {
+    _isUserScrolling = false;
+
+    _movieStore.selectGenre(genreId);
+    _scrollChipToCenter(genreId);
+
+    final key = _sectionKeys[genreId];
+    if (key?.currentContext != null) {
+      Scrollable.ensureVisible(
+        key!.currentContext!,
+        duration: const Duration(milliseconds: 400),
+        curve: Curves.easeInOut,
+        alignment: 0.0,
+      ).then((_) {
+        _isUserScrolling = true;
+      });
+    } else {
+      _isUserScrolling = true;
+    }
+  }
+
+  void _scrollChipToCenter(int genreId) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) return;
+      if (!_chipScrollController.hasClients) return;
+
+      final key = _chipKeys[genreId];
+      if (key?.currentContext == null) return;
+
+      final renderBox = key!.currentContext!.findRenderObject() as RenderBox?;
+      if (renderBox == null || !renderBox.hasSize) return;
+
+      final chipPosition = renderBox.localToGlobal(Offset.zero);
+      final chipWidth = renderBox.size.width;
+      final screenWidth = MediaQuery.of(context).size.width;
+      final targetOffset =
+          _chipScrollController.offset +
+          chipPosition.dx +
+          (chipWidth / 2) -
+          (screenWidth / 2);
+
+      final maxExtent = _chipScrollController.position.maxScrollExtent;
+      final clampedOffset = targetOffset.clamp(0.0, maxExtent);
+
+      _chipScrollController.animateTo(
+        clampedOffset,
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeOutCubic,
+      );
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16.sp),
+          child: RichText(
+            text: TextSpan(
+              text: "Movies",
+              style: context.fs24W700,
+              children: [TextSpan(text: " 🎬", style: context.fs24W700)],
+            ),
+          ),
+        ),
+        SizedBox(height: 16.h),
+        _buildGenreChips(),
+        SizedBox(height: 16.h),
+        Expanded(child: _buildMoviesList()),
+      ],
+    );
+  }
+
+  Widget _buildGenreChips() {
+    return Observer(
+      builder: (context) {
+        final genres = _movieStore.availableGenres;
+        final selectedId = _movieStore.selectedGenreId;
+
+        return SizedBox(
+          height: 36.h,
+          child: ListView.builder(
+            controller: _chipScrollController,
+            scrollDirection: Axis.horizontal,
+            itemCount: genres.length,
+            padding: EdgeInsets.symmetric(horizontal: 16.sp),
+            itemBuilder: (context, index) {
+              final genre = genres[index];
+              final isSelected = genre.id == selectedId;
+
+              _chipKeys.putIfAbsent(genre.id, () => GlobalKey());
+
+              return GenreChip(
+                key: _chipKeys[genre.id],
+                name: genre.name,
+                isSelected: isSelected,
+                onTap: () => _onGenreTap(genre.id),
+              );
+            },
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _buildMoviesList() {
+    return Observer(
+      builder: (context) {
+        final genres = _movieStore.availableGenres;
+        final groupedMovies = _movieStore.groupedMovies;
+        if (genres.isEmpty) {
+          if (_movieStore.isMoviesLoading) {
+            return const Center(child: CircularProgressIndicator());
+          }
+          return Center(
+            child: Text("No movies found", style: context.fs24W700),
+          );
+        }
+
+        return SingleChildScrollView(
+          controller: _moviesScrollController,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              for (final genre in genres) ...[
+                Builder(
+                  builder: (context) {
+                    _sectionKeys.putIfAbsent(genre.id, () => GlobalKey());
+
+                    return CategorySection(
+                      categoryName: genre.name,
+                      movies: groupedMovies[genre.id] ?? [],
+                      titleKey: _sectionKeys[genre.id]!,
+                    );
+                  },
+                ),
+                SizedBox(height: 24.sp),
+              ],
+            ],
+          ),
+        );
+      },
+    );
+  }
+}
