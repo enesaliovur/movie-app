@@ -43,6 +43,17 @@ extension BuildContextTextStyleExt on BuildContext {
     );
   }
 
+   TextStyle get fs16W400 {
+    return TextStyle(
+      fontSize: 16.sp,
+      fontWeight: FontWeight.w400,
+      color: labelColor,
+      letterSpacing: 0,
+      height: 1,
+    );
+  }
+
+
   TextStyle get fs16W600 {
     return TextStyle(
       fontSize: 16.sp,

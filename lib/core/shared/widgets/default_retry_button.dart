@@ -1,7 +1,7 @@
 import 'package:boby_ai_case/core/extensions/theme/build_context_color_ext.dart';
 import 'package:boby_ai_case/core/extensions/theme/build_context_radius_ext.dart';
 import 'package:boby_ai_case/core/shared/widgets/scaling_container.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class DefaultRetryButton extends StatelessWidget {
@@ -29,7 +29,7 @@ class DefaultRetryButton extends StatelessWidget {
           borderRadius: context.radius100,
         ),
         child: Icon(
-          CupertinoIcons.arrow_counterclockwise,
+          Icons.refresh,
           color: iconColor ?? context.white,
           size: 20.w,
         ),

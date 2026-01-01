@@ -57,6 +57,9 @@ abstract class _MovieStore with Store {
   @observable
   String searchQuery = '';
 
+  @observable
+  int? selectedGenreId;
+
   @computed
   List<MovieData> get movies => movieInformation.movies;
 
@@ -66,8 +69,26 @@ abstract class _MovieStore with Store {
   @computed
   bool get hasError => moviesFailure != null;
 
+  @computed
+  Map<int, List<MovieData>> get groupedMovies {
+    final Map<int, List<MovieData>> grouped = {};
+    for (final genre in genres) {
+      grouped[genre.id] = movies
+          .where((movie) => movie.genreIds.contains(genre.id))
+          .toList();
+    }
+    return grouped;
+  }
+
+  @computed
+  List<MovieGenreData> get availableGenres {
+    return genres
+        .where((genre) => groupedMovies[genre.id]?.isNotEmpty ?? false)
+        .toList();
+  }
+
   @action
-  Future<void> getMovies({int page = 1, bool loadMore = false}) async {
+  Future<void> fetchMovies({int page = 1, bool loadMore = false}) async {
     if (isMoviesLoading) return;
 
     isMoviesLoading = true;
@@ -91,7 +112,7 @@ abstract class _MovieStore with Store {
   }
 
   @action
-  Future<void> getGenres() async {
+  Future<void> fetchGenres() async {
     if (isGenresLoading) return;
 
     isGenresLoading = true;
@@ -166,9 +187,14 @@ abstract class _MovieStore with Store {
   }
 
   @action
+  void selectGenre(int? genreId) {
+    selectedGenreId = genreId;
+  }
+
+  @action
   Future<void> loadMoreMovies() async {
     if (!hasMorePages || isMoviesLoading) return;
     final nextPage = movieInformation.page + 1;
-    await getMovies(page: nextPage, loadMore: true);
+    await fetchMovies(page: nextPage, loadMore: true);
   }
 }
