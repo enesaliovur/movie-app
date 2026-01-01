@@ -5,7 +5,7 @@ import 'package:boby_ai_case/core/extensions/theme/build_context_text_style_ext.
 import 'package:boby_ai_case/core/shared/widgets/default_retry_button.dart';
 import 'package:boby_ai_case/core/shared/widgets/movie_card.dart';
 import 'package:boby_ai_case/core/shared/widgets/scaling_container.dart';
-import 'package:boby_ai_case/data/models/movie/movie_data.dart';
+import 'package:boby_ai_case/domain/entities/movie/movie_entity.dart';
 import 'package:boby_ai_case/presentation/common/movie/store/movie_store.dart';
 import 'package:boby_ai_case/presentation/home/store/recommendation_store.dart';
 import 'package:flutter/material.dart';

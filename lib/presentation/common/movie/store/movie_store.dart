@@ -3,9 +3,9 @@ import 'dart:math';
 import 'package:boby_ai_case/core/cache/cache_key.dart';
 import 'package:boby_ai_case/core/cache/i_cache_service.dart';
 import 'package:boby_ai_case/core/failure/failure.dart';
-import 'package:boby_ai_case/data/models/movie/movie_data.dart';
-import 'package:boby_ai_case/data/models/movie/movie_genre_data.dart';
-import 'package:boby_ai_case/data/models/movie/movie_information_data.dart';
+import 'package:boby_ai_case/domain/entities/movie/movie_entity.dart';
+import 'package:boby_ai_case/domain/entities/movie/movie_genre_entity.dart';
+import 'package:boby_ai_case/domain/entities/movie/paginated_movies_entity.dart';
 import 'package:boby_ai_case/domain/repositories/movie/i_movie_repository.dart';
 import 'package:mobx/mobx.dart';
 
@@ -43,16 +43,16 @@ abstract class _MovieStore with Store {
   Failure? searchFailure;
 
   @observable
-  MovieInformationData movieInformation = MovieInformationData.empty();
+  PaginatedMoviesEntity movieInformation = PaginatedMoviesEntity.empty();
 
   @observable
-  List<MovieGenreData> genres = [];
+  List<MovieGenreEntity> genres = [];
 
   @observable
-  MovieInformationData recommendations = MovieInformationData.empty();
+  PaginatedMoviesEntity recommendations = PaginatedMoviesEntity.empty();
 
   @observable
-  MovieInformationData searchResults = MovieInformationData.empty();
+  PaginatedMoviesEntity searchResults = PaginatedMoviesEntity.empty();
 
   @observable
   String searchQuery = '';
@@ -61,7 +61,7 @@ abstract class _MovieStore with Store {
   int? selectedGenreId;
 
   @computed
-  List<MovieData> get movies => movieInformation.movies;
+  List<MovieEntity> get movies => movieInformation.movies;
 
   @computed
   bool get hasMorePages => movieInformation.page < movieInformation.totalPages;
@@ -70,8 +70,8 @@ abstract class _MovieStore with Store {
   bool get hasError => moviesFailure != null;
 
   @computed
-  Map<int, List<MovieData>> get groupedMovies {
-    final Map<int, List<MovieData>> grouped = {};
+  Map<int, List<MovieEntity>> get groupedMovies {
+    final Map<int, List<MovieEntity>> grouped = {};
     for (final genre in genres) {
       grouped[genre.id] = movies
           .where((movie) => movie.genreIds.contains(genre.id))
@@ -81,7 +81,7 @@ abstract class _MovieStore with Store {
   }
 
   @computed
-  List<MovieGenreData> get availableGenres {
+  List<MovieGenreEntity> get availableGenres {
     return genres
         .where((genre) => groupedMovies[genre.id]?.isNotEmpty ?? false)
         .toList();
@@ -98,7 +98,7 @@ abstract class _MovieStore with Store {
 
     result.fold((error) => moviesFailure = error, (data) {
       if (loadMore) {
-        movieInformation = MovieInformationData(
+        movieInformation = PaginatedMoviesEntity(
           movies: [...movieInformation.movies, ...data.movies],
           page: data.page,
           totalPages: data.totalPages,
@@ -156,7 +156,7 @@ abstract class _MovieStore with Store {
     searchFailure = null;
 
     if (query.isEmpty) {
-      searchResults = MovieInformationData.empty();
+      searchResults = PaginatedMoviesEntity.empty();
       searchQuery = '';
       return;
     }
@@ -177,7 +177,7 @@ abstract class _MovieStore with Store {
 
   @action
   void clearSearch() {
-    searchResults = MovieInformationData.empty();
+    searchResults = PaginatedMoviesEntity.empty();
     searchQuery = '';
   }
 

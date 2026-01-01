@@ -1,5 +1,5 @@
 import 'package:boby_ai_case/core/failure/failure.dart';
-import 'package:boby_ai_case/data/models/movie/movie_data.dart';
+import 'package:boby_ai_case/domain/entities/movie/movie_entity.dart';
 import 'package:boby_ai_case/domain/repositories/account/i_account_repository.dart';
 import 'package:boby_ai_case/domain/repositories/movie/i_movie_repository.dart';
 import 'package:mobx/mobx.dart';
@@ -21,13 +21,13 @@ abstract class _RecommendationStore with Store {
   Failure? failure;
 
   @observable
-  ObservableList<MovieData> similarMovies = ObservableList<MovieData>();
+  ObservableList<MovieEntity> similarMovies = ObservableList<MovieEntity>();
 
   @observable
   ObservableList<int> favoriteMovieIds = ObservableList<int>();
 
   @computed
-  List<MovieData> get recommendedMovies => similarMovies.toList();
+  List<MovieEntity> get recommendedMovies => similarMovies.toList();
 
   @computed
   bool get hasError => failure != null;

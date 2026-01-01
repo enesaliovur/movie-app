@@ -1,6 +1,6 @@
 import 'package:boby_ai_case/core/extensions/theme/build_context_color_ext.dart';
 import 'package:boby_ai_case/core/extensions/theme/build_context_text_style_ext.dart';
-import 'package:boby_ai_case/data/models/movie/movie_genre_data.dart';
+import 'package:boby_ai_case/domain/entities/movie/movie_genre_entity.dart';
 import 'package:boby_ai_case/presentation/onboarding/store/onboarding_store.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -121,7 +121,7 @@ class _GenreGrid extends StatelessWidget {
 class _GenreItem extends StatelessWidget {
   const _GenreItem({required this.genre, required this.onboardingStore});
 
-  final MovieGenreData genre;
+  final MovieGenreEntity genre;
   final OnboardingStore onboardingStore;
 
   @override

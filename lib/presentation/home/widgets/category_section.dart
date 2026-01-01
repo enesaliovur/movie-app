@@ -9,7 +9,7 @@ class CategorySection extends StatelessWidget {
   });
 
   final String categoryName;
-  final List<MovieData> movies;
+  final List<MovieEntity> movies;
   final GlobalKey titleKey;
 
   @override

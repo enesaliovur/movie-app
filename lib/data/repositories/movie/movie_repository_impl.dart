@@ -1,8 +1,9 @@
 import 'package:boby_ai_case/core/failure/failure.dart';
 import 'package:boby_ai_case/core/network/mixin/http_failure_handler.dart';
 import 'package:boby_ai_case/data/datasources/movie/i_movie_data_source.dart';
-import 'package:boby_ai_case/data/models/movie/movie_genre_data.dart';
-import 'package:boby_ai_case/data/models/movie/movie_information_data.dart';
+import 'package:boby_ai_case/data/mappers/movie_mapper.dart';
+import 'package:boby_ai_case/domain/entities/movie/movie_genre_entity.dart';
+import 'package:boby_ai_case/domain/entities/movie/paginated_movies_entity.dart';
 import 'package:boby_ai_case/domain/repositories/movie/i_movie_repository.dart';
 import 'package:dartz/dartz.dart';
 
@@ -17,44 +18,56 @@ class MovieRepositoryImpl
   HttpFailureHandler get httpFailureHandler => _httpFailureHandler;
 
   @override
-  Future<FailureOr<MovieInformationData>> getMovies({int page = 1}) async {
+  Future<FailureOr<PaginatedMoviesEntity>> getMovies({int page = 1}) async {
     try {
       final result = await _dataSource.getMovies(page: page);
-      return result;
+      return result.fold(
+        (failure) => left(failure),
+        (data) => right(MovieMapper.toPaginatedEntity(data)),
+      );
     } catch (e) {
       return left(handleErrorsAndExceptions(e));
     }
   }
 
   @override
-  Future<FailureOr<List<MovieGenreData>>> getGenres() async {
+  Future<FailureOr<List<MovieGenreEntity>>> getGenres() async {
     try {
       final result = await _dataSource.getGenres();
-      return result;
+      return result.fold(
+        (failure) => left(failure),
+        (data) => right(MovieMapper.toGenreEntityList(data)),
+      );
     } catch (e) {
       return left(handleErrorsAndExceptions(e));
     }
   }
 
   @override
-  Future<FailureOr<MovieInformationData>> getRecommendations({
+  Future<FailureOr<PaginatedMoviesEntity>> getRecommendations({
     required int movieId,
   }) async {
     try {
       final result = await _dataSource.getRecommendations(movieId: movieId);
-      return result;
+      return result.fold(
+        (failure) => left(failure),
+        (data) => right(MovieMapper.toPaginatedEntity(data)),
+      );
     } catch (e) {
       return left(handleErrorsAndExceptions(e));
     }
   }
 
   @override
-  Future<FailureOr<MovieInformationData>> searchMovies({
+  Future<FailureOr<PaginatedMoviesEntity>> searchMovies({
     required String query,
   }) async {
     try {
       final result = await _dataSource.searchMovies(query: query);
-      return result;
+      return result.fold(
+        (failure) => left(failure),
+        (data) => right(MovieMapper.toPaginatedEntity(data)),
+      );
     } catch (e) {
       return left(handleErrorsAndExceptions(e));
     }

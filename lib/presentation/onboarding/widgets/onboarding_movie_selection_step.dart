@@ -3,7 +3,7 @@ import 'package:boby_ai_case/core/extensions/theme/build_context_radius_ext.dart
 import 'package:boby_ai_case/core/extensions/theme/build_context_text_style_ext.dart';
 import 'package:boby_ai_case/core/extensions/screen_extension.dart';
 import 'package:boby_ai_case/core/shared/widgets/default_progress_indicator.dart';
-import 'package:boby_ai_case/data/models/movie/movie_data.dart';
+import 'package:boby_ai_case/domain/entities/movie/movie_entity.dart';
 import 'package:boby_ai_case/presentation/onboarding/store/onboarding_store.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:shimmer/shimmer.dart';
@@ -213,7 +213,7 @@ class _MovieCardShimmer extends StatelessWidget {
 class _MovieCard extends StatelessWidget {
   const _MovieCard({required this.movie, required this.onboardingStore});
 
-  final MovieData movie;
+  final MovieEntity movie;
   final OnboardingStore onboardingStore;
 
   @override
