@@ -13,7 +13,10 @@ import 'package:boby_ai_case/domain/repositories/movie/i_movie_repository.dart';
 import 'package:boby_ai_case/presentation/common/movie/store/movie_store.dart';
 import 'package:boby_ai_case/presentation/home/store/recommendation_store.dart';
 import 'package:boby_ai_case/presentation/onboarding/store/onboarding_store.dart';
+import 'package:boby_ai_case/presentation/paywall/store/paywall_store.dart';
 import 'package:boby_ai_case/presentation/splash/store/splash_store.dart';
+import 'package:boby_ai_case/core/remote_config/i_remote_config_service.dart';
+import 'package:boby_ai_case/core/remote_config/remote_config_service.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -32,6 +35,9 @@ Future<void> setupInjector() async {
 
   // Client
   getIt.registerSingleton<Client>(Client());
+
+  // Remote Config Service
+  getIt.registerSingleton<IRemoteConfigService>(RemoteConfigService());
 
   // Movie Feature
   getIt.registerSingleton<IMovieDataSource>(
@@ -67,5 +73,10 @@ Future<void> setupInjector() async {
   // Recommendation
   getIt.registerSingleton<RecommendationStore>(
     RecommendationStore(getIt<IMovieRepository>(), getIt<IAccountRepository>()),
+  );
+
+  // Paywall
+  getIt.registerFactory<PaywallStore>(
+    () => PaywallStore(getIt<IRemoteConfigService>()),
   );
 }

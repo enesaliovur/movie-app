@@ -1,5 +1,5 @@
+import 'package:boby_ai_case/core/enums/paywall_version.dart';
 import 'package:boby_ai_case/core/remote_config/i_remote_config_service.dart';
-import 'package:boby_ai_case/presentation/paywall/store/paywall_store.dart';
 
 class RemoteConfigService implements IRemoteConfigService {
   @override

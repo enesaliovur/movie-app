@@ -1,4 +1,4 @@
-import 'package:boby_ai_case/presentation/paywall/store/paywall_store.dart';
+import 'package:boby_ai_case/core/enums/paywall_version.dart';
 
 abstract class IRemoteConfigService {
   PaywallVersion getPaywallVersion();
