@@ -7,7 +7,7 @@ extension BuildContextTextStyleExt on BuildContext {
     return TextStyle(
       fontSize: 8.sp,
       fontWeight: FontWeight.w400,
-      color: labelColor,
+      color: white,
       letterSpacing: 0,
       height: 1,
     );
@@ -17,7 +17,17 @@ extension BuildContextTextStyleExt on BuildContext {
     return TextStyle(
       fontSize: 12.sp,
       fontWeight: FontWeight.w400,
-      color: labelColor,
+      color: white,
+      letterSpacing: 0,
+      height: 1,
+    );
+  }
+
+  TextStyle get fs12W500 {
+    return TextStyle(
+      fontSize: 12.sp,
+      fontWeight: FontWeight.w500,
+      color: white,
       letterSpacing: 0,
       height: 1,
     );
@@ -27,7 +37,7 @@ extension BuildContextTextStyleExt on BuildContext {
     return TextStyle(
       fontSize: 14.sp,
       fontWeight: FontWeight.w400,
-      color: labelColor,
+      color: white,
       letterSpacing: 0,
       height: 1,
     );
@@ -37,7 +47,7 @@ extension BuildContextTextStyleExt on BuildContext {
     return TextStyle(
       fontSize: 14.sp,
       fontWeight: FontWeight.w600,
-      color: labelColor,
+      color: white,
       letterSpacing: 0,
       height: 1,
     );
@@ -47,7 +57,7 @@ extension BuildContextTextStyleExt on BuildContext {
     return TextStyle(
       fontSize: 16.sp,
       fontWeight: FontWeight.w400,
-      color: labelColor,
+      color: white,
       letterSpacing: 0,
       height: 1,
     );
@@ -58,7 +68,7 @@ extension BuildContextTextStyleExt on BuildContext {
     return TextStyle(
       fontSize: 16.sp,
       fontWeight: FontWeight.w600,
-      color: labelColor,
+      color: white,
       letterSpacing: 0,
       height: 1,
     );
@@ -68,7 +78,7 @@ extension BuildContextTextStyleExt on BuildContext {
     return TextStyle(
       fontSize: 18.sp,
       fontWeight: FontWeight.w600,
-      color: labelColor,
+      color: white,
       letterSpacing: 0,
       height: 1,
     );
@@ -78,7 +88,7 @@ extension BuildContextTextStyleExt on BuildContext {
     return TextStyle(
       fontSize: 20.sp,
       fontWeight: FontWeight.w500,
-      color: labelColor,
+      color: white,
       letterSpacing: 0,
       height: 1,
     );
@@ -88,7 +98,7 @@ extension BuildContextTextStyleExt on BuildContext {
     return TextStyle(
       fontSize: 20.sp,
       fontWeight: FontWeight.w600,
-      color: labelColor,
+      color: white,
       letterSpacing: 0,
       height: 1,
     );
@@ -98,7 +108,7 @@ extension BuildContextTextStyleExt on BuildContext {
     return TextStyle(
       fontSize: 24.sp,
       fontWeight: FontWeight.w700,
-      color: labelColor,
+      color: white,
       letterSpacing: 0,
       height: 1,
     );
@@ -108,7 +118,7 @@ extension BuildContextTextStyleExt on BuildContext {
     return TextStyle(
       fontSize: 24.sp,
       fontWeight: FontWeight.w800,
-      color: labelColor,
+      color: white,
     );
   }
 
@@ -116,7 +126,7 @@ extension BuildContextTextStyleExt on BuildContext {
     return TextStyle(
       fontSize: 28.sp,
       fontWeight: FontWeight.w600,
-      color: labelColor,
+      color: white,
       letterSpacing: 0,
       height: 1,
     );
@@ -126,7 +136,7 @@ extension BuildContextTextStyleExt on BuildContext {
     return TextStyle(
       fontSize: 32.sp,
       fontWeight: FontWeight.w800,
-      color: labelColor,
+      color: white,
       letterSpacing: 0,
       height: 1,
     );
