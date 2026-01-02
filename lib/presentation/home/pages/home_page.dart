@@ -8,9 +8,11 @@ import 'package:boby_ai_case/core/shared/widgets/scaling_container.dart';
 import 'package:boby_ai_case/domain/entities/movie/movie_entity.dart';
 import 'package:boby_ai_case/presentation/common/movie/store/movie_store.dart';
 import 'package:boby_ai_case/presentation/home/store/recommendation_store.dart';
+import 'package:boby_ai_case/presentation/paywall/guarded_paywall_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:mobx/mobx.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer/shimmer.dart';
 

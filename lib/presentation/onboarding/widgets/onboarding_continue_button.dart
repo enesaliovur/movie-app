@@ -31,7 +31,7 @@ class OnboardingContinueButton extends StatelessWidget {
                       child: Text(
                         "Continue",
                         style: context.fs16W600.copyWith(
-                          color: isValid ? context.labelColor : context.gray,
+                          color: isValid ? context.white : context.gray,
                         ),
                       ),
                     ),

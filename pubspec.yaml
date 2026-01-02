@@ -37,6 +37,8 @@ flutter:
   assets:
     - .env
     - assets/png/
+    - assets/fonts/
+    - assets/paywall/
   fonts:
     - family: Inter
       fonts:
