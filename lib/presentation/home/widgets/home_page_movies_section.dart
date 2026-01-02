@@ -20,6 +20,8 @@ class _HomePageMoviesSectionState extends State<HomePageMoviesSection> {
 
   bool _isUserScrolling = true;
 
+  late ReactionDisposer _disposer;
+
   @override
   void initState() {
     super.initState();
@@ -29,6 +31,15 @@ class _HomePageMoviesSectionState extends State<HomePageMoviesSection> {
 
     _moviesScrollController.addListener(_onMoviesScroll);
 
+    _disposer = reaction<List<dynamic>>((_) => _movieStore.availableGenres, (
+      genres,
+    ) {
+      for (final genre in genres) {
+        _chipKeys.putIfAbsent(genre.id, () => GlobalKey());
+        _sectionKeys.putIfAbsent(genre.id, () => GlobalKey());
+      }
+    }, fireImmediately: true);
+
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _selectFirstGenreIfNeeded();
     });
@@ -36,6 +47,7 @@ class _HomePageMoviesSectionState extends State<HomePageMoviesSection> {
 
   @override
   void dispose() {
+    _disposer();
     _moviesScrollController.removeListener(_onMoviesScroll);
     _moviesScrollController.dispose();
     _chipScrollController.dispose();
@@ -177,10 +189,11 @@ class _HomePageMoviesSectionState extends State<HomePageMoviesSection> {
               final genre = genres[index];
               final isSelected = genre.id == selectedId;
 
-              _chipKeys.putIfAbsent(genre.id, () => GlobalKey());
+              // Key should already be created by reaction
+              final key = _chipKeys[genre.id];
 
               return GenreChip(
-                key: _chipKeys[genre.id],
+                key: key,
                 name: genre.name,
                 isSelected: isSelected,
                 onTap: () => _onGenreTap(genre.id),
@@ -214,12 +227,13 @@ class _HomePageMoviesSectionState extends State<HomePageMoviesSection> {
               for (final genre in genres) ...[
                 Builder(
                   builder: (context) {
-                    _sectionKeys.putIfAbsent(genre.id, () => GlobalKey());
+                    // Key should already be created by reaction
+                    final key = _sectionKeys[genre.id];
 
                     return CategorySection(
                       categoryName: genre.name,
                       movies: groupedMovies[genre.id] ?? [],
-                      titleKey: _sectionKeys[genre.id]!,
+                      titleKey: key ?? GlobalKey(), // Fallback just in case
                     );
                   },
                 ),
