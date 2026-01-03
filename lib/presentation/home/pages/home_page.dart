@@ -9,6 +9,7 @@ import 'package:boby_ai_case/domain/entities/movie/movie_entity.dart';
 import 'package:boby_ai_case/presentation/common/movie/store/movie_store.dart';
 import 'package:boby_ai_case/presentation/home/store/recommendation_store.dart';
 import 'package:boby_ai_case/presentation/paywall/guarded_paywall_page.dart';
+import 'package:boby_ai_case/presentation/search/movie_search_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -20,6 +21,7 @@ part '../widgets/home_page_for_you_section.dart';
 part '../widgets/home_page_movies_section.dart';
 part '../widgets/genre_chip.dart';
 part '../widgets/category_section.dart';
+part '../widgets/home_page_search_bar.dart';
 
 class HomePage extends StatelessWidget {
   static const String path = '/home';
@@ -32,11 +34,13 @@ class HomePage extends StatelessWidget {
       child: Scaffold(
         body: SafeArea(
           child: Column(
-            spacing: 12.h,
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: const [
-              HomePageForYouSection(),
-              Expanded(child: HomePageMoviesSection()),
+            children: [
+              const HomePageForYouSection(),
+              SizedBox(height: 32.h),
+              Divider(color: context.grayDark, height: 0.5),
+              SizedBox(height: 16.h),
+              const Expanded(child: HomePageMoviesSection()),
             ],
           ),
         ),

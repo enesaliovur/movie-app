@@ -14,6 +14,7 @@ import 'package:boby_ai_case/presentation/common/movie/store/movie_store.dart';
 import 'package:boby_ai_case/presentation/home/store/recommendation_store.dart';
 import 'package:boby_ai_case/presentation/onboarding/store/onboarding_store.dart';
 import 'package:boby_ai_case/presentation/paywall/store/paywall_store.dart';
+import 'package:boby_ai_case/presentation/search/store/movie_search_store.dart';
 import 'package:boby_ai_case/presentation/splash/store/splash_store.dart';
 import 'package:boby_ai_case/core/remote_config/i_remote_config_service.dart';
 import 'package:boby_ai_case/core/remote_config/remote_config_service.dart';
@@ -78,5 +79,10 @@ Future<void> setupInjector() async {
   // Paywall
   getIt.registerFactory<PaywallStore>(
     () => PaywallStore(getIt<IRemoteConfigService>()),
+  );
+
+  // Movie Search
+  getIt.registerFactory<MovieSearchStore>(
+    () => MovieSearchStore(getIt<IMovieRepository>()),
   );
 }
