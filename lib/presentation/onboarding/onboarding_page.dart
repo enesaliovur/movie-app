@@ -6,6 +6,7 @@ import 'package:boby_ai_case/presentation/onboarding/store/onboarding_store.dart
 import 'package:boby_ai_case/presentation/onboarding/widgets/onboarding_continue_button.dart';
 import 'package:boby_ai_case/presentation/onboarding/widgets/onboarding_genre_selection_step.dart';
 import 'package:boby_ai_case/presentation/onboarding/widgets/onboarding_movie_selection_step.dart';
+import 'package:boby_ai_case/presentation/paywall/guarded_paywall_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -39,7 +40,11 @@ class _OnboardingPageState extends State<OnboardingPage> {
           _movieStore.fetchGenres();
           Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => const HomePage()),
+            MaterialPageRoute(
+              builder: (context) {
+                return const GuardedPaywallPage(fromOnboarding: true);
+              },
+            ),
           );
         }
       },
