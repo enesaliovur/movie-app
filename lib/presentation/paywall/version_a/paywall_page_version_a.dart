@@ -6,6 +6,7 @@ import 'package:boby_ai_case/core/extensions/theme/build_context_text_style_ext.
 import 'package:boby_ai_case/core/shared/widgets/scaling_container.dart';
 import 'package:boby_ai_case/data/models/paywall/paywall_feature.dart';
 import 'package:boby_ai_case/data/models/product/product_data.dart';
+import 'package:boby_ai_case/presentation/home/pages/home_page.dart';
 import 'package:boby_ai_case/presentation/paywall/store/paywall_store.dart';
 import 'package:boby_ai_case/presentation/paywall/widgets/paywall_button.dart';
 import 'package:boby_ai_case/presentation/paywall/widgets/paywall_footer_links.dart';
@@ -24,7 +25,8 @@ part 'widgets/paywall_products_view.dart';
 part 'widgets/paywall_purchase_button.dart';
 
 class PaywallPageVersionA extends StatelessWidget {
-  const PaywallPageVersionA({super.key});
+  const PaywallPageVersionA({super.key, required this.fromOnboarding});
+  final bool fromOnboarding;
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +55,18 @@ class PaywallPageVersionA extends StatelessWidget {
                 right: 8.w,
                 child: IconButton(
                   icon: Icon(Icons.close, color: context.gray, size: 24.sp),
-                  onPressed: () => Navigator.of(context).pop(),
+                  onPressed: () {
+                    if (fromOnboarding) {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const HomePage(),
+                        ),
+                      );
+                    } else {
+                      Navigator.of(context).pop();
+                    }
+                  },
                 ),
               ),
             ],

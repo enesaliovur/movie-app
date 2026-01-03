@@ -4,6 +4,7 @@ import 'package:boby_ai_case/core/extensions/screen_extension.dart';
 import 'package:boby_ai_case/core/extensions/theme/build_context_color_ext.dart';
 import 'package:boby_ai_case/core/extensions/theme/build_context_text_style_ext.dart';
 import 'package:boby_ai_case/data/models/paywall/paywall_feature.dart';
+import 'package:boby_ai_case/presentation/home/pages/home_page.dart';
 
 import 'package:boby_ai_case/presentation/paywall/store/paywall_store.dart';
 import 'package:boby_ai_case/presentation/paywall/widgets/paywall_button.dart';
@@ -20,7 +21,8 @@ part 'widgets/paywall_product_selection.dart';
 part 'widgets/paywall_feature_list.dart';
 
 class PaywallPageVersionB extends StatelessWidget {
-  const PaywallPageVersionB({super.key});
+  const PaywallPageVersionB({super.key, required this.fromOnboarding});
+  final bool fromOnboarding;
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +62,7 @@ class PaywallPageVersionB extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          const PaywallHeader(),
+                           PaywallHeader(fromOnboarding: fromOnboarding),
                           SizedBox(height: context.screenHeight * 0.1),
                           Text(
                             AppConfig.appName,

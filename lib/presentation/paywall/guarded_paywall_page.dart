@@ -10,8 +10,9 @@ import 'package:provider/provider.dart';
 
 class GuardedPaywallPage extends StatelessWidget {
   static const String path = '/paywall';
+  final bool fromOnboarding;
 
-  const GuardedPaywallPage({super.key});
+  const GuardedPaywallPage({super.key, required this.fromOnboarding});
 
   @override
   Widget build(BuildContext context) {
@@ -23,9 +24,9 @@ class GuardedPaywallPage extends StatelessWidget {
           final paywallVersion = store.paywallVersion;
           switch (paywallVersion) {
             case PaywallVersion.versionA:
-              return const PaywallPageVersionA();
+              return PaywallPageVersionA(fromOnboarding: fromOnboarding);
             case PaywallVersion.versionB:
-              return const PaywallPageVersionB();
+              return PaywallPageVersionB(fromOnboarding: fromOnboarding);
           }
         },
       ),

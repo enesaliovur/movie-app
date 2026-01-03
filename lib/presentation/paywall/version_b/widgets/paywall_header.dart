@@ -1,7 +1,8 @@
 part of '../paywall_page_version_b.dart';
 
 class PaywallHeader extends StatelessWidget {
-  const PaywallHeader({super.key});
+  const PaywallHeader({super.key, required this.fromOnboarding});
+  final bool fromOnboarding;
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +17,16 @@ class PaywallHeader extends StatelessWidget {
           ),
           child: Icon(Icons.close, color: context.white, size: 20.sp),
         ),
-        onPressed: () => Navigator.of(context).pop(),
+        onPressed: () {
+          if (fromOnboarding) {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => const HomePage()),
+            );
+          } else {
+            Navigator.of(context).pop();
+          }
+        },
       ),
     );
   }
