@@ -10,5 +10,6 @@ abstract class IMovieRepository {
   });
   Future<FailureOr<PaginatedMoviesEntity>> searchMovies({
     required String query,
+    int page = 1,
   });
 }

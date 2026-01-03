@@ -2,9 +2,9 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class MovieCard extends StatelessWidget {
-  const MovieCard(
-    this.imageUrl, {
+  const MovieCard({
     super.key,
+    required this.imageUrl,
     this.borderRadius = BorderRadius.zero,
     this.width,
     this.height,
@@ -29,7 +29,9 @@ class MovieCard extends StatelessWidget {
           height: height,
           imageUrl: imageUrl,
           fit: fit ?? BoxFit.cover,
-          errorWidget: (context, url, error) => const Icon(Icons.error),
+          errorWidget: (context, url, error) {
+            return const Icon(Icons.image_not_supported, color: Colors.white);
+          },
           errorListener: (value) {},
         ),
       ),

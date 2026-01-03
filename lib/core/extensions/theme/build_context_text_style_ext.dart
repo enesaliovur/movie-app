@@ -53,7 +53,7 @@ extension BuildContextTextStyleExt on BuildContext {
     );
   }
 
-   TextStyle get fs16W400 {
+  TextStyle get fs16W400 {
     return TextStyle(
       fontSize: 16.sp,
       fontWeight: FontWeight.w400,
@@ -62,7 +62,6 @@ extension BuildContextTextStyleExt on BuildContext {
       height: 1,
     );
   }
-
 
   TextStyle get fs16W600 {
     return TextStyle(
@@ -74,10 +73,30 @@ extension BuildContextTextStyleExt on BuildContext {
     );
   }
 
+  TextStyle get fs17W400 {
+    return TextStyle(
+      fontSize: 17.sp,
+      fontWeight: FontWeight.w400,
+      color: white,
+      letterSpacing: 0,
+      height: 1,
+    );
+  }
+
   TextStyle get fs18W600 {
     return TextStyle(
       fontSize: 18.sp,
       fontWeight: FontWeight.w600,
+      color: white,
+      letterSpacing: 0,
+      height: 1,
+    );
+  }
+
+  TextStyle get fs20W400 {
+    return TextStyle(
+      fontSize: 20.sp,
+      fontWeight: FontWeight.w400,
       color: white,
       letterSpacing: 0,
       height: 1,

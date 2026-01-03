@@ -93,11 +93,12 @@ class MovieDataSource extends IMovieDataSource with HttpFailureHandlerMixin {
   @override
   Future<FailureOr<MovieInformationData>> searchMovies({
     required String query,
+    int page = 1,
   }) async {
     try {
       final response = await _client.get(
         EndpointConstants.searchMovies,
-        queryParameters: {'query': query},
+        queryParameters: {'query': query, 'page': page},
       );
       final decodedData = decodeResponseData(response.data);
 

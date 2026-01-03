@@ -61,9 +61,10 @@ class MovieRepositoryImpl
   @override
   Future<FailureOr<PaginatedMoviesEntity>> searchMovies({
     required String query,
+    int page = 1,
   }) async {
     try {
-      final result = await _dataSource.searchMovies(query: query);
+      final result = await _dataSource.searchMovies(query: query, page: page);
       return result.fold(
         (failure) => left(failure),
         (data) => right(MovieMapper.toPaginatedEntity(data)),
