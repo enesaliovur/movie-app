@@ -71,6 +71,9 @@ abstract class _OnboardingStore with Store {
   bool get hasError => moviesFailure != null || genresFailure != null;
 
   @computed
+  bool get isLastPage => currentPage == 1;
+
+  @computed
   bool get isValid {
     if (currentPage == 0) {
       return selectedMovieIds.length >= 3;

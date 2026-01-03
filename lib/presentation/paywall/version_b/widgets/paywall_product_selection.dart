@@ -15,38 +15,41 @@ class _PaywallProductSelectionState extends State<PaywallProductSelection> {
 
     return Observer(
       builder: (_) {
+        final monthlyProduct = store.products.firstWhere(
+          (p) => p.tier == 1,
+          orElse: () => store.products.first,
+        );
+        final yearlyProduct = store.products.firstWhere(
+          (p) => p.tier == 2,
+          orElse: () => store.products.last,
+        );
+
         return Column(
           spacing: 24.h,
           children: [
             _ProductCard(
-              title: "Monthly",
-              price: "\$11.99/month",
-              subPrice: "\$2.99 / week",
+              title: context.tr.paywall.monthlyTitle,
+              price: context.tr.paywall.monthlyPrice(monthlyProduct.price),
+              subPrice: context.tr.paywall.monthlySubPrice(
+                monthlyProduct.weeklyPrice,
+              ),
               isSelected:
                   store.selectedProduct?.tier == 1, // Monthly tier = 1 assumed
               onTap: () {
-                // Find monthly product
-                final product = store.products.firstWhere(
-                  (p) => p.tier == 1,
-                  orElse: () => store.products.first,
-                );
-                store.selectProduct(product);
+                store.selectProduct(monthlyProduct);
               },
             ),
             _ProductCard(
-              title: "Yearly",
-              price: "\$44.99/month",
-              subPrice: "\$0.96 / week",
+              title: context.tr.paywall.yearlyTitle,
+              price: context.tr.paywall.yearlyPrice(yearlyProduct.price),
+              subPrice: context.tr.paywall.yearlySubPrice(
+                yearlyProduct.weeklyPrice,
+              ),
               isSelected:
                   store.selectedProduct?.tier == 2, // Yearly tier = 2 assumed
               isBestValue: true,
               onTap: () {
-                // Find yearly product
-                final product = store.products.firstWhere(
-                  (p) => p.tier == 2,
-                  orElse: () => store.products.last,
-                );
-                store.selectProduct(product);
+                store.selectProduct(yearlyProduct);
               },
             ),
           ],
@@ -131,7 +134,7 @@ class _ProductCard extends StatelessWidget {
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Text(
-                  "Best Value",
+                  context.tr.paywall.bestValue,
                   textAlign: TextAlign.center,
                   style: context.fs12W400.copyWith(
                     color: context.white,

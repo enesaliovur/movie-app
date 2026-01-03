@@ -1,0 +1,57 @@
+{
+  "app_title": "Boby AI Case",
+  "home": {
+    "welcome": "Welcome",
+    "search_hint": "Search",
+    "for_you": "For You",
+    "movies": "Movies",
+    "see_all": "See All",
+    "no_recommendations": "No recommendations yet",
+    "no_movies_found": "No movies found"
+  },
+  "search": {
+    "title": "Movie Search",
+    "no_results": "Movies not found",
+    "error": "Something went wrong",
+    "retry": "Retry",
+    "search_hint": "Search"
+  },
+  "common": {
+    "success": "Success",
+    "error": "Error",
+    "loading": "Loading..."
+  },
+  "onboarding": {
+    "welcome": "Welcome",
+    "thank_you": "Thank you",
+    "continue_to_next_step": "Continue to next step 👉",
+    "choose_movies_title": "Choose your 3 favorite movies",
+    "choose_genres_title": "Choose your 2 favorite genres",
+    "continue_btn": "Continue",
+    "get_started_btn": "Get Started"
+  },
+  "paywall": {
+    "monthly_title": "Monthly",
+    "monthly_price": "{price}/month",
+    "monthly_sub_price": "{price} / week",
+    "yearly_title": "Yearly",
+    "yearly_price": "{price}/month",
+    "yearly_sub_price": "{price} / week",
+    "best_value": "Best Value",
+    "terms_of_use": "Terms of Use",
+    "restore_purchase": "Restore Purchase",
+    "privacy_policy": "Privacy Policy",
+    "free_trial": "3 Day Free",
+    "no_payment_now": "No Payment Now",
+    "enable_free_trial": "Enable Free Trial",
+    "free": "FREE",
+    "pro": "PRO",
+    "weekly_sub_price_fallback": "Only {price} per week",
+    "features": {
+      "unlimited": "Unlimited movie recommendations",
+      "ad_free": "Ad-free experience",
+      "offline": "Offline access",
+      "hd": "HD streaming"
+    }
+  }
+}

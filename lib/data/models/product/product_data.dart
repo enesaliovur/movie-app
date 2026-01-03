@@ -5,6 +5,7 @@ class ProductData extends Equatable {
   final String period;
   final String weeklyPrice;
   final String priceText;
+  final String price;
   final bool isBestValue;
 
   /// Tier level: 0 = Weekly, 1 = Monthly, 2 = Yearly
@@ -15,6 +16,7 @@ class ProductData extends Equatable {
     required this.period,
     required this.weeklyPrice,
     required this.priceText,
+    required this.price,
     required this.tier,
     this.isBestValue = false,
   });
@@ -25,6 +27,7 @@ class ProductData extends Equatable {
       period: 'Weekly',
       weeklyPrice: '\$4.99',
       priceText: '\$4.99 / week',
+      price: '\$4.99',
       tier: 0,
       isBestValue: false,
     );
@@ -36,6 +39,7 @@ class ProductData extends Equatable {
       period: 'Monthly',
       weeklyPrice: '\$2.99',
       priceText: '\$11.99 / month',
+      price: '\$11.99',
       tier: 1,
       isBestValue: false,
     );
@@ -47,6 +51,7 @@ class ProductData extends Equatable {
       period: 'Yearly',
       weeklyPrice: '\$0.96',
       priceText: '\$49.99 / year',
+      price: '\$49.99',
       tier: 2,
       isBestValue: true,
     );
@@ -58,6 +63,7 @@ class ProductData extends Equatable {
     period,
     weeklyPrice,
     priceText,
+    price,
     tier,
     isBestValue,
   ];

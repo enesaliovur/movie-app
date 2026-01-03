@@ -6,6 +6,7 @@ import 'package:boby_ai_case/core/di/setup_injector.dart';
 import 'package:boby_ai_case/core/setup/setup_bindings.dart';
 import 'package:boby_ai_case/movie_app.dart';
 import 'package:boby_ai_case/setup_environment.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 void main() async {
@@ -21,7 +22,16 @@ void main() async {
       await Environment.setup();
       await setupBindings();
       await setupInjector();
-      runApp(const MovieApp());
+      await EasyLocalization.ensureInitialized();
+
+      runApp(
+        EasyLocalization(
+          supportedLocales: const [Locale('en', 'US')],
+          path: 'assets/translations',
+          fallbackLocale: const Locale('en', 'US'),
+          child: const MovieApp(),
+        ),
+      );
     },
     (error, stack) {
       log('Error: ${error.toString()}');

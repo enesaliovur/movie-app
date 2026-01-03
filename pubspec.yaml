@@ -25,6 +25,7 @@ dependencies:
   cached_network_image: ^3.4.1
   shimmer: ^3.0.0
   fluttertoast: ^9.0.0
+  easy_localization: ^3.0.7
 
 dev_dependencies:
   flutter_test:
@@ -37,6 +38,7 @@ flutter:
   uses-material-design: true
   assets:
     - .env
+    - assets/translations/
     - assets/app_icon_dev.png
     - assets/app_icon_staging.png
     - assets/app_icon_prod.png

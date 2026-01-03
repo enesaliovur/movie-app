@@ -76,8 +76,14 @@ class _AnimatedButtonState extends State<_AnimatedButton>
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text('3 Days Free', style: context.fs16W600),
-                  Text('No Payment Now', style: context.fs16W600),
+                  Text(
+                    context.tr.paywall.freeTrial,
+                    style: context.fs16W600.copyWith(color: context.white),
+                  ),
+                  Text(
+                    context.tr.paywall.noPaymentNow,
+                    style: context.fs16W600,
+                  ),
                 ],
               ),
             ),

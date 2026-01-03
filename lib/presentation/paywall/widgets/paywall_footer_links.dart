@@ -1,3 +1,4 @@
+import 'package:boby_ai_case/core/extensions/localization/build_context_tr_ext.dart';
 import 'package:boby_ai_case/core/extensions/theme/build_context_color_ext.dart';
 import 'package:boby_ai_case/core/extensions/theme/build_context_text_style_ext.dart';
 import 'package:boby_ai_case/core/shared/widgets/scaling_container.dart';
@@ -11,9 +12,9 @@ class PaywallFooterLinks extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        _FooterLink(onTap: () {}, text: 'Terms of Use'),
-        _FooterLink(onTap: () {}, text: 'Restore Purchase'),
-        _FooterLink(onTap: () {}, text: 'Privacy Policy'),
+        _FooterLink(onTap: () {}, text: context.tr.paywall.termsOfUse),
+        _FooterLink(onTap: () {}, text: context.tr.paywall.restorePurchase),
+        _FooterLink(onTap: () {}, text: context.tr.paywall.privacyPolicy),
       ],
     );
   }

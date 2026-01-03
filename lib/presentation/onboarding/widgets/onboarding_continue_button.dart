@@ -1,3 +1,4 @@
+import 'package:boby_ai_case/core/extensions/localization/build_context_tr_ext.dart';
 import 'package:boby_ai_case/core/extensions/theme/build_context_color_ext.dart';
 import 'package:boby_ai_case/core/extensions/theme/build_context_text_style_ext.dart';
 import 'package:boby_ai_case/core/shared/widgets/default_button.dart';
@@ -29,7 +30,7 @@ class OnboardingContinueButton extends StatelessWidget {
                   ? const DefaultProgressIndicator()
                   : Center(
                       child: Text(
-                        "Continue",
+                        context.tr.onboarding.continueBtn,
                         style: context.fs16W600.copyWith(
                           color: isValid ? context.white : context.gray,
                         ),

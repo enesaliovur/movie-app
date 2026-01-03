@@ -61,7 +61,10 @@ class _FreeTrialContainer extends StatelessWidget {
           child: Row(
             children: [
               Expanded(
-                child: Text("Enable Free Trial", style: context.fs16W600),
+                child: Text(
+                  context.tr.paywall.enableFreeTrial,
+                  style: context.fs16W600,
+                ),
               ),
               AnimatedContainer(
                 duration: const Duration(milliseconds: 300),
@@ -128,14 +131,28 @@ class _ProductListTile extends StatelessWidget {
                     children: [
                       Text(product.period, style: context.fs16W600),
                       Text(
-                        "Only ${product.weeklyPrice} per week",
+                        product.tier == 1
+                            ? context.tr.paywall.monthlySubPrice(
+                                product.weeklyPrice,
+                              )
+                            : product.tier == 2
+                            ? context.tr.paywall.yearlySubPrice(
+                                product.weeklyPrice,
+                              )
+                            : context.tr.paywall.weeklySubPriceFallback(
+                                product.weeklyPrice,
+                              ),
                         style: context.fs12W400.copyWith(color: context.gray),
                       ),
                     ],
                   ),
                   const Spacer(),
                   Text(
-                    product.priceText,
+                    product.tier == 1
+                        ? context.tr.paywall.monthlyPrice(product.price)
+                        : product.tier == 2
+                        ? context.tr.paywall.yearlyPrice(product.price)
+                        : product.priceText,
                     textAlign: TextAlign.end,
                     style: context.fs16W600,
                   ),
@@ -159,7 +176,7 @@ class _ProductListTile extends StatelessWidget {
                           borderRadius: BorderRadius.circular(12),
                         ),
                         child: Text(
-                          "Best Value",
+                          context.tr.paywall.bestValue,
                           textAlign: TextAlign.center,
                           style: context.fs12W500.copyWith(
                             color: context.white,

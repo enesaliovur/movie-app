@@ -21,7 +21,7 @@ class HomePageSearchBar extends StatelessWidget {
         child: DecoratedBox(
           decoration: BoxDecoration(
             color: context.white,
-            borderRadius: BorderRadius.circular(12.sp),
+            borderRadius: context.radius16,
           ),
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 8.h),
@@ -31,7 +31,7 @@ class HomePageSearchBar extends StatelessWidget {
                 SizedBox(width: 4.w),
                 Expanded(
                   child: Text(
-                    "Search",
+                    context.tr.search.searchHint,
                     style: context.fs17W400.copyWith(color: context.grayDark),
                   ),
                 ),

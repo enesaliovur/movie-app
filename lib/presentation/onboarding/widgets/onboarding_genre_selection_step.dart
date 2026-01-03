@@ -1,3 +1,4 @@
+import 'package:boby_ai_case/core/extensions/localization/build_context_tr_ext.dart';
 import 'package:boby_ai_case/core/extensions/theme/build_context_color_ext.dart';
 import 'package:boby_ai_case/core/extensions/theme/build_context_text_style_ext.dart';
 import 'package:boby_ai_case/domain/entities/movie/movie_genre_entity.dart';
@@ -58,7 +59,10 @@ class _Header extends StatelessWidget {
                   width: double.infinity,
                   child: Row(
                     children: [
-                      Text("Thank you", style: context.fs24W700),
+                      Text(
+                        context.tr.onboarding.thankYou,
+                        style: context.fs24W700,
+                      ),
                       Text(" 👍", style: context.fs24W700),
                     ],
                   ),
@@ -70,10 +74,13 @@ class _Header extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text("Welcome", style: context.fs24W700),
+                      Text(
+                        context.tr.onboarding.welcome,
+                        style: context.fs24W700,
+                      ),
                       SizedBox(height: 12.h),
                       Text(
-                        "Choose your 2 favorite genres",
+                        context.tr.onboarding.chooseGenresTitle,
                         style: context.fs20W500,
                       ),
                     ],

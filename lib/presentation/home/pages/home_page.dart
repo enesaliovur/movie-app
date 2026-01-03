@@ -1,4 +1,5 @@
 import 'package:boby_ai_case/core/di/setup_injector.dart';
+import 'package:boby_ai_case/core/extensions/localization/build_context_tr_ext.dart';
 import 'package:boby_ai_case/core/extensions/theme/build_context_color_ext.dart';
 import 'package:boby_ai_case/core/extensions/theme/build_context_radius_ext.dart';
 import 'package:boby_ai_case/core/extensions/theme/build_context_text_style_ext.dart';

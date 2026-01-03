@@ -1,4 +1,5 @@
 import 'package:boby_ai_case/core/di/setup_injector.dart';
+import 'package:boby_ai_case/core/extensions/localization/build_context_tr_ext.dart';
 import 'package:boby_ai_case/core/extensions/theme/build_context_color_ext.dart';
 import 'package:boby_ai_case/core/extensions/theme/build_context_text_style_ext.dart';
 import 'package:boby_ai_case/core/failure/failure.dart';
@@ -67,7 +68,9 @@ class _MovieSearchPageState extends State<MovieSearchPage> {
     return Provider<MovieSearchStore>(
       create: (context) => _store,
       child: Scaffold(
-        appBar: AppBar(title: Text('Movie Search', style: context.fs20W600)),
+        appBar: AppBar(
+          title: Text(context.tr.search.title, style: context.fs20W600),
+        ),
         body: Padding(
           padding: EdgeInsets.symmetric(horizontal: 16.w),
           child: Column(
@@ -106,7 +109,7 @@ class _MovieSearchPageState extends State<MovieSearchPage> {
                     if (query.isNotEmpty && movies.isEmpty) {
                       return Center(
                         child: Text(
-                          "Movies not found",
+                          context.tr.search.noResults,
                           style: context.fs16W600,
                         ),
                       );
@@ -169,24 +172,21 @@ class _SearchBar extends StatelessWidget {
         decoration: InputDecoration(
           filled: true,
           fillColor: context.white,
-          contentPadding: EdgeInsets.symmetric(
-            horizontal: 16.sp,
-            vertical: 8.sp,
-          ),
-          hintText: 'Search',
-          hintStyle: context.fs14W600.copyWith(color: context.grayDark),
+          contentPadding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 8.h),
+          hintText: context.tr.search.searchHint,
+          hintStyle: context.fs17W400.copyWith(color: context.grayDark),
           border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(12.sp),
+            borderRadius: BorderRadius.circular(12.r),
             borderSide: BorderSide.none,
           ),
           focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(12.sp),
+            borderRadius: BorderRadius.circular(12.r),
             borderSide: BorderSide.none,
           ),
           prefixIcon: Icon(Icons.search, color: context.grayDark, size: 24.sp),
           suffixIcon: Icon(Icons.mic, color: context.grayDark, size: 24.sp),
         ),
-        style: context.fs14W600.copyWith(color: context.black),
+        style: context.fs17W400.copyWith(color: context.black),
         autofocus: true,
         onChanged: (value) {
           _onSearch(context, query: value);

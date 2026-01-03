@@ -179,7 +179,7 @@ class _HomePageMoviesSectionState extends State<HomePageMoviesSection> {
           padding: EdgeInsets.symmetric(horizontal: 16.sp),
           child: RichText(
             text: TextSpan(
-              text: "Movies",
+              text: context.tr.home.movies,
               style: context.fs24W700,
               children: [TextSpan(text: " 🎬", style: context.fs24W700)],
             ),
@@ -238,7 +238,7 @@ class _HomePageMoviesSectionState extends State<HomePageMoviesSection> {
             return const Center(child: CircularProgressIndicator());
           }
           return Center(
-            child: Text("No movies found", style: context.fs24W700),
+            child: Text(context.tr.home.noMoviesFound, style: context.fs24W700),
           );
         }
 

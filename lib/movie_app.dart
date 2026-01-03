@@ -3,6 +3,7 @@ import 'package:boby_ai_case/core/constants/asset_constants.dart';
 import 'package:boby_ai_case/core/extensions/theme/build_context_color_ext.dart';
 import 'package:boby_ai_case/core/extensions/theme/build_context_text_style_ext.dart';
 import 'package:boby_ai_case/presentation/splash/pages/splash_page.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -18,6 +19,9 @@ class MovieApp extends StatelessWidget {
         return MaterialApp(
           title: AppConfig.appName,
           debugShowCheckedModeBanner: false,
+          localizationsDelegates: context.localizationDelegates,
+          supportedLocales: context.supportedLocales,
+          locale: context.locale,
           theme: ThemeData(
             scaffoldBackgroundColor: context.black,
             fontFamily: AssetConstants.fontFamilyInter,

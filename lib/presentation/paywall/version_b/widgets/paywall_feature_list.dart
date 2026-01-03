@@ -9,28 +9,34 @@ class PaywallFeatureList extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: PaywallFeatures.all
-            .map(
-              (feature) => Padding(
-                padding: EdgeInsets.only(bottom: 20.h),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Icon(Icons.check, color: context.white, size: 20.sp),
-                    SizedBox(width: 12.w),
-                    Flexible(
-                      child: Text(
-                        feature.name,
-                        style: context.fs16W600,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            )
-            .toList(),
+        children: [
+          _buildFeature(context, context.tr.paywall.features.unlimited),
+          _buildFeature(context, context.tr.paywall.features.adFree),
+          _buildFeature(context, context.tr.paywall.features.offline),
+          _buildFeature(context, context.tr.paywall.features.hd),
+        ],
       ),
     );
   }
-}
+
+  Widget _buildFeature(BuildContext context, String text) {
+    return Padding(
+      padding: EdgeInsets.only(bottom: 20.h),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(Icons.check, color: context.white, size: 20.sp),
+          SizedBox(width: 12.w),
+          Flexible(
+            child: Text(
+              text,
+              style: context.fs16W600,
+              overflow: TextOverflow.ellipsis,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+  }
+

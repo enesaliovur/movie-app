@@ -80,7 +80,7 @@ class _FreeColumn extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               SizedBox(height: 1.h),
-              Text('FREE', style: context.fs16W600),
+              Text(context.tr.paywall.free, style: context.fs16W600),
               SizedBox(height: 1.h),
             ],
           ),
@@ -301,7 +301,7 @@ class _ProHeader extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         const _ProGradient(),
-        Text('PRO', style: context.fs16W600),
+        Text(context.tr.paywall.pro, style: context.fs16W600),
         const _ProGradient(),
       ],
     );

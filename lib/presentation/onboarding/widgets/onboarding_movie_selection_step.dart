@@ -1,3 +1,4 @@
+import 'package:boby_ai_case/core/extensions/localization/build_context_tr_ext.dart';
 import 'package:boby_ai_case/core/extensions/theme/build_context_color_ext.dart';
 import 'package:boby_ai_case/core/extensions/theme/build_context_radius_ext.dart';
 import 'package:boby_ai_case/core/extensions/theme/build_context_text_style_ext.dart';
@@ -102,7 +103,7 @@ class _Header extends StatelessWidget {
                   key: const ValueKey('valid'),
                   width: double.infinity,
                   child: Text(
-                    "Continue to next step 👉",
+                    context.tr.onboarding.continueToNextStep,
                     style: context.fs24W700,
                   ),
                 )
@@ -113,10 +114,13 @@ class _Header extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text("Welcome", style: context.fs24W700),
+                      Text(
+                        context.tr.onboarding.welcome,
+                        style: context.fs24W700,
+                      ),
                       SizedBox(height: 12.h),
                       Text(
-                        "Choose your 3 favorite movies",
+                        context.tr.onboarding.chooseMoviesTitle,
                         style: context.fs20W500,
                       ),
                     ],

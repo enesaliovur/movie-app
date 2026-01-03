@@ -1,9 +1,9 @@
 import 'package:boby_ai_case/core/config/app_config.dart';
 import 'package:boby_ai_case/core/constants/asset_constants.dart';
 import 'package:boby_ai_case/core/extensions/screen_extension.dart';
+import 'package:boby_ai_case/core/extensions/localization/build_context_tr_ext.dart';
 import 'package:boby_ai_case/core/extensions/theme/build_context_color_ext.dart';
 import 'package:boby_ai_case/core/extensions/theme/build_context_text_style_ext.dart';
-import 'package:boby_ai_case/data/models/paywall/paywall_feature.dart';
 import 'package:boby_ai_case/presentation/home/pages/home_page.dart';
 
 import 'package:boby_ai_case/presentation/paywall/store/paywall_store.dart';
@@ -62,7 +62,7 @@ class PaywallPageVersionB extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                           PaywallHeader(fromOnboarding: fromOnboarding),
+                          PaywallHeader(fromOnboarding: fromOnboarding),
                           SizedBox(height: context.screenHeight * 0.1),
                           Text(
                             AppConfig.appName,
