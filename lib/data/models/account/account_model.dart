@@ -1,15 +1,16 @@
+import 'package:boby_ai_case/domain/entities/account/account_entity.dart';
 import 'package:equatable/equatable.dart';
 
-class Account extends Equatable {
-  const Account({
+class AccountModel extends Equatable {
+  const AccountModel({
     required this.id,
     required this.username,
     required this.name,
     required this.includeAdult,
   });
 
-  factory Account.fromMap(Map<String, dynamic> map) {
-    return Account(
+  factory AccountModel.fromMap(Map<String, dynamic> map) {
+    return AccountModel(
       id: map['id'] as int? ?? 0,
       username: map['username'] as String? ?? '',
       name: map['name'] as String? ?? '',
@@ -29,6 +30,15 @@ class Account extends Equatable {
       'name': name,
       'include_adult': includeAdult,
     };
+  }
+
+  AccountEntity toEntity() {
+    return AccountEntity(
+      id: id,
+      username: username,
+      name: name,
+      includeAdult: includeAdult,
+    );
   }
 
   @override

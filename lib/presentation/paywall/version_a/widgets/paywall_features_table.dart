@@ -119,14 +119,10 @@ class _ProColumnState extends State<_ProColumn> {
   @override
   void initState() {
     super.initState();
-    // Keys for features: 0, 1, 2, 3 based on PaywallFeatures.all index
     for (int i = 0; i < PaywallFeatures.all.length; i++) {
       _iconKeys[i] = GlobalKey();
     }
 
-    // Defer reaction setup until we have context/store access or safer place
-    // But we need store. context.read might not be available in initState easily if depends on parent
-    // Use didChangeDependencies/PostFrame
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _store = context.read<PaywallStore>();
       _visualTier = _store?.selectedProduct?.tier ?? 0;
@@ -148,29 +144,12 @@ class _ProColumnState extends State<_ProColumn> {
   }
 
   void _handleTierChange(int oldTier, int newTier) async {
-    // Only animate for specific transitions
-    // Monthly (1) -> Weekly (0) : Cross flies from index 3 (AdFree) to index 2 (Watchlist)
-    // Weekly (0) -> Monthly (1) : Cross flies from index 2 (Watchlist) to index 3 (AdFree)
-
-    // Index mapping:
-    // 0: Daily Suggestions (Always True)
-    // 1: AI Insights (Always True in logic? No minTier 0=True)
-    // 2: Watchlist (minTier 1) -> Weekly:False, Monthly:True
-    // 3: Ad-Free (minTier 2) -> Weekly:False, Monthly:False
-
     if (oldTier == 1 && newTier == 0) {
-      // Monthly -> Weekly
-      // Feature 2 (Watchlist) becomes False (Cross)
-      // Animation: Fly cross from Feature 3 (AdFree, already Cross) to Feature 2
       await _playFlightAnimation(fromIndex: 3, toIndex: 2);
     } else if (oldTier == 0 && newTier == 1) {
-      // Weekly -> Monthly
-      // Feature 2 becomes True (Check)
-      // Animation: Feature 2 (Cross) flies down to Feature 3
       await _playFlightAnimation(fromIndex: 2, toIndex: 3);
     }
 
-    // Update visual state after animation (or immediately if no animation matched)
     if (mounted) {
       setState(() {
         _visualTier = newTier;
@@ -196,10 +175,8 @@ class _ProColumnState extends State<_ProColumn> {
     final startPos = renderBoxFrom.localToGlobal(Offset.zero);
     var endPos = renderBoxTo.localToGlobal(Offset.zero);
 
-    // Force vertical alignment: use startPos.dx for endPos.dx
     endPos = Offset(startPos.dx, endPos.dy);
 
-    // Create animation entry
     late OverlayEntry entry;
     final animationNotifier = ValueNotifier<double>(0);
 

@@ -10,7 +10,6 @@ import 'package:boby_ai_case/domain/entities/movie/movie_entity.dart';
 import 'package:boby_ai_case/presentation/common/movie/store/movie_store.dart';
 import 'package:boby_ai_case/presentation/home/store/recommendation_store.dart';
 import 'package:boby_ai_case/presentation/paywall/guarded_paywall_page.dart';
-import 'package:boby_ai_case/presentation/search/movie_search_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -18,11 +17,11 @@ import 'package:mobx/mobx.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer/shimmer.dart';
 
-part '../widgets/home_page_for_you_section.dart';
-part '../widgets/home_page_movies_section.dart';
-part '../widgets/genre_chip.dart';
-part '../widgets/category_section.dart';
-part '../widgets/home_page_search_bar.dart';
+part 'widgets/home_page_for_you_section.dart';
+part 'widgets/home_page_movies_section.dart';
+part 'widgets/genre_chip.dart';
+part 'widgets/category_section.dart';
+part 'widgets/home_page_search_bar.dart';
 
 class HomePage extends StatelessWidget {
   static const String path = '/home';

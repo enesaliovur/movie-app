@@ -1,6 +1,5 @@
 enum CacheKey {
-  onboardingCompleted('onboarding_completed'),
-  favoriteMovieIds('favorite_movie_ids');
+  onboardingCompleted('onboarding_completed');
 
   const CacheKey(this.value);
   final String value;

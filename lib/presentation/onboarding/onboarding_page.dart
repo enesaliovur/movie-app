@@ -1,6 +1,5 @@
 import 'package:boby_ai_case/core/di/setup_injector.dart';
 import 'package:boby_ai_case/presentation/common/movie/store/movie_store.dart';
-import 'package:boby_ai_case/presentation/home/pages/home_page.dart';
 import 'package:boby_ai_case/presentation/home/store/recommendation_store.dart';
 import 'package:boby_ai_case/presentation/onboarding/store/onboarding_store.dart';
 import 'package:boby_ai_case/presentation/onboarding/widgets/onboarding_continue_button.dart';

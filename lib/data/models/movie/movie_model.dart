@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 
-class MovieData extends Equatable {
-  const MovieData({
+class MovieModel extends Equatable {
+  const MovieModel({
     required this.adult,
     required this.backdropPath,
     required this.genreIds,
@@ -18,8 +18,8 @@ class MovieData extends Equatable {
     required this.voteCount,
   });
 
-  factory MovieData.fromMap(Map<String, dynamic> map) {
-    return MovieData(
+  factory MovieModel.fromMap(Map<String, dynamic> map) {
+    return MovieModel(
       adult: map['adult'] ?? true,
       backdropPath: map['backdrop_path'] ?? '',
       genreIds: List<int>.from(map['genre_ids'] ?? []),

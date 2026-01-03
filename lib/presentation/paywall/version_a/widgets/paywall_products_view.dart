@@ -98,9 +98,25 @@ class _ProductListTile extends StatelessWidget {
     required this.isSelected,
     required this.onTap,
   });
-  final ProductData product;
+  final ProductEntity product;
   final bool isSelected;
   final Function onTap;
+
+  String _getSubtitle(BuildContext context) {
+    return switch (product.tier) {
+      1 => context.tr.paywall.weeklySubPriceFallback(product.weeklyPrice),
+      2 => context.tr.paywall.weeklySubPriceFallback(product.weeklyPrice),
+      _ => context.tr.paywall.weeklySubPriceFallback(product.weeklyPrice),
+    };
+  }
+
+  String _getPriceText(BuildContext context) {
+    return switch (product.tier) {
+      1 => context.tr.paywall.monthlyPrice(product.price),
+      2 => context.tr.paywall.yearlyPrice(product.price),
+      _ => context.tr.paywall.weeklyPrice(product.price),
+    };
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -131,28 +147,14 @@ class _ProductListTile extends StatelessWidget {
                     children: [
                       Text(product.period, style: context.fs16W600),
                       Text(
-                        product.tier == 1
-                            ? context.tr.paywall.monthlySubPrice(
-                                product.weeklyPrice,
-                              )
-                            : product.tier == 2
-                            ? context.tr.paywall.yearlySubPrice(
-                                product.weeklyPrice,
-                              )
-                            : context.tr.paywall.weeklySubPriceFallback(
-                                product.weeklyPrice,
-                              ),
+                        _getSubtitle(context),
                         style: context.fs12W400.copyWith(color: context.gray),
                       ),
                     ],
                   ),
                   const Spacer(),
                   Text(
-                    product.tier == 1
-                        ? context.tr.paywall.monthlyPrice(product.price)
-                        : product.tier == 2
-                        ? context.tr.paywall.yearlyPrice(product.price)
-                        : product.priceText,
+                    _getPriceText(context),
                     textAlign: TextAlign.end,
                     style: context.fs16W600,
                   ),

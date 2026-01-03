@@ -21,10 +21,7 @@ class MovieRepositoryImpl
   Future<FailureOr<PaginatedMoviesEntity>> getMovies({int page = 1}) async {
     try {
       final result = await _dataSource.getMovies(page: page);
-      return result.fold(
-        (failure) => left(failure),
-        (data) => right(MovieMapper.toPaginatedEntity(data)),
-      );
+      return right(MovieMapper.toPaginatedEntity(result));
     } catch (e) {
       return left(handleErrorsAndExceptions(e));
     }
@@ -34,10 +31,7 @@ class MovieRepositoryImpl
   Future<FailureOr<List<MovieGenreEntity>>> getGenres() async {
     try {
       final result = await _dataSource.getGenres();
-      return result.fold(
-        (failure) => left(failure),
-        (data) => right(MovieMapper.toGenreEntityList(data)),
-      );
+      return right(MovieMapper.toGenreEntityList(result));
     } catch (e) {
       return left(handleErrorsAndExceptions(e));
     }
@@ -49,10 +43,7 @@ class MovieRepositoryImpl
   }) async {
     try {
       final result = await _dataSource.getRecommendations(movieId: movieId);
-      return result.fold(
-        (failure) => left(failure),
-        (data) => right(MovieMapper.toPaginatedEntity(data)),
-      );
+      return right(MovieMapper.toPaginatedEntity(result));
     } catch (e) {
       return left(handleErrorsAndExceptions(e));
     }
@@ -65,10 +56,7 @@ class MovieRepositoryImpl
   }) async {
     try {
       final result = await _dataSource.searchMovies(query: query, page: page);
-      return result.fold(
-        (failure) => left(failure),
-        (data) => right(MovieMapper.toPaginatedEntity(data)),
-      );
+      return right(MovieMapper.toPaginatedEntity(result));
     } catch (e) {
       return left(handleErrorsAndExceptions(e));
     }

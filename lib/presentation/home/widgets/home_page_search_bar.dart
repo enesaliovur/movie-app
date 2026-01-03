@@ -1,4 +1,4 @@
-part of '../pages/home_page.dart';
+part of '../home_page.dart';
 
 class HomePageSearchBar extends StatelessWidget {
   const HomePageSearchBar({super.key});
@@ -13,7 +13,7 @@ class HomePageSearchBar extends StatelessWidget {
             context,
             MaterialPageRoute(
               builder: (context) {
-                return const MovieSearchPage();
+                return const GuardedPaywallPage(fromOnboarding: false);
               },
             ),
           );

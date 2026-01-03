@@ -1,4 +1,4 @@
-part of '../pages/home_page.dart';
+part of '../home_page.dart';
 
 class HomePageMoviesSection extends StatefulWidget {
   const HomePageMoviesSection({super.key});

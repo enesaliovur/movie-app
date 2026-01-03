@@ -41,9 +41,7 @@ Future<void> setupInjector() async {
   getIt.registerSingleton<IRemoteConfigService>(RemoteConfigService());
 
   // Movie Feature
-  getIt.registerSingleton<IMovieDataSource>(
-    MovieDataSource(getIt<Client>(), getIt<HttpFailureHandler>()),
-  );
+  getIt.registerSingleton<IMovieDataSource>(MovieDataSource(getIt<Client>()));
   getIt.registerSingleton<IMovieRepository>(
     MovieRepositoryImpl(getIt<IMovieDataSource>(), getIt<HttpFailureHandler>()),
   );
@@ -55,11 +53,12 @@ Future<void> setupInjector() async {
   getIt.registerFactory<SplashStore>(() => SplashStore(getIt<ICacheService>()));
 
   // Account Feature
-  getIt.registerSingleton<IAccountDataSource>(
-    UserDataSource(getIt<Client>(), getIt<HttpFailureHandler>()),
-  );
+  getIt.registerSingleton<IAccountDataSource>(UserDataSource(getIt<Client>()));
   getIt.registerSingleton<IAccountRepository>(
-    AccountRepositoryImpl(getIt<IAccountDataSource>()),
+    AccountRepositoryImpl(
+      getIt<IAccountDataSource>(),
+      getIt<HttpFailureHandler>(),
+    ),
   );
 
   // Onboarding

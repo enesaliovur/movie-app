@@ -17,7 +17,7 @@ class GuardedPaywallPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Provider<PaywallStore>(
-      create: (context) => getIt<PaywallStore>(),
+      create: (context) => getIt<PaywallStore>()..init(),
       child: Observer(
         builder: (context) {
           final store = context.read<PaywallStore>();

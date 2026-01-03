@@ -2,7 +2,7 @@ import 'package:boby_ai_case/core/config/app_config.dart';
 import 'package:boby_ai_case/core/constants/asset_constants.dart';
 import 'package:boby_ai_case/core/extensions/theme/build_context_color_ext.dart';
 import 'package:boby_ai_case/core/extensions/theme/build_context_text_style_ext.dart';
-import 'package:boby_ai_case/presentation/splash/pages/splash_page.dart';
+import 'package:boby_ai_case/presentation/splash/splash_page.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

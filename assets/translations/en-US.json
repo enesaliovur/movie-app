@@ -31,12 +31,14 @@
     "get_started_btn": "Get Started"
   },
   "paywall": {
+    "weekly_title": "Weekly",
     "monthly_title": "Monthly",
-    "monthly_price": "{price}/month",
-    "monthly_sub_price": "{price} / week",
     "yearly_title": "Yearly",
-    "yearly_price": "{price}/month",
+    "monthly_price": "{price}/ month",
+    "monthly_sub_price": "{price} / week",
+    "yearly_price": "{price} / year",
     "yearly_sub_price": "{price} / week",
+    "weekly_price": "{price} / week",
     "best_value": "Best Value",
     "terms_of_use": "Terms of Use",
     "restore_purchase": "Restore Purchase",

@@ -7,7 +7,6 @@ import 'package:boby_ai_case/core/failure/failure.dart';
 import 'package:boby_ai_case/core/shared/widgets/default_progress_indicator.dart';
 import 'package:boby_ai_case/core/shared/widgets/default_retry_button.dart';
 import 'package:boby_ai_case/core/shared/widgets/movie_card.dart';
-import 'package:boby_ai_case/domain/entities/movie/paginated_movies_entity.dart';
 import 'package:boby_ai_case/presentation/search/store/movie_search_store.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';

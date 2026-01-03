@@ -5,10 +5,9 @@ import 'package:boby_ai_case/core/extensions/localization/build_context_tr_ext.d
 import 'package:boby_ai_case/core/extensions/theme/build_context_color_ext.dart';
 import 'package:boby_ai_case/core/extensions/theme/build_context_radius_ext.dart';
 import 'package:boby_ai_case/core/extensions/theme/build_context_text_style_ext.dart';
-import 'package:boby_ai_case/core/shared/widgets/scaling_container.dart';
-import 'package:boby_ai_case/data/models/paywall/paywall_feature.dart';
-import 'package:boby_ai_case/data/models/product/product_data.dart';
-import 'package:boby_ai_case/presentation/home/pages/home_page.dart';
+import 'package:boby_ai_case/domain/entities/paywall/paywall_feature_entity.dart';
+import 'package:boby_ai_case/domain/entities/product/product_entity.dart';
+import 'package:boby_ai_case/presentation/home/home_page.dart';
 import 'package:boby_ai_case/presentation/paywall/store/paywall_store.dart';
 import 'package:boby_ai_case/presentation/paywall/widgets/paywall_button.dart';
 import 'package:boby_ai_case/presentation/paywall/widgets/paywall_footer_links.dart';
@@ -23,8 +22,8 @@ import 'package:provider/provider.dart';
 import 'package:mobx/mobx.dart';
 
 part 'widgets/paywall_features_table.dart';
-part 'widgets/paywall_products_view.dart';
 part 'widgets/paywall_purchase_button.dart';
+part 'widgets/paywall_products_view.dart';
 
 class PaywallPageVersionA extends StatelessWidget {
   const PaywallPageVersionA({super.key, required this.fromOnboarding});

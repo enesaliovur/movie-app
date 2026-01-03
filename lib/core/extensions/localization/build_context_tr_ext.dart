@@ -61,6 +61,8 @@ class PaywallTranslations {
       'paywall.yearly_sub_price'.tr(namedArgs: {'price': price});
   String weeklySubPriceFallback(String price) =>
       'paywall.weekly_sub_price_fallback'.tr(namedArgs: {'price': price});
+  String weeklyPrice(String price) =>
+      'paywall.weekly_price'.tr(namedArgs: {'price': price});
   String get bestValue => 'paywall.best_value'.tr();
   String get termsOfUse => 'paywall.terms_of_use'.tr();
   String get restorePurchase => 'paywall.restore_purchase'.tr();
