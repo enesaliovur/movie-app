@@ -25,8 +25,8 @@ class CategorySection extends StatelessWidget {
       children: [
         Padding(
           key: titleKey,
-          padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.w),
-          child: Text(categoryName, style: context.fs18W600),
+          padding: EdgeInsets.only(left: 16.w, bottom: 16.h),
+          child: Text(categoryName, style: context.fs20W400),
         ),
 
         SizedBox(
@@ -40,7 +40,7 @@ class CategorySection extends StatelessWidget {
               return Padding(
                 padding: EdgeInsets.only(right: 12.w),
                 child: MovieCard(
-                  movie.posterUrl,
+                  imageUrl: movie.posterUrl,
                   width: 100.w,
                   height: 140.h,
                   borderRadius: context.radius8,

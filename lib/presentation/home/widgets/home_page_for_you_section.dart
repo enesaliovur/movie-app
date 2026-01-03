@@ -14,8 +14,8 @@ class HomePageForYouSection extends StatelessWidget {
           child: RichText(
             text: TextSpan(
               text: "For You",
-              style: context.fs18W600,
-              children: [TextSpan(text: " ⭐️", style: context.fs20W600)],
+              style: context.fs24W700,
+              children: [TextSpan(text: " ⭐️", style: context.fs24W700)],
             ),
           ),
         ),
@@ -86,7 +86,7 @@ class HomePageForYouSection extends StatelessWidget {
                 itemBuilder: (context, index) {
                   final movie = recommendedMovies[index];
                   return MovieCard(
-                    movie.posterUrl,
+                    imageUrl: movie.posterUrl,
                     borderRadius: context.radius100,
                     width: 80.w,
                     height: 80.h,

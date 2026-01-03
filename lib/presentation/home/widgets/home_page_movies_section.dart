@@ -18,6 +18,8 @@ class _HomePageMoviesSectionState extends State<HomePageMoviesSection> {
 
   final Map<int, GlobalKey> _chipKeys = {};
 
+  final GlobalKey _listKey = GlobalKey();
+
   bool _isUserScrolling = true;
 
   late ReactionDisposer _disposer;
@@ -68,7 +70,26 @@ class _HomePageMoviesSectionState extends State<HomePageMoviesSection> {
     final genres = _movieStore.availableGenres;
     if (genres.isEmpty) return;
 
-    const double referenceY = 320.0;
+    if (_moviesScrollController.position.pixels >=
+        _moviesScrollController.position.maxScrollExtent - 20) {
+      final lastGenreId = genres.last.id;
+      if (lastGenreId != _movieStore.selectedGenreId) {
+        _movieStore.selectGenre(lastGenreId);
+        _scrollChipToCenter(lastGenreId);
+      }
+      return;
+    }
+
+    double referenceY = 0;
+    if (_listKey.currentContext != null) {
+      final listRenderBox =
+          _listKey.currentContext!.findRenderObject() as RenderBox?;
+      if (listRenderBox != null) {
+        referenceY = listRenderBox.localToGlobal(Offset.zero).dy;
+      }
+    }
+
+    final threshold = referenceY + 140;
 
     int? selectedGenreId;
 
@@ -81,11 +102,10 @@ class _HomePageMoviesSectionState extends State<HomePageMoviesSection> {
 
       final position = renderBox.localToGlobal(Offset.zero);
       final titleTop = position.dy;
-      final titleHeight = renderBox.size.height;
-      final titleBottom = titleTop + titleHeight;
 
-      if (titleBottom >= referenceY && titleTop < referenceY + 200) {
+      if (titleTop <= threshold) {
         selectedGenreId = genre.id;
+      } else {
         break;
       }
     }
@@ -153,6 +173,7 @@ class _HomePageMoviesSectionState extends State<HomePageMoviesSection> {
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
+      spacing: 16.h,
       children: [
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 16.sp),
@@ -164,9 +185,11 @@ class _HomePageMoviesSectionState extends State<HomePageMoviesSection> {
             ),
           ),
         ),
-        SizedBox(height: 16.h),
+        Padding(
+          padding: EdgeInsets.only(top: 10.h),
+          child: const HomePageSearchBar(),
+        ),
         _buildGenreChips(),
-        SizedBox(height: 16.h),
         Expanded(child: _buildMoviesList()),
       ],
     );
@@ -220,6 +243,7 @@ class _HomePageMoviesSectionState extends State<HomePageMoviesSection> {
         }
 
         return SingleChildScrollView(
+          key: _listKey,
           controller: _moviesScrollController,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -227,13 +251,12 @@ class _HomePageMoviesSectionState extends State<HomePageMoviesSection> {
               for (final genre in genres) ...[
                 Builder(
                   builder: (context) {
-                    // Key should already be created by reaction
                     final key = _sectionKeys[genre.id];
 
                     return CategorySection(
                       categoryName: genre.name,
                       movies: groupedMovies[genre.id] ?? [],
-                      titleKey: key ?? GlobalKey(), // Fallback just in case
+                      titleKey: key ?? GlobalKey(),
                     );
                   },
                 ),
