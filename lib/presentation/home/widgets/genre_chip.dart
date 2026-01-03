@@ -23,7 +23,7 @@ class GenreChip extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 16.w),
           decoration: BoxDecoration(
             color: isSelected ? context.redLight : context.white,
-            borderRadius: BorderRadius.circular(100.w),
+            borderRadius: context.radius100,
             border: Border.all(
               color: isSelected ? context.redLight : context.gray,
             ),

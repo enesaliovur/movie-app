@@ -1,6 +1,7 @@
 import 'package:boby_ai_case/core/di/setup_injector.dart';
 import 'package:boby_ai_case/core/extensions/localization/build_context_tr_ext.dart';
 import 'package:boby_ai_case/core/extensions/theme/build_context_color_ext.dart';
+import 'package:boby_ai_case/core/extensions/theme/build_context_radius_ext.dart';
 import 'package:boby_ai_case/core/extensions/theme/build_context_text_style_ext.dart';
 import 'package:boby_ai_case/core/failure/failure.dart';
 import 'package:boby_ai_case/core/shared/widgets/default_progress_indicator.dart';
@@ -133,7 +134,7 @@ class _MovieSearchPageState extends State<MovieSearchPage> {
                               final movie = movies[index];
                               return MovieCard(
                                 imageUrl: movie.posterUrl,
-                                borderRadius: BorderRadius.circular(12.sp),
+                                borderRadius: context.radius12,
                               );
                             },
                           ),
@@ -176,11 +177,11 @@ class _SearchBar extends StatelessWidget {
           hintText: context.tr.search.searchHint,
           hintStyle: context.fs17W400.copyWith(color: context.grayDark),
           border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(12.r),
+            borderRadius: context.radius12,
             borderSide: BorderSide.none,
           ),
           focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(12.r),
+            borderRadius: context.radius12,
             borderSide: BorderSide.none,
           ),
           prefixIcon: Icon(Icons.search, color: context.grayDark, size: 24.sp),

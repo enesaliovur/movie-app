@@ -260,7 +260,7 @@ class _ProColumnState extends State<_ProColumn> {
     return Container(
       padding: EdgeInsets.all(8.w),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8.w),
+        borderRadius: context.radius8,
         border: Border.all(color: context.redLight, width: 1.w),
       ),
       child: Column(

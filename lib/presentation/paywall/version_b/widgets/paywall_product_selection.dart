@@ -86,7 +86,7 @@ class _ProductCard extends StatelessWidget {
           Container(
             width: context.screenWidth,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: context.radius12,
               border: Border.all(
                 color: isSelected ? context.redLight : context.white,
               ),
@@ -131,7 +131,7 @@ class _ProductCard extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                 decoration: BoxDecoration(
                   color: context.redLight,
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: context.radius12,
                 ),
                 child: Text(
                   context.tr.paywall.bestValue,

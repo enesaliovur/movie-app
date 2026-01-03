@@ -55,7 +55,7 @@ class _FreeTrialContainer extends StatelessWidget {
         return Container(
           padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 8.h),
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: context.radius12,
             border: Border.all(color: context.redLight),
           ),
           child: Row(
@@ -72,7 +72,7 @@ class _FreeTrialContainer extends StatelessWidget {
                   color: paywallStore.highlightFreeTrialSwitch
                       ? context.blue.withValues(alpha: 0.2)
                       : context.transparent,
-                  borderRadius: BorderRadius.circular(16),
+                  borderRadius: context.radius12,
                   border: Border.all(
                     color: paywallStore.highlightFreeTrialSwitch
                         ? context.blue
@@ -109,7 +109,7 @@ class _ProductListTile extends StatelessWidget {
       child: Container(
         width: context.screenWidth,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: context.radius12,
           border: Border.all(
             color: isSelected ? context.redLight : context.white,
           ),
@@ -173,7 +173,7 @@ class _ProductListTile extends StatelessWidget {
                         ),
                         decoration: BoxDecoration(
                           color: context.redLight,
-                          borderRadius: BorderRadius.circular(12),
+                          borderRadius: context.radius12,
                         ),
                         child: Text(
                           context.tr.paywall.bestValue,

@@ -71,7 +71,7 @@ class _AnimatedButtonState extends State<_AnimatedButton>
               height: 56.h,
               decoration: BoxDecoration(
                 color: context.redLight,
-                borderRadius: BorderRadius.circular(12.w),
+                borderRadius: context.radius12,
               ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,

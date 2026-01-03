@@ -1,5 +1,6 @@
 import 'package:boby_ai_case/core/extensions/screen_extension.dart';
 import 'package:boby_ai_case/core/extensions/theme/build_context_color_ext.dart';
+import 'package:boby_ai_case/core/extensions/theme/build_context_radius_ext.dart';
 import 'package:boby_ai_case/core/extensions/theme/build_context_text_style_ext.dart';
 import 'package:boby_ai_case/core/shared/widgets/scaling_container.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +20,7 @@ class PaywallButton extends StatelessWidget {
         height: 56.h,
         decoration: BoxDecoration(
           color: context.redLight,
-          borderRadius: BorderRadius.circular(12.w),
+          borderRadius: context.radius12,
         ),
         child: Stack(
           alignment: Alignment.center,
