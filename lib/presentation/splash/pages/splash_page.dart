@@ -148,6 +148,7 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
                   scale: AlwaysStoppedAnimation(currentScale),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
+                    spacing: 32.h,
                     children: [
                       Image.asset(
                         AssetConstants.imageAppIcon,

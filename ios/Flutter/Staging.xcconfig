@@ -1,0 +1,8 @@
+// Staging flavor configuration
+#include "Debug.xcconfig"
+
+// Staging-specific settings
+FLUTTER_FLAVOR=staging
+PRODUCT_BUNDLE_IDENTIFIER=com.example.bobyAiCase.staging
+PRODUCT_NAME=Movie STG
+ASSETCATALOG_COMPILER_APPICON_NAME=AppIcon-Staging

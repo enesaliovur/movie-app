@@ -1,10 +1,17 @@
+import 'package:boby_ai_case/core/config/app_config.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 
 class HttpInterceptor extends Interceptor {
+  void _log(String message) {
+    if (AppConfig.enableLogging) {
+      debugPrint(message);
+    }
+  }
+
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
-    debugPrint('''
+    _log('''
       ═══════════════════════════════════════════════════════════
       REQUEST
       ───────────────────────────────────────────────────────────
@@ -19,7 +26,7 @@ class HttpInterceptor extends Interceptor {
 
   @override
   void onResponse(Response response, ResponseInterceptorHandler handler) {
-    debugPrint('''
+    _log('''
       ═══════════════════════════════════════════════════════════
       RESPONSE
       ───────────────────────────────────────────────────────────
@@ -32,7 +39,7 @@ class HttpInterceptor extends Interceptor {
 
   @override
   void onError(DioException err, ErrorInterceptorHandler handler) {
-    debugPrint('''
+    _log('''
       ═══════════════════════════════════════════════════════════
       ERROR
       ───────────────────────────────────────────────────────────
