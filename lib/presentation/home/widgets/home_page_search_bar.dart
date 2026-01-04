@@ -9,14 +9,7 @@ class HomePageSearchBar extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 16.sp),
       child: ScalingContainer(
         onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) {
-                return const GuardedPaywallPage(fromOnboarding: false);
-              },
-            ),
-          );
+          context.router.push(GuardedPaywallRoute(fromOnboarding: false));
         },
         child: DecoratedBox(
           decoration: BoxDecoration(

@@ -1,15 +1,16 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:boby_ai_case/core/di/setup_injector.dart';
 import 'package:boby_ai_case/core/extensions/localization/build_context_tr_ext.dart';
 import 'package:boby_ai_case/core/extensions/theme/build_context_color_ext.dart';
 import 'package:boby_ai_case/core/extensions/theme/build_context_radius_ext.dart';
 import 'package:boby_ai_case/core/extensions/theme/build_context_text_style_ext.dart';
+import 'package:boby_ai_case/core/router/app_router.dart';
 import 'package:boby_ai_case/core/shared/widgets/default_retry_button.dart';
 import 'package:boby_ai_case/core/shared/widgets/movie_card.dart';
 import 'package:boby_ai_case/core/shared/widgets/scaling_container.dart';
 import 'package:boby_ai_case/domain/entities/movie/movie_entity.dart';
 import 'package:boby_ai_case/presentation/common/movie/store/movie_store.dart';
 import 'package:boby_ai_case/presentation/home/store/recommendation_store.dart';
-import 'package:boby_ai_case/presentation/paywall/guarded_paywall_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -23,8 +24,8 @@ part 'widgets/genre_chip.dart';
 part 'widgets/category_section.dart';
 part 'widgets/home_page_search_bar.dart';
 
+@RoutePage()
 class HomePage extends StatelessWidget {
-  static const String path = '/home';
   const HomePage({super.key});
 
   @override

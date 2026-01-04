@@ -1,17 +1,18 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:boby_ai_case/core/config/app_config.dart';
 import 'package:boby_ai_case/core/constants/asset_constants.dart';
 import 'package:boby_ai_case/core/di/setup_injector.dart';
 import 'package:boby_ai_case/core/extensions/theme/build_context_text_style_ext.dart';
+import 'package:boby_ai_case/core/router/app_router.dart';
 import 'package:boby_ai_case/presentation/common/movie/store/movie_store.dart';
-import 'package:boby_ai_case/presentation/home/home_page.dart';
 import 'package:boby_ai_case/presentation/home/store/recommendation_store.dart';
-import 'package:boby_ai_case/presentation/onboarding/onboarding_page.dart';
 import 'package:boby_ai_case/presentation/onboarding/store/onboarding_store.dart';
 import 'package:boby_ai_case/presentation/splash/store/splash_store.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+@RoutePage()
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
 
@@ -55,10 +56,8 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
       ]);
       if (!_onboardingStore.hasError) {
         if (!mounted) return;
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => const OnboardingPage()),
-        );
+        if (!mounted) return;
+        context.router.replace(const OnboardingRoute());
       }
     } else {
       await _recommendationStore.fetchRecommendations();
@@ -66,10 +65,7 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
       await _movieStore.fetchGenres();
       if (!_movieStore.isGenresLoading && !_movieStore.isMoviesLoading) {
         if (!mounted) return;
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => const HomePage()),
-        );
+        context.router.replace(const HomeRoute());
       }
     }
   }

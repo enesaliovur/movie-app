@@ -6,6 +6,7 @@ import 'package:boby_ai_case/data/datasources/movie/i_movie_data_source.dart';
 import 'package:boby_ai_case/data/datasources/account/i_account_data_source.dart';
 import 'package:boby_ai_case/data/datasources/account/account_data_source.dart';
 import 'package:boby_ai_case/data/datasources/movie/movie_data_source.dart';
+import 'package:boby_ai_case/core/router/app_router.dart';
 import 'package:boby_ai_case/data/repositories/account/account_repository_impl.dart';
 import 'package:boby_ai_case/data/repositories/movie/movie_repository_impl.dart';
 import 'package:boby_ai_case/domain/repositories/account/i_account_repository.dart';
@@ -39,6 +40,9 @@ Future<void> setupInjector() async {
 
   // Remote Config Service
   getIt.registerSingleton<IRemoteConfigService>(RemoteConfigService());
+
+  // App Router
+  getIt.registerSingleton<AppRouter>(AppRouter());
 
   // Movie Feature
   getIt.registerSingleton<IMovieDataSource>(MovieDataSource(getIt<Client>()));

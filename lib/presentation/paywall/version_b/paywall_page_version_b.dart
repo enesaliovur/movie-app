@@ -1,4 +1,6 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:boby_ai_case/core/config/app_config.dart';
+import 'package:boby_ai_case/core/router/app_router.dart';
 import 'package:boby_ai_case/core/constants/asset_constants.dart';
 import 'package:boby_ai_case/core/extensions/screen_extension.dart';
 import 'package:boby_ai_case/core/extensions/localization/build_context_tr_ext.dart';

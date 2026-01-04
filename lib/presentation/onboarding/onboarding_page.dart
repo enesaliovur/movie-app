@@ -5,12 +5,14 @@ import 'package:boby_ai_case/presentation/onboarding/store/onboarding_store.dart
 import 'package:boby_ai_case/presentation/onboarding/widgets/onboarding_continue_button.dart';
 import 'package:boby_ai_case/presentation/onboarding/widgets/onboarding_genre_selection_step.dart';
 import 'package:boby_ai_case/presentation/onboarding/widgets/onboarding_movie_selection_step.dart';
-import 'package:boby_ai_case/presentation/paywall/guarded_paywall_page.dart';
+import 'package:auto_route/auto_route.dart';
+import 'package:boby_ai_case/core/router/app_router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mobx/mobx.dart';
 
+@RoutePage()
 class OnboardingPage extends StatefulWidget {
   const OnboardingPage({super.key});
 
@@ -37,14 +39,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
           _recommendationStore.fetchRecommendations();
           _movieStore.fetchMovies();
           _movieStore.fetchGenres();
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder: (context) {
-                return const GuardedPaywallPage(fromOnboarding: true);
-              },
-            ),
-          );
+          context.router.replace(GuardedPaywallRoute(fromOnboarding: true));
         }
       },
     );

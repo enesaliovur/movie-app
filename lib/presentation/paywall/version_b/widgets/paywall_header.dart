@@ -19,12 +19,9 @@ class PaywallHeader extends StatelessWidget {
         ),
         onPressed: () {
           if (fromOnboarding) {
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(builder: (context) => const HomePage()),
-            );
+            context.router.replace(const HomeRoute());
           } else {
-            Navigator.of(context).pop();
+            context.router.pop();
           }
         },
       ),

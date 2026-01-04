@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:boby_ai_case/core/di/setup_injector.dart';
 import 'package:boby_ai_case/core/extensions/localization/build_context_tr_ext.dart';
 import 'package:boby_ai_case/core/extensions/theme/build_context_color_ext.dart';
@@ -15,8 +16,8 @@ import 'package:mobx/mobx.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
+@RoutePage()
 class MovieSearchPage extends StatefulWidget {
-  static const String path = '/movie_search';
   const MovieSearchPage({super.key});
 
   @override

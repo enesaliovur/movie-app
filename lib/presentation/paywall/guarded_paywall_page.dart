@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:boby_ai_case/core/di/setup_injector.dart';
 import 'package:boby_ai_case/core/enums/paywall_version.dart';
 import 'package:boby_ai_case/presentation/paywall/store/paywall_store.dart';
@@ -8,8 +9,8 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:boby_ai_case/presentation/paywall/version_b/paywall_page_version_b.dart';
 import 'package:provider/provider.dart';
 
+@RoutePage()
 class GuardedPaywallPage extends StatelessWidget {
-  static const String path = '/paywall';
   final bool fromOnboarding;
 
   const GuardedPaywallPage({super.key, required this.fromOnboarding});

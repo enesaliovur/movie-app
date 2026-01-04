@@ -1,4 +1,6 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:boby_ai_case/core/config/app_config.dart';
+import 'package:boby_ai_case/core/router/app_router.dart';
 
 import 'package:boby_ai_case/core/extensions/screen_extension.dart';
 import 'package:boby_ai_case/core/extensions/localization/build_context_tr_ext.dart';
@@ -7,7 +9,6 @@ import 'package:boby_ai_case/core/extensions/theme/build_context_radius_ext.dart
 import 'package:boby_ai_case/core/extensions/theme/build_context_text_style_ext.dart';
 import 'package:boby_ai_case/domain/entities/paywall/paywall_feature_entity.dart';
 import 'package:boby_ai_case/domain/entities/product/product_entity.dart';
-import 'package:boby_ai_case/presentation/home/home_page.dart';
 import 'package:boby_ai_case/presentation/paywall/store/paywall_store.dart';
 import 'package:boby_ai_case/presentation/paywall/widgets/paywall_button.dart';
 import 'package:boby_ai_case/presentation/paywall/widgets/paywall_footer_links.dart';
@@ -58,14 +59,9 @@ class PaywallPageVersionA extends StatelessWidget {
                   icon: Icon(Icons.close, color: context.gray, size: 24.sp),
                   onPressed: () {
                     if (fromOnboarding) {
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const HomePage(),
-                        ),
-                      );
+                      context.router.replace(const HomeRoute());
                     } else {
-                      Navigator.of(context).pop();
+                      context.router.pop();
                     }
                   },
                 ),

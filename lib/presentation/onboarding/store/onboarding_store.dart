@@ -125,10 +125,6 @@ abstract class _OnboardingStore with Store {
           ),
         );
       } finally {
-        await _cacheService.writeStringList(
-          CacheKey.favoriteMovieIds,
-          selectedMovieIds.map((e) => e.toString()).toList(),
-        );
         isProcessing = false;
       }
 
