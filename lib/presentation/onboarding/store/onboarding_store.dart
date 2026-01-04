@@ -56,6 +56,9 @@ abstract class _OnboardingStore with Store {
   Failure? genresFailure;
 
   @observable
+  Failure? failure;
+
+  @observable
   PaginatedMoviesEntity movieInformation = PaginatedMoviesEntity.empty();
 
   @observable
@@ -68,7 +71,8 @@ abstract class _OnboardingStore with Store {
   bool get hasMorePages => movieInformation.page < movieInformation.totalPages;
 
   @computed
-  bool get hasError => moviesFailure != null || genresFailure != null;
+  bool get hasError =>
+      moviesFailure != null || genresFailure != null || failure != null;
 
   @computed
   bool get isLastPage => currentPage == 1;
@@ -118,16 +122,26 @@ abstract class _OnboardingStore with Store {
 
     if (currentPage == 0) {
       isProcessing = true;
-      try {
-        await Future.wait(
-          selectedMovieIds.map(
-            (id) => _accountRepository.addFavorite(movieId: id),
-          ),
-        );
-      } finally {
+      failure = null;
+
+      final results = await Future.wait(
+        selectedMovieIds.map(
+          (id) => _accountRepository.addFavorite(movieId: id),
+        ),
+      );
+
+      final hasFailure = results.any((result) => result.isLeft());
+
+      if (hasFailure) {
+        // Find the first failure and assign it
+        failure = results
+            .firstWhere((result) => result.isLeft())
+            .fold((l) => l, (r) => null);
         isProcessing = false;
+        return;
       }
 
+      isProcessing = false;
       currentPage = 1;
       pageController.animateToPage(
         1,

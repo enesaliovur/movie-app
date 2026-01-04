@@ -36,6 +36,7 @@ class CommonTranslations {
   String get success => 'common.success'.tr();
   String get error => 'common.error'.tr();
   String get loading => 'common.loading'.tr();
+  String get somethingWentWrong => 'common.something_went_wrong'.tr();
 }
 
 class OnboardingTranslations {

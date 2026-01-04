@@ -235,11 +235,27 @@ class _HomePageMoviesSectionState extends State<HomePageMoviesSection> {
         final groupedMovies = _movieStore.groupedMovies;
         if (genres.isEmpty) {
           if (_movieStore.isMoviesLoading) {
-            return const Center(child: CircularProgressIndicator());
+            return const Center(child: DefaultProgressIndicator());
           }
-          return Center(
-            child: Text(context.tr.home.noMoviesFound, style: context.fs24W700),
-          );
+
+          if (_movieStore.moviesFailure != null) {
+            return Center(
+              child: DefaultRetryButton(
+                onTap: () {
+                  _movieStore.fetchMovies();
+                },
+              ),
+            );
+          }
+
+          if (_movieStore.movies.isEmpty) {
+            return Center(
+              child: Text(
+                context.tr.home.noMoviesFound,
+                style: context.fs18W600,
+              ),
+            );
+          }
         }
 
         return SingleChildScrollView(

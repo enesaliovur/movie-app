@@ -7,6 +7,8 @@ import 'package:boby_ai_case/presentation/onboarding/widgets/onboarding_genre_se
 import 'package:boby_ai_case/presentation/onboarding/widgets/onboarding_movie_selection_step.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:boby_ai_case/core/router/app_router.dart';
+import 'package:boby_ai_case/core/extensions/visualization/build_context_toast_ext.dart';
+import 'package:boby_ai_case/core/failure/failure.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -24,7 +26,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
   late final OnboardingStore _onboardingStore;
   late final MovieStore _movieStore;
   late final RecommendationStore _recommendationStore;
-  late ReactionDisposer _onboardingCompletedReaction;
+  late List<ReactionDisposer> _disposers;
 
   @override
   void initState() {
@@ -32,23 +34,40 @@ class _OnboardingPageState extends State<OnboardingPage> {
     _onboardingStore = getIt<OnboardingStore>();
     _movieStore = getIt<MovieStore>();
     _recommendationStore = getIt<RecommendationStore>();
-    _onboardingCompletedReaction = reaction(
-      (_) => _onboardingStore.onboardingCompleted,
-      (bool completed) {
+
+    _disposers = [
+      reaction((_) => _onboardingStore.onboardingCompleted, (bool completed) {
         if (completed && mounted) {
           _recommendationStore.fetchRecommendations();
           _movieStore.fetchMovies();
           _movieStore.fetchGenres();
           context.router.replace(GuardedPaywallRoute(fromOnboarding: true));
         }
-      },
-    );
+      }),
+      reaction<Failure?>((_) => _onboardingStore.moviesFailure, (failure) {
+        if (failure != null && mounted) {
+          context.showFailureToast();
+        }
+      }),
+      reaction<Failure?>((_) => _onboardingStore.genresFailure, (failure) {
+        if (failure != null && mounted) {
+          context.showFailureToast();
+        }
+      }),
+      reaction<Failure?>((_) => _onboardingStore.failure, (failure) {
+        if (failure != null && mounted) {
+          context.showFailureToast();
+        }
+      }),
+    ];
   }
 
   @override
   void dispose() {
     _onboardingStore.dispose();
-    _onboardingCompletedReaction();
+    for (final disposer in _disposers) {
+      disposer();
+    }
     super.dispose();
   }
 

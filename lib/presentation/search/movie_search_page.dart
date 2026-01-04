@@ -4,6 +4,7 @@ import 'package:boby_ai_case/core/extensions/localization/build_context_tr_ext.d
 import 'package:boby_ai_case/core/extensions/theme/build_context_color_ext.dart';
 import 'package:boby_ai_case/core/extensions/theme/build_context_radius_ext.dart';
 import 'package:boby_ai_case/core/extensions/theme/build_context_text_style_ext.dart';
+import 'package:boby_ai_case/core/extensions/visualization/build_context_toast_ext.dart';
 import 'package:boby_ai_case/core/failure/failure.dart';
 import 'package:boby_ai_case/core/shared/widgets/default_progress_indicator.dart';
 import 'package:boby_ai_case/core/shared/widgets/default_retry_button.dart';
@@ -11,7 +12,6 @@ import 'package:boby_ai_case/core/shared/widgets/movie_card.dart';
 import 'package:boby_ai_case/presentation/search/store/movie_search_store.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:mobx/mobx.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
@@ -36,13 +36,8 @@ class _MovieSearchPageState extends State<MovieSearchPage> {
     _scrollController.addListener(_onScroll);
     _store = getIt<MovieSearchStore>();
     _disposer = reaction<Failure?>((_) => _store.failure, (failure) {
-      if (failure != null) {
-        Fluttertoast.showToast(
-          msg: 'Something went wrong',
-          gravity: ToastGravity.TOP,
-          textColor: context.white,
-          backgroundColor: context.redLight,
-        );
+      if (failure != null && mounted) {
+        context.showFailureToast();
       }
     });
   }

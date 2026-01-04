@@ -19,7 +19,8 @@
   "common": {
     "success": "Success",
     "error": "Error",
-    "loading": "Loading..."
+    "loading": "Loading...",
+    "something_went_wrong": "Something went wrong"
   },
   "onboarding": {
     "welcome": "Welcome",

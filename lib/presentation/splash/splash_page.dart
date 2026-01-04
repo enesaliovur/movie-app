@@ -3,6 +3,8 @@ import 'package:boby_ai_case/core/config/app_config.dart';
 import 'package:boby_ai_case/core/constants/asset_constants.dart';
 import 'package:boby_ai_case/core/di/setup_injector.dart';
 import 'package:boby_ai_case/core/extensions/theme/build_context_text_style_ext.dart';
+import 'package:boby_ai_case/core/extensions/visualization/build_context_toast_ext.dart';
+import 'package:boby_ai_case/core/failure/failure.dart';
 import 'package:boby_ai_case/core/router/app_router.dart';
 import 'package:boby_ai_case/presentation/common/movie/store/movie_store.dart';
 import 'package:boby_ai_case/presentation/home/store/recommendation_store.dart';
@@ -11,6 +13,7 @@ import 'package:boby_ai_case/presentation/splash/store/splash_store.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:mobx/mobx.dart' hide Listenable;
 
 @RoutePage()
 class SplashPage extends StatefulWidget {
@@ -30,6 +33,7 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
   late Animation<double> _fadeAnimation;
   late Animation<double> _scaleAnimation;
   late Animation<double> _pulseAnimation;
+  late final List<ReactionDisposer> _disposers;
 
   @override
   void initState() {
@@ -39,23 +43,40 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
     _onboardingStore = getIt<OnboardingStore>();
     _recommendationStore = getIt<RecommendationStore>();
     _movieStore = getIt<MovieStore>();
-
+    _setupReactions();
     _setupAnimations();
     _loadInitialData();
   }
 
+  void _setupReactions() {
+    _disposers = [
+      reaction<Failure?>((_) => _movieStore.moviesFailure, (failure) {
+        if (failure != null && mounted) {
+          context.showFailureToast();
+        }
+      }),
+      reaction<Failure?>((_) => _movieStore.genresFailure, (failure) {
+        if (failure != null && mounted) {
+          context.showFailureToast();
+        }
+      }),
+      reaction<Failure?>((_) => _recommendationStore.failure, (failure) {
+        if (failure != null && mounted) {
+          context.showFailureToast();
+        }
+      }),
+    ];
+  }
+
   Future<void> _loadInitialData() async {
-    // Initialize splash store (onboarding check)
     await _splashStore.init();
 
     if (_splashStore.showOnboarding) {
-      // Load movies and genres in parallel
       await Future.wait([
         _onboardingStore.getMovies(),
         _onboardingStore.getGenres(),
       ]);
       if (!_onboardingStore.hasError) {
-        if (!mounted) return;
         if (!mounted) return;
         context.router.replace(const OnboardingRoute());
       }

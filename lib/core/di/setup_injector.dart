@@ -49,9 +49,7 @@ Future<void> setupInjector() async {
   getIt.registerSingleton<IMovieRepository>(
     MovieRepositoryImpl(getIt<IMovieDataSource>(), getIt<HttpFailureHandler>()),
   );
-  getIt.registerSingleton<MovieStore>(
-    MovieStore(getIt<IMovieRepository>(), getIt<ICacheService>()),
-  );
+  getIt.registerSingleton<MovieStore>(MovieStore(getIt<IMovieRepository>()));
 
   // Splash
   getIt.registerFactory<SplashStore>(() => SplashStore(getIt<ICacheService>()));

@@ -54,32 +54,24 @@ abstract class _RecommendationStore with Store {
 
   @action
   Future<void> fetchRecommendations() async {
-    if (isLoading) return;
-
     isLoading = true;
     failure = null;
 
     final result = await _accountRepository.getFavorites();
 
-    await result.fold((error) async => failure = error, (data) async {
-      favoriteMovieIds = ObservableList.of(data.movies.map((e) => e.id));
+    await result.fold(
+      (error) async {
+        return failure = error;
+      },
+      (data) async {
+        favoriteMovieIds = ObservableList.of(data.movies.map((e) => e.id));
 
-      for (final id in favoriteMovieIds) {
-        await _fetchSimilarMovies(id);
-      }
-    });
+        for (final id in favoriteMovieIds) {
+          await _fetchSimilarMovies(id);
+        }
+      },
+    );
 
     isLoading = false;
-  }
-
-  @action
-  void clearFailure() {
-    failure = null;
-  }
-
-  @action
-  void clearRecommendations() {
-    similarMovies.clear();
-    favoriteMovieIds.clear();
   }
 }
