@@ -16,11 +16,11 @@ class _PaywallProductSelectionState extends State<PaywallProductSelection> {
     return Observer(
       builder: (_) {
         final monthlyProduct = store.products.firstWhere(
-          (p) => p.tier == 1,
+          (p) => p.isMonthly,
           orElse: () => store.products.first,
         );
         final yearlyProduct = store.products.firstWhere(
-          (p) => p.tier == 2,
+          (p) => p.isYearly,
           orElse: () => store.products.last,
         );
 
@@ -33,8 +33,7 @@ class _PaywallProductSelectionState extends State<PaywallProductSelection> {
               subPrice: context.tr.paywall.monthlySubPrice(
                 monthlyProduct.weeklyPrice,
               ),
-              isSelected:
-                  store.selectedProduct?.tier == 1, // Monthly tier = 1 assumed
+              isSelected: store.selectedProduct?.isMonthly ?? false,
               onTap: () {
                 store.selectProduct(monthlyProduct);
               },
@@ -45,8 +44,7 @@ class _PaywallProductSelectionState extends State<PaywallProductSelection> {
               subPrice: context.tr.paywall.yearlySubPrice(
                 yearlyProduct.weeklyPrice,
               ),
-              isSelected:
-                  store.selectedProduct?.tier == 2, // Yearly tier = 2 assumed
+              isSelected: store.selectedProduct?.isYearly ?? false,
               isBestValue: true,
               onTap: () {
                 store.selectProduct(yearlyProduct);

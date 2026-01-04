@@ -1,21 +1,7 @@
-import 'package:auto_size_text/auto_size_text.dart';
-import 'package:boby_ai_case/core/extensions/localization/build_context_tr_ext.dart';
-import 'package:boby_ai_case/core/extensions/theme/build_context_color_ext.dart';
-import 'package:boby_ai_case/core/extensions/theme/build_context_text_style_ext.dart';
-import 'package:boby_ai_case/core/shared/widgets/default_animated_container.dart';
-import 'package:boby_ai_case/domain/entities/movie/movie_genre_entity.dart';
-import 'package:boby_ai_case/presentation/onboarding/store/onboarding_store.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+part of '../onboarding_page.dart';
 
 class OnboardingGenreSelectionStep extends StatelessWidget {
-  const OnboardingGenreSelectionStep({
-    super.key,
-    required this.onboardingStore,
-  });
-
-  final OnboardingStore onboardingStore;
+  const OnboardingGenreSelectionStep({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -27,28 +13,24 @@ class OnboardingGenreSelectionStep extends StatelessWidget {
           Container(
             height: 100.h,
             padding: EdgeInsets.only(top: 28.h, left: 20.w, right: 20.w),
-
             alignment: Alignment.centerLeft,
-            child: _Header(onboardingStore: onboardingStore),
+            child: const _GenreSelectionHeader(),
           ),
-          Expanded(
-            flex: 5,
-            child: _GenreGrid(onboardingStore: onboardingStore),
-          ),
+          const Expanded(flex: 5, child: _GenreSelectionGrid()),
         ],
       ),
     );
   }
 }
 
-class _Header extends StatelessWidget {
-  const _Header({required this.onboardingStore});
-  final OnboardingStore onboardingStore;
+class _GenreSelectionHeader extends StatelessWidget {
+  const _GenreSelectionHeader();
 
   @override
   Widget build(BuildContext context) {
     return Observer(
       builder: (context) {
+        final onboardingStore = context.read<OnboardingStore>();
         final isValid = onboardingStore.isValid;
         return AnimatedSwitcher(
           duration: const Duration(milliseconds: 300),
@@ -94,15 +76,14 @@ class _Header extends StatelessWidget {
   }
 }
 
-class _GenreGrid extends StatelessWidget {
-  const _GenreGrid({required this.onboardingStore});
-
-  final OnboardingStore onboardingStore;
+class _GenreSelectionGrid extends StatelessWidget {
+  const _GenreSelectionGrid();
 
   @override
   Widget build(BuildContext context) {
     return Observer(
       builder: (context) {
+        final onboardingStore = context.read<OnboardingStore>();
         final genres = onboardingStore.genres;
         return GridView.builder(
           padding: EdgeInsets.symmetric(
@@ -117,7 +98,7 @@ class _GenreGrid extends StatelessWidget {
           ),
           itemBuilder: (context, index) {
             final genre = genres[index];
-            return _GenreItem(genre: genre, onboardingStore: onboardingStore);
+            return _GenreSelectionItem(genre: genre);
           },
         );
       },
@@ -125,16 +106,15 @@ class _GenreGrid extends StatelessWidget {
   }
 }
 
-class _GenreItem extends StatelessWidget {
-  const _GenreItem({required this.genre, required this.onboardingStore});
-
+class _GenreSelectionItem extends StatelessWidget {
+  const _GenreSelectionItem({required this.genre});
   final MovieGenreEntity genre;
-  final OnboardingStore onboardingStore;
 
   @override
   Widget build(BuildContext context) {
     return Observer(
       builder: (context) {
+        final onboardingStore = context.read<OnboardingStore>();
         final isSelected = onboardingStore.isFavoriteGenre(genre);
         return DefaultAnimatedContainer(
           onTap: () {

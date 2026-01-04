@@ -92,7 +92,7 @@ abstract class _MovieSearchStore with Store {
     if (isLoadMore) {
       performSearch();
     } else {
-      // I added a debounce to send fewer requests to the API and improve performance
+      // Added a debounce to send fewer requests to the API and improve performance
       _debounceTimer = Timer(const Duration(seconds: 2), performSearch);
     }
   }

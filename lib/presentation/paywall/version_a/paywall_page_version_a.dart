@@ -25,6 +25,12 @@ import 'package:mobx/mobx.dart';
 part 'widgets/paywall_features_table.dart';
 part 'widgets/paywall_purchase_button.dart';
 part 'widgets/paywall_products_view.dart';
+part 'widgets/paywall_products_list_tile.dart';
+part 'widgets/paywall_free_trial_container.dart';
+part 'widgets/paywall_feature_names_column.dart';
+part 'widgets/paywall_free_column.dart';
+part 'widgets/paywall_pro_column.dart';
+part 'widgets/paywall_feature_status_cell.dart';
 
 class PaywallPageVersionA extends StatelessWidget {
   const PaywallPageVersionA({super.key, required this.fromOnboarding});

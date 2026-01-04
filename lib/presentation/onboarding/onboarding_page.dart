@@ -1,18 +1,34 @@
+import 'package:auto_route/auto_route.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:boby_ai_case/core/di/setup_injector.dart';
+import 'package:boby_ai_case/core/extensions/localization/build_context_tr_ext.dart';
+import 'package:boby_ai_case/core/extensions/responsive/build_context_screen_ext.dart';
+import 'package:boby_ai_case/core/extensions/theme/build_context_color_ext.dart';
+import 'package:boby_ai_case/core/extensions/theme/build_context_radius_ext.dart';
+import 'package:boby_ai_case/core/extensions/theme/build_context_text_style_ext.dart';
+import 'package:boby_ai_case/core/extensions/visualization/build_context_toast_ext.dart';
+import 'package:boby_ai_case/core/failure/failure.dart';
+import 'package:boby_ai_case/core/router/app_router.dart';
+import 'package:boby_ai_case/core/shared/widgets/default_animated_container.dart';
+import 'package:boby_ai_case/core/shared/widgets/default_button.dart';
+import 'package:boby_ai_case/core/shared/widgets/default_progress_indicator.dart';
+import 'package:boby_ai_case/domain/entities/movie/movie_entity.dart';
+import 'package:boby_ai_case/domain/entities/movie/movie_genre_entity.dart';
 import 'package:boby_ai_case/presentation/home/store/home_store.dart';
 import 'package:boby_ai_case/presentation/home/store/recommendation_store.dart';
 import 'package:boby_ai_case/presentation/onboarding/store/onboarding_store.dart';
-import 'package:boby_ai_case/presentation/onboarding/widgets/onboarding_continue_button.dart';
-import 'package:boby_ai_case/presentation/onboarding/widgets/onboarding_genre_selection_step.dart';
-import 'package:boby_ai_case/presentation/onboarding/widgets/onboarding_movie_selection_step.dart';
-import 'package:auto_route/auto_route.dart';
-import 'package:boby_ai_case/core/router/app_router.dart';
-import 'package:boby_ai_case/core/extensions/visualization/build_context_toast_ext.dart';
-import 'package:boby_ai_case/core/failure/failure.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mobx/mobx.dart';
+import 'package:provider/provider.dart';
+import 'package:shimmer/shimmer.dart';
+
+part 'widgets/onboarding_genre_selection_step.dart';
+part 'widgets/onboarding_movie_selection_step.dart';
+part 'widgets/onboarding_continue_button.dart';
 
 @RoutePage()
 class OnboardingPage extends StatefulWidget {
@@ -87,31 +103,28 @@ class _OnboardingPageState extends State<OnboardingPage> {
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: SystemUiOverlayStyle.light,
       child: Scaffold(
-        body: Stack(
-          children: [
-            Positioned.fill(
-              child: PageView(
-                controller: _pageController,
-                physics: const NeverScrollableScrollPhysics(),
-                children: [
-                  OnboardingMovieSelectionStep(
-                    onboardingStore: _onboardingStore,
-                  ),
-                  OnboardingGenreSelectionStep(
-                    onboardingStore: _onboardingStore,
-                  ),
-                ],
+        body: Provider.value(
+          value: _onboardingStore,
+          child: Stack(
+            children: [
+              Positioned.fill(
+                child: PageView(
+                  controller: _pageController,
+                  physics: const NeverScrollableScrollPhysics(),
+                  children: const [
+                    OnboardingMovieSelectionStep(),
+                    OnboardingGenreSelectionStep(),
+                  ],
+                ),
               ),
-            ),
-            Positioned(
-              bottom: 79.h,
-              left: 0,
-              right: 0,
-              child: OnboardingContinueButton(
-                onboardingStore: _onboardingStore,
+              Positioned(
+                bottom: 79.h,
+                left: 0,
+                right: 0,
+                child: const OnboardingContinueButton(),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

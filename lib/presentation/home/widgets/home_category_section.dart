@@ -1,7 +1,7 @@
 part of '../home_page.dart';
 
-class CategorySection extends StatelessWidget {
-  const CategorySection({
+class HomeCategorySection extends StatelessWidget {
+  const HomeCategorySection({
     super.key,
     required this.categoryName,
     required this.movies,

@@ -1,8 +1,7 @@
 part of '../home_page.dart';
 
-
-class HomePageForYouSection extends StatelessWidget {
-  const HomePageForYouSection({super.key});
+class HomeForYouSection extends StatelessWidget {
+  const HomeForYouSection({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +15,9 @@ class HomePageForYouSection extends StatelessWidget {
             text: TextSpan(
               text: context.tr.home.forYou,
               style: context.textStyles.fs24W700,
-              children: [TextSpan(text: " ⭐️", style: context.textStyles.fs24W700)],
+              children: [
+                TextSpan(text: " ⭐️", style: context.textStyles.fs24W700),
+              ],
             ),
           ),
         ),

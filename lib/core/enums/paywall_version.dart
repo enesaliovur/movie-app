@@ -1,6 +1,6 @@
 enum PaywallVersion {
-  versionA('0'),
-  versionB('1');
+  versionA('version_a'),
+  versionB('version_b');
 
   const PaywallVersion(this.value);
   final String value;

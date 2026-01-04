@@ -189,7 +189,7 @@ class _HomePageMoviesSectionState extends State<HomePageMoviesSection> {
         ),
         Padding(
           padding: EdgeInsets.only(top: 10.h),
-          child: const HomePageSearchBar(),
+          child: const HomeSearchBar(),
         ),
         _buildGenreChips(),
         Expanded(child: _buildMoviesList()),
@@ -216,7 +216,7 @@ class _HomePageMoviesSectionState extends State<HomePageMoviesSection> {
 
               final key = _chipKeys[genre.id];
 
-              return GenreChip(
+              return HomeGenreChip(
                 key: key,
                 name: genre.name,
                 isSelected: isSelected,
@@ -270,7 +270,7 @@ class _HomePageMoviesSectionState extends State<HomePageMoviesSection> {
                   builder: (context) {
                     final key = _sectionKeys[genre.id];
 
-                    return CategorySection(
+                    return HomeCategorySection(
                       categoryName: genre.name,
                       movies: groupedMovies[genre.id] ?? [],
                       titleKey: key ?? GlobalKey(),

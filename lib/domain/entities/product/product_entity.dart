@@ -52,6 +52,10 @@ class ProductEntity extends Equatable {
     );
   }
 
+  bool get isWeekly => tier == 0;
+  bool get isMonthly => tier == 1;
+  bool get isYearly => tier == 2;
+
   @override
   List<Object?> get props => [
     id,

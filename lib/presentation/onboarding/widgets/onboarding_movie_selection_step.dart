@@ -1,24 +1,7 @@
-import 'package:boby_ai_case/core/extensions/localization/build_context_tr_ext.dart';
-import 'package:boby_ai_case/core/extensions/responsive/build_context_screen_ext.dart';
-import 'package:boby_ai_case/core/extensions/theme/build_context_color_ext.dart';
-import 'package:boby_ai_case/core/extensions/theme/build_context_radius_ext.dart';
-import 'package:boby_ai_case/core/extensions/theme/build_context_text_style_ext.dart';
-import 'package:boby_ai_case/core/shared/widgets/default_progress_indicator.dart';
-import 'package:boby_ai_case/domain/entities/movie/movie_entity.dart';
-import 'package:boby_ai_case/presentation/onboarding/store/onboarding_store.dart';
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:shimmer/shimmer.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+part of '../onboarding_page.dart';
 
 class OnboardingMovieSelectionStep extends StatefulWidget {
-  const OnboardingMovieSelectionStep({
-    super.key,
-    required this.onboardingStore,
-  });
-
-  final OnboardingStore onboardingStore;
+  const OnboardingMovieSelectionStep({super.key});
 
   @override
   State<OnboardingMovieSelectionStep> createState() =>
@@ -44,7 +27,7 @@ class _OnboardingMovieSelectionStepState
   }
 
   void _onScroll() {
-    final onboardingStore = widget.onboardingStore;
+    final onboardingStore = context.read<OnboardingStore>();
     if (_isNearEnd &&
         !onboardingStore.isMoviesLoading &&
         onboardingStore.hasMorePages) {
@@ -68,14 +51,11 @@ class _OnboardingMovieSelectionStepState
           Container(
             height: 100.h,
             padding: EdgeInsets.only(top: 28.h, left: 20.w, right: 20.w),
-            child: _Header(onboardingStore: widget.onboardingStore),
+            child: const _MovieSelectionHeader(),
           ),
           Expanded(
             child: Center(
-              child: _MovieList(
-                onboardingStore: widget.onboardingStore,
-                scrollController: _scrollController,
-              ),
+              child: _MovieList(scrollController: _scrollController),
             ),
           ),
         ],
@@ -84,14 +64,14 @@ class _OnboardingMovieSelectionStepState
   }
 }
 
-class _Header extends StatelessWidget {
-  const _Header({required this.onboardingStore});
-  final OnboardingStore onboardingStore;
+class _MovieSelectionHeader extends StatelessWidget {
+  const _MovieSelectionHeader();
 
   @override
   Widget build(BuildContext context) {
     return Observer(
       builder: (context) {
+        final onboardingStore = context.read<OnboardingStore>();
         final isValid = onboardingStore.isValid;
         return AnimatedSwitcher(
           duration: const Duration(milliseconds: 300),
@@ -133,12 +113,8 @@ class _Header extends StatelessWidget {
 }
 
 class _MovieList extends StatelessWidget {
-  const _MovieList({
-    required this.onboardingStore,
-    required this.scrollController,
-  });
+  const _MovieList({required this.scrollController});
 
-  final OnboardingStore onboardingStore;
   final ScrollController scrollController;
 
   @override
@@ -148,6 +124,7 @@ class _MovieList extends StatelessWidget {
       width: context.screenWidth,
       child: Observer(
         builder: (context) {
+          final onboardingStore = context.read<OnboardingStore>();
           final movies = onboardingStore.movies;
           final isLoading = onboardingStore.isMoviesLoading;
           return Stack(
@@ -162,10 +139,7 @@ class _MovieList extends StatelessWidget {
                   }
 
                   final movie = movies[index];
-                  return _MovieCard(
-                    movie: movie,
-                    onboardingStore: onboardingStore,
-                  );
+                  return _MovieCard(movie: movie);
                 },
               ),
               Positioned(
@@ -215,15 +189,15 @@ class _MovieCardShimmer extends StatelessWidget {
 }
 
 class _MovieCard extends StatelessWidget {
-  const _MovieCard({required this.movie, required this.onboardingStore});
+  const _MovieCard({required this.movie});
 
   final MovieEntity movie;
-  final OnboardingStore onboardingStore;
 
   @override
   Widget build(BuildContext context) {
     return Observer(
       builder: (_) {
+        final onboardingStore = context.read<OnboardingStore>();
         final id = movie.id;
         final isFavorite = onboardingStore.isFavoriteMovie(id);
         return GestureDetector(

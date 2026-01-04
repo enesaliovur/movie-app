@@ -17,6 +17,9 @@ import 'package:mobx/mobx.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
+part 'widgets/movie_search_bar.dart';
+part 'widgets/movie_search_list.dart';
+
 @RoutePage()
 class MovieSearchPage extends StatefulWidget {
   const MovieSearchPage({super.key});
@@ -76,141 +79,14 @@ class _MovieSearchPageState extends State<MovieSearchPage> {
           child: Column(
             children: [
               SizedBox(height: 8.sp),
-              const _SearchBar(),
+              const MovieSearchBar(),
               SizedBox(height: 16.sp),
               Expanded(
-                child: Observer(
-                  builder: (context) {
-                    final movies = _store.searchResults.movies;
-                    final hasFailure = _store.hasFailure;
-                    final isLoadMoreLoading = _store.isLoadMoreLoading;
-                    final query = _store.lastQuery;
-                    final isFetching = _store.isFetching;
-
-                    if (isFetching) {
-                      return const Center(child: DefaultProgressIndicator());
-                    }
-
-                    if (hasFailure) {
-                      return Center(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            DefaultRetryButton(
-                              onTap: () {
-                                _store.searchMovies(query);
-                              },
-                            ),
-                          ],
-                        ),
-                      );
-                    }
-
-                    if (query.isNotEmpty && movies.isEmpty) {
-                      return Center(
-                        child: Text(
-                          context.tr.search.noResults,
-                          style: context.textStyles.fs16W600,
-                        ),
-                      );
-                    }
-
-                    return Column(
-                      children: [
-                        Expanded(
-                          child: GridView.builder(
-                            controller: _scrollController,
-                            shrinkWrap: true,
-                            gridDelegate:
-                                SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 3,
-                                  mainAxisSpacing: 8.h,
-                                  crossAxisSpacing: 8.w,
-                                  childAspectRatio: 2 / 3,
-                                ),
-                            itemCount: movies.length,
-                            itemBuilder: (context, index) {
-                              final movie = movies[index];
-                              return MovieCard(
-                                onTap: () {
-                                  context.router.push(
-                                    MovieDetailRoute(movie: movie),
-                                  );
-                                },
-                                imageUrl: movie.posterUrl,
-                                borderRadius: context.radius.radius12,
-                              );
-                            },
-                          ),
-                        ),
-                        if (isLoadMoreLoading)
-                          Padding(
-                            padding: EdgeInsets.all(8.sp),
-                            child: const DefaultProgressIndicator(),
-                          ),
-                      ],
-                    );
-                  },
-                ),
+                child: MovieSearchList(scrollController: _scrollController),
               ),
             ],
           ),
         ),
-      ),
-    );
-  }
-}
-
-class _SearchBar extends StatelessWidget {
-  const _SearchBar();
-
-  void _onSearch(BuildContext context, {required String query}) {
-    final store = context.read<MovieSearchStore>();
-    store.searchMovies(query);
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Material(
-      color: context.colors.transparent,
-      child: TextFormField(
-        decoration: InputDecoration(
-          filled: true,
-          fillColor: context.colors.white,
-          contentPadding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 8.h),
-          hintText: context.tr.search.searchHint,
-          hintStyle: context.textStyles.fs17W400.copyWith(
-            color: context.colors.grayDark,
-          ),
-          border: OutlineInputBorder(
-            borderRadius: context.radius.radius10,
-            borderSide: BorderSide.none,
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderRadius: context.radius.radius10,
-            borderSide: BorderSide.none,
-          ),
-          prefixIcon: Icon(
-            Icons.search,
-            color: context.colors.grayDark,
-            size: 24.sp,
-          ),
-          suffixIcon: Icon(
-            Icons.mic,
-            color: context.colors.grayDark,
-            size: 24.sp,
-          ),
-        ),
-        style: context.textStyles.fs17W400.copyWith(
-          color: context.colors.black,
-        ),
-        autofocus: true,
-        onChanged: (value) {
-          _onSearch(context, query: value);
-        },
-        onTapOutside: (event) {
-          FocusScope.of(context).unfocus();
-        },
       ),
     );
   }

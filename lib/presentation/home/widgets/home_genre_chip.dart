@@ -1,7 +1,7 @@
 part of '../home_page.dart';
 
-class GenreChip extends StatelessWidget {
-  const GenreChip({
+class HomeGenreChip extends StatelessWidget {
+  const HomeGenreChip({
     super.key,
     required this.name,
     required this.isSelected,

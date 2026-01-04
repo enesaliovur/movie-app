@@ -41,7 +41,6 @@ abstract class _OnboardingStore with Store {
   @observable
   int currentPage = 0;
 
-  // Movie fetching state
   @observable
   bool isMoviesLoading = false;
 
@@ -132,7 +131,6 @@ abstract class _OnboardingStore with Store {
       final hasFailure = results.any((result) => result.isLeft());
 
       if (hasFailure) {
-        // Find the first failure and assign it
         failure = results
             .firstWhere((result) => result.isLeft())
             .fold((l) => l, (r) => null);

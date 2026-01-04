@@ -1,7 +1,7 @@
 part of '../home_page.dart';
 
-class HomePageSearchBar extends StatelessWidget {
-  const HomePageSearchBar({super.key});
+class HomeSearchBar extends StatelessWidget {
+  const HomeSearchBar({super.key});
 
   @override
   Widget build(BuildContext context) {

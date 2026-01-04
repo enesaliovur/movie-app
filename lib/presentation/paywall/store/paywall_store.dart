@@ -24,8 +24,10 @@ abstract class _PaywallStoreBase with Store {
   @observable
   bool highlightFreeTrialSwitch = false;
 
-  _PaywallStoreBase(this.remoteConfigService);
+  @observable
+  bool highlightOtherItems = false;
 
+  _PaywallStoreBase(this.remoteConfigService);
 
   @action
   void init() {
@@ -36,7 +38,7 @@ abstract class _PaywallStoreBase with Store {
       ProductEntity.yearlyDummy(),
     ]);
     try {
-      selectProduct(products.firstWhere((element) => element.tier == 2));
+      selectProduct(products.firstWhere((element) => element.isYearly));
     } catch (_) {
       if (products.isNotEmpty) selectProduct(products.last);
     }
@@ -44,6 +46,14 @@ abstract class _PaywallStoreBase with Store {
 
   @action
   void selectProduct(ProductEntity product) {
+    if (selectedProduct == product) {
+      triggerFreeTrialHighlight();
+      if (!isFreeTrial || product.tier != 2) {
+        triggerOtherItemsHighlight();
+      }
+      return;
+    }
+
     if (paywallVersion.isVersionA && isFreeTrial) {
       if (product.tier != 2) {
         triggerFreeTrialHighlight();
@@ -61,7 +71,7 @@ abstract class _PaywallStoreBase with Store {
 
     if (paywallVersion.isVersionA && value) {
       final yearly = products.firstWhere(
-        (p) => p.tier == 2,
+        (p) => p.isYearly,
         orElse: () => products.first,
       );
       selectedProduct = yearly;
@@ -73,6 +83,14 @@ abstract class _PaywallStoreBase with Store {
     highlightFreeTrialSwitch = true;
     Future.delayed(const Duration(milliseconds: 600), () {
       highlightFreeTrialSwitch = false;
+    });
+  }
+
+  @action
+  void triggerOtherItemsHighlight() {
+    highlightOtherItems = true;
+    Future.delayed(const Duration(milliseconds: 600), () {
+      highlightOtherItems = false;
     });
   }
 }

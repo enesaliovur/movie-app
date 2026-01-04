@@ -21,11 +21,11 @@ import 'package:mobx/mobx.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer/shimmer.dart';
 
-part 'widgets/home_page_for_you_section.dart';
-part 'widgets/home_page_movies_section.dart';
-part 'widgets/genre_chip.dart';
-part 'widgets/category_section.dart';
-part 'widgets/home_page_search_bar.dart';
+part 'widgets/home_for_you_section.dart';
+part 'widgets/home_movies_section.dart';
+part 'widgets/home_genre_chip.dart';
+part 'widgets/home_category_section.dart';
+part 'widgets/home_search_bar.dart';
 
 @RoutePage()
 class HomePage extends StatefulWidget {
@@ -85,7 +85,7 @@ class _HomePageState extends State<HomePage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const HomePageForYouSection(),
+              const HomeForYouSection(),
               SizedBox(height: 32.h),
               Divider(color: context.colors.grayDark, height: 0.5),
               SizedBox(height: 16.h),
