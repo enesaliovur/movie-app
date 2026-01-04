@@ -2,7 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:boby_ai_case/core/config/app_config.dart';
 import 'package:boby_ai_case/core/router/app_router.dart';
 
-import 'package:boby_ai_case/core/extensions/screen_extension.dart';
+import 'package:boby_ai_case/core/extensions/responsive/build_context_screen_ext.dart';
 import 'package:boby_ai_case/core/extensions/localization/build_context_tr_ext.dart';
 import 'package:boby_ai_case/core/extensions/theme/build_context_color_ext.dart';
 import 'package:boby_ai_case/core/extensions/theme/build_context_radius_ext.dart';

@@ -1,4 +1,4 @@
-import 'package:boby_ai_case/core/extensions/screen_extension.dart';
+import 'package:boby_ai_case/core/extensions/responsive/build_context_screen_ext.dart';
 import 'package:boby_ai_case/core/extensions/theme/build_context_color_ext.dart';
 import 'package:boby_ai_case/core/extensions/theme/build_context_radius_ext.dart';
 import 'package:boby_ai_case/core/shared/widgets/default_animated_container.dart';
