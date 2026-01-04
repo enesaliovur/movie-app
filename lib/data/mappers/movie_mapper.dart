@@ -26,6 +26,9 @@ class MovieMapper {
       genreIds: dto.genreIds,
       popularity: dto.popularity,
       isAdult: dto.adult,
+      originalLanguage: dto.originalLanguage,
+      originalTitle: dto.originalTitle,
+      video: dto.video,
     );
   }
 

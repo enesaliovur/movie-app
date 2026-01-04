@@ -44,6 +44,9 @@ class CategorySection extends StatelessWidget {
                   width: 100.w,
                   height: 140.h,
                   borderRadius: context.radius.radius8,
+                  onTap: () {
+                    context.router.push(MovieDetailRoute(movie: movie));
+                  },
                 ),
               );
             },

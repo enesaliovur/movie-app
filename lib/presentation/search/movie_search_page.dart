@@ -6,6 +6,7 @@ import 'package:boby_ai_case/core/extensions/theme/build_context_radius_ext.dart
 import 'package:boby_ai_case/core/extensions/theme/build_context_text_style_ext.dart';
 import 'package:boby_ai_case/core/extensions/visualization/build_context_toast_ext.dart';
 import 'package:boby_ai_case/core/failure/failure.dart';
+import 'package:boby_ai_case/core/router/app_router.dart';
 import 'package:boby_ai_case/core/shared/widgets/default_progress_indicator.dart';
 import 'package:boby_ai_case/core/shared/widgets/default_retry_button.dart';
 import 'package:boby_ai_case/core/shared/widgets/movie_card.dart';
@@ -65,7 +66,10 @@ class _MovieSearchPageState extends State<MovieSearchPage> {
       create: (context) => _store,
       child: Scaffold(
         appBar: AppBar(
-          title: Text(context.tr.search.title, style: context.textStyles.fs20W600),
+          title: Text(
+            context.tr.search.title,
+            style: context.textStyles.fs20W600,
+          ),
         ),
         body: Padding(
           padding: EdgeInsets.symmetric(horizontal: 16.w),
@@ -128,6 +132,11 @@ class _MovieSearchPageState extends State<MovieSearchPage> {
                             itemBuilder: (context, index) {
                               final movie = movies[index];
                               return MovieCard(
+                                onTap: () {
+                                  context.router.push(
+                                    MovieDetailRoute(movie: movie),
+                                  );
+                                },
                                 imageUrl: movie.posterUrl,
                                 borderRadius: context.radius.radius12,
                               );
@@ -170,7 +179,9 @@ class _SearchBar extends StatelessWidget {
           fillColor: context.colors.white,
           contentPadding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 8.h),
           hintText: context.tr.search.searchHint,
-          hintStyle: context.textStyles.fs17W400.copyWith(color: context.colors.grayDark),
+          hintStyle: context.textStyles.fs17W400.copyWith(
+            color: context.colors.grayDark,
+          ),
           border: OutlineInputBorder(
             borderRadius: context.radius.radius10,
             borderSide: BorderSide.none,
@@ -179,10 +190,20 @@ class _SearchBar extends StatelessWidget {
             borderRadius: context.radius.radius10,
             borderSide: BorderSide.none,
           ),
-          prefixIcon: Icon(Icons.search, color: context.colors.grayDark, size: 24.sp),
-          suffixIcon: Icon(Icons.mic, color: context.colors.grayDark, size: 24.sp),
+          prefixIcon: Icon(
+            Icons.search,
+            color: context.colors.grayDark,
+            size: 24.sp,
+          ),
+          suffixIcon: Icon(
+            Icons.mic,
+            color: context.colors.grayDark,
+            size: 24.sp,
+          ),
         ),
-        style: context.textStyles.fs17W400.copyWith(color: context.colors.black),
+        style: context.textStyles.fs17W400.copyWith(
+          color: context.colors.black,
+        ),
         autofocus: true,
         onChanged: (value) {
           _onSearch(context, query: value);

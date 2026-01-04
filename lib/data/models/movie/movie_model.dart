@@ -1,3 +1,4 @@
+import 'package:boby_ai_case/domain/entities/movie/movie_entity.dart';
 import 'package:equatable/equatable.dart';
 
 class MovieModel extends Equatable {
@@ -20,7 +21,7 @@ class MovieModel extends Equatable {
 
   factory MovieModel.fromMap(Map<String, dynamic> map) {
     return MovieModel(
-      adult: map['adult'] ?? true,
+      adult: map['adult'] ?? false,
       backdropPath: map['backdrop_path'] ?? '',
       genreIds: List<int>.from(map['genre_ids'] ?? []),
       id: map['id'] ?? 0,
@@ -31,7 +32,7 @@ class MovieModel extends Equatable {
       posterPath: map['poster_path'] ?? '',
       releaseDate: map['release_date'] ?? '',
       title: map['title'] ?? '',
-      video: map['video'] ?? true,
+      video: map['video'] ?? false,
       voteAverage: (map['vote_average'] as num?)?.toDouble() ?? 0.0,
       voteCount: map['vote_count'] ?? 0,
     );
@@ -72,7 +73,32 @@ class MovieModel extends Equatable {
   }
 
   String get posterUrl {
+    if (posterPath.isEmpty) return '';
     return 'https://image.tmdb.org/t/p/w500$posterPath';
+  }
+
+  String get backdropUrl {
+    if (backdropPath?.isEmpty ?? true) return '';
+    return 'https://image.tmdb.org/t/p/w780$backdropPath';
+  }
+
+  MovieEntity toEntity() {
+    return MovieEntity(
+      id: id,
+      title: title,
+      overview: overview,
+      posterUrl: posterUrl,
+      backdropUrl: backdropUrl,
+      releaseDate: releaseDate,
+      voteAverage: voteAverage,
+      voteCount: voteCount,
+      genreIds: genreIds,
+      popularity: popularity,
+      isAdult: adult,
+      originalLanguage: originalLanguage,
+      originalTitle: originalTitle,
+      video: video,
+    );
   }
 
   @override

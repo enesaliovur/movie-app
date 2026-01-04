@@ -30,7 +30,9 @@ class _FooterLink extends StatelessWidget {
       onTap: onTap,
       child: Text(
         text,
-        style: context.textStyles.fs8W400.copyWith(color: context.colors.gray),
+        style: context.textStyles.fs8W400.copyWith(
+          color: context.colors.grayLight,
+        ),
       ),
     );
   }

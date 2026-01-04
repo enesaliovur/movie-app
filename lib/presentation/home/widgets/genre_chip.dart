@@ -25,7 +25,9 @@ class GenreChip extends StatelessWidget {
             color: isSelected ? context.colors.redLight : context.colors.white,
             borderRadius: context.radius.radius100,
             border: Border.all(
-              color: isSelected ? context.colors.redLight : context.colors.gray,
+              color: isSelected
+                  ? context.colors.redLight
+                  : context.colors.grayLight,
             ),
           ),
           child: Row(

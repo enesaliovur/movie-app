@@ -181,7 +181,9 @@ class _HomePageMoviesSectionState extends State<HomePageMoviesSection> {
             text: TextSpan(
               text: context.tr.home.movies,
               style: context.textStyles.fs24W700,
-              children: [TextSpan(text: " 🎬", style: context.textStyles.fs24W700)],
+              children: [
+                TextSpan(text: " 🎬", style: context.textStyles.fs24W700),
+              ],
             ),
           ),
         ),
@@ -212,7 +214,6 @@ class _HomePageMoviesSectionState extends State<HomePageMoviesSection> {
               final genre = genres[index];
               final isSelected = genre.id == selectedId;
 
-              // Key should already be created by reaction
               final key = _chipKeys[genre.id];
 
               return GenreChip(

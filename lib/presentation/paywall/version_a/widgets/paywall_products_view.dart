@@ -148,7 +148,9 @@ class _ProductListTile extends StatelessWidget {
                       Text(product.period, style: context.textStyles.fs16W600),
                       Text(
                         _getSubtitle(context),
-                        style: context.textStyles.fs12W400.copyWith(color: context.colors.gray),
+                        style: context.textStyles.fs12W400.copyWith(
+                          color: context.colors.grayLight,
+                        ),
                       ),
                     ],
                   ),

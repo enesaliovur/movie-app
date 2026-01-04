@@ -12,7 +12,8 @@ class AppColors {
   Color get black => const Color(0xff0F0E0E);
   Color get green => const Color(0xff00E275);
   Color get white => const Color(0xffF3E9E9);
-  Color get gray => const Color(0xffDED5D5);
+  Color get grayLight => const Color(0xffDED5D5);
   Color get grayDark => const Color(0xff968D8D);
+  Color get yellow => const Color(0xFFFFD700);
   Color get transparent => Colors.transparent;
 }

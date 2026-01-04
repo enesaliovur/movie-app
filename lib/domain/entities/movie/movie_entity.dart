@@ -13,6 +13,9 @@ class MovieEntity extends Equatable {
     required this.genreIds,
     required this.popularity,
     required this.isAdult,
+    required this.originalLanguage,
+    required this.originalTitle,
+    required this.video,
   });
 
   final int id;
@@ -26,6 +29,9 @@ class MovieEntity extends Equatable {
   final List<int> genreIds;
   final double popularity;
   final bool isAdult;
+  final String originalLanguage;
+  final String originalTitle;
+  final bool video;
 
   @override
   List<Object?> get props => [
@@ -40,5 +46,8 @@ class MovieEntity extends Equatable {
     genreIds,
     popularity,
     isAdult,
+    originalLanguage,
+    originalTitle,
+    video,
   ];
 }

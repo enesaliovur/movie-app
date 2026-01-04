@@ -88,7 +88,9 @@ class _ProductCard extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: context.radius.radius12,
               border: Border.all(
-                color: isSelected ? context.colors.redLight : context.colors.white,
+                color: isSelected
+                    ? context.colors.redLight
+                    : context.colors.white,
               ),
             ),
             child: Padding(
@@ -104,12 +106,16 @@ class _ProductCard extends StatelessWidget {
                     children: [
                       Text(
                         title,
-                        style: context.textStyles.fs16W600.copyWith(color: Colors.white),
+                        style: context.textStyles.fs16W600.copyWith(
+                          color: Colors.white,
+                        ),
                       ),
                       SizedBox(height: 4.h),
                       Text(
                         subPrice,
-                        style: context.textStyles.fs12W400.copyWith(color: context.colors.gray),
+                        style: context.textStyles.fs12W400.copyWith(
+                          color: context.colors.grayLight,
+                        ),
                       ),
                     ],
                   ),
@@ -117,7 +123,9 @@ class _ProductCard extends StatelessWidget {
                   Text(
                     price,
                     textAlign: TextAlign.end,
-                    style: context.textStyles.fs16W600.copyWith(color: Colors.white),
+                    style: context.textStyles.fs16W600.copyWith(
+                      color: Colors.white,
+                    ),
                   ),
                 ],
               ),

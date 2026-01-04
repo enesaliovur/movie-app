@@ -11,9 +11,8 @@ import 'package:provider/provider.dart';
 
 @RoutePage()
 class GuardedPaywallPage extends StatelessWidget {
-  final bool fromOnboarding;
-
   const GuardedPaywallPage({super.key, required this.fromOnboarding});
+  final bool fromOnboarding;
 
   @override
   Widget build(BuildContext context) {

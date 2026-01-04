@@ -201,11 +201,11 @@ class _MovieCardShimmer extends StatelessWidget {
       margin: EdgeInsets.symmetric(horizontal: 8.w),
       width: context.screenWidth * 0.5,
       child: Shimmer.fromColors(
-        baseColor: context.colors.gray.withValues(alpha: 0.3),
-        highlightColor: context.colors.gray.withValues(alpha: 0.1),
+        baseColor: context.colors.grayLight.withValues(alpha: 0.3),
+        highlightColor: context.colors.grayLight.withValues(alpha: 0.1),
         child: Container(
           decoration: BoxDecoration(
-            color: context.colors.gray,
+            color: context.colors.grayLight,
             borderRadius: context.radius.radius16,
           ),
         ),
