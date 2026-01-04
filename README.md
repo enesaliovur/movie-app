@@ -2,6 +2,16 @@
 
 App Screen Recording: https://drive.google.com/file/d/188CljdLbt4L5SHAke9oHYQX7VaReVclb/view?usp=share_link
 
+### App Icon Dev
+<img src="https://github.com/user-attachments/assets/a3796bfc-8cef-46a0-82ae-5d41d57691ba" width="100">
+
+### App Icon Staging
+<img src="https://github.com/user-attachments/assets/237d45c3-134b-421f-9fb1-e7fba4beff05" width="100">
+
+### App Icon Prod
+<img src="https://github.com/user-attachments/assets/cb8c3e3c-86ac-4561-8e21-7f85e0d35eb7" width="100">
+
+
 ## 🏗️ Build Environments (Flavors/Schemes)
 
 This project implements three distinct build environments:
