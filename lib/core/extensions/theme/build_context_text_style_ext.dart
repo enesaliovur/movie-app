@@ -140,24 +140,6 @@ class AppTextStyles {
     );
   }
 
-  TextStyle get fs24W800 {
-    return TextStyle(
-      fontSize: 24.sp,
-      fontWeight: FontWeight.w800,
-      color: _context.colors.white,
-    );
-  }
-
-  TextStyle get fs28W600 {
-    return TextStyle(
-      fontSize: 28.sp,
-      fontWeight: FontWeight.w600,
-      color: _context.colors.white,
-      letterSpacing: 0,
-      height: 1,
-    );
-  }
-
   TextStyle get fs32W800 {
     return TextStyle(
       fontSize: 32.sp,
