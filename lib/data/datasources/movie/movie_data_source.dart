@@ -2,6 +2,7 @@ import 'package:boby_ai_case/core/constants/endpoint_constants.dart';
 import 'package:boby_ai_case/core/network/client.dart';
 import 'package:boby_ai_case/core/network/utilities/response_decoder.dart';
 import 'package:boby_ai_case/data/datasources/movie/i_movie_data_source.dart';
+import 'package:boby_ai_case/data/adapters/movie_api_v2_adapter.dart';
 import 'package:boby_ai_case/data/models/movie/movie_genre_model.dart';
 import 'package:boby_ai_case/data/models/movie/movie_information_model.dart';
 
@@ -21,7 +22,8 @@ class MovieDataSource extends IMovieDataSource {
       throw const FormatException('Expected Map<String, dynamic>');
     }
 
-    return MovieInformationModel.fromMap(decodedData);
+    final v2Data = transformToV2(decodedData);
+    return MovieInformationModel.fromMap(v2Data);
   }
 
   @override
@@ -51,7 +53,8 @@ class MovieDataSource extends IMovieDataSource {
       throw const FormatException('Expected Map<String, dynamic>');
     }
 
-    return MovieInformationModel.fromMap(decodedData);
+    final v2Data = transformToV2(decodedData);
+    return MovieInformationModel.fromMap(v2Data);
   }
 
   @override
@@ -69,6 +72,11 @@ class MovieDataSource extends IMovieDataSource {
       throw const FormatException('Expected Map<String, dynamic>');
     }
 
-    return MovieInformationModel.fromMap(decodedData);
+    // Simulate V2 Transformation
+    final v2Data = transformToV2(decodedData);
+    return MovieInformationModel.fromMap(v2Data);
   }
 }
+  
+
+

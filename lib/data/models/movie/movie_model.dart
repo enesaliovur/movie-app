@@ -20,21 +20,29 @@ class MovieModel extends Equatable {
   });
 
   factory MovieModel.fromMap(Map<String, dynamic> map) {
+    // V2 Structure Support
+    final content = map['content'] as Map<String, dynamic>?;
+    final images = map['images'] as Map<String, dynamic>?;
+    final metrics = map['metrics'] as Map<String, dynamic>?;
+    final dates = map['dates'] as Map<String, dynamic>?;
+    final flags = map['flags'] as Map<String, dynamic>?;
+    final meta = map['meta'] as Map<String, dynamic>?;
+
     return MovieModel(
-      adult: map['adult'] ?? false,
-      backdropPath: map['backdrop_path'] ?? '',
-      genreIds: List<int>.from(map['genre_ids'] ?? []),
       id: map['id'] ?? 0,
-      originalLanguage: map['original_language'] ?? '',
-      originalTitle: map['original_title'] ?? '',
-      overview: map['overview'] ?? '',
-      popularity: (map['popularity'] as num?)?.toDouble() ?? 0.0,
-      posterPath: map['poster_path'] ?? '',
-      releaseDate: map['release_date'] ?? '',
-      title: map['title'] ?? '',
-      video: map['video'] ?? false,
-      voteAverage: (map['vote_average'] as num?)?.toDouble() ?? 0.0,
-      voteCount: map['vote_count'] ?? 0,
+      title: content?['title'] ?? '',
+      overview: content?['overview'] ?? '',
+      originalTitle: content?['original_title'] ?? '',
+      originalLanguage: content?['original_language'] ?? '',
+      posterPath: images?['poster_url'] ?? '',
+      backdropPath: images?['backdrop_url'] ?? '',
+      voteAverage: (metrics?['score'] as num?)?.toDouble() ?? 0.0,
+      voteCount: metrics?['reviews'] ?? 0,
+      popularity: (metrics?['popularity'] as num?)?.toDouble() ?? 0.0,
+      releaseDate: dates?['theatrical_release'] ?? '',
+      adult: flags?['is_adult'] ?? false,
+      video: flags?['has_video'] ?? false,
+      genreIds: List<int>.from(meta?['genre_ids'] ?? []),
     );
   }
 

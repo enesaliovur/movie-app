@@ -13,12 +13,16 @@ class MovieInformationModel extends Equatable {
   }
 
   factory MovieInformationModel.fromMap(Map<String, dynamic> map) {
+    // V2 Structure Support
+    final meta = map['meta'] as Map<String, dynamic>?;
+    final data = map['data'] as Map<String, dynamic>?;
+
     return MovieInformationModel(
-      movies: (map['results'] as List)
+      movies: ((data?['movies'] ?? []) as List)
           .map((e) => MovieModel.fromMap(e))
           .toList(),
-      page: map['page'] as int? ?? 0,
-      totalPages: map['total_pages'] as int? ?? 0,
+      page: meta?['current_page'] as int? ?? 0,
+      totalPages: meta?['total_pages'] as int? ?? 0,
     );
   }
 

@@ -4,6 +4,7 @@ import 'package:boby_ai_case/core/network/utilities/response_decoder.dart';
 import 'package:boby_ai_case/data/datasources/account/i_account_data_source.dart';
 import 'package:boby_ai_case/data/models/account/account_model.dart';
 import 'package:boby_ai_case/data/models/movie/movie_information_model.dart';
+import 'package:boby_ai_case/data/adapters/movie_api_v2_adapter.dart';
 import 'package:dartz/dartz.dart';
 
 class UserDataSource implements IAccountDataSource {
@@ -53,6 +54,8 @@ class UserDataSource implements IAccountDataSource {
       throw const FormatException('Expected Map<String, dynamic>');
     }
 
-    return MovieInformationModel.fromMap(decodedData);
+    // Simulate V2 Transformation
+    final v2Data = transformToV2(decodedData);
+    return MovieInformationModel.fromMap(v2Data);
   }
 }
