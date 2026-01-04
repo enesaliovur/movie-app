@@ -20,7 +20,6 @@ class MovieRepositoryImpl
   @override
   Future<FailureOr<PaginatedMoviesEntity>> getMovies({int page = 1}) async {
     try {
-      return left(UnknownFailure());
       final result = await _dataSource.getMovies(page: page);
       return right(MovieMapper.toPaginatedEntity(result));
     } catch (e) {

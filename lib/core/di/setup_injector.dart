@@ -11,7 +11,7 @@ import 'package:boby_ai_case/data/repositories/account/account_repository_impl.d
 import 'package:boby_ai_case/data/repositories/movie/movie_repository_impl.dart';
 import 'package:boby_ai_case/domain/repositories/account/i_account_repository.dart';
 import 'package:boby_ai_case/domain/repositories/movie/i_movie_repository.dart';
-import 'package:boby_ai_case/presentation/common/movie/store/movie_store.dart';
+import 'package:boby_ai_case/presentation/home/store/home_store.dart';
 import 'package:boby_ai_case/presentation/home/store/recommendation_store.dart';
 import 'package:boby_ai_case/presentation/onboarding/store/onboarding_store.dart';
 import 'package:boby_ai_case/presentation/paywall/store/paywall_store.dart';
@@ -49,7 +49,7 @@ Future<void> setupInjector() async {
   getIt.registerSingleton<IMovieRepository>(
     MovieRepositoryImpl(getIt<IMovieDataSource>(), getIt<HttpFailureHandler>()),
   );
-  getIt.registerSingleton<MovieStore>(MovieStore(getIt<IMovieRepository>()));
+  getIt.registerSingleton<HomeStore>(HomeStore(getIt<IMovieRepository>()));
 
   // Splash
   getIt.registerFactory<SplashStore>(() => SplashStore(getIt<ICacheService>()));

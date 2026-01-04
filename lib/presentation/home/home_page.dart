@@ -8,9 +8,9 @@ import 'package:boby_ai_case/core/router/app_router.dart';
 import 'package:boby_ai_case/core/shared/widgets/default_progress_indicator.dart';
 import 'package:boby_ai_case/core/shared/widgets/default_retry_button.dart';
 import 'package:boby_ai_case/core/shared/widgets/movie_card.dart';
-import 'package:boby_ai_case/core/shared/widgets/scaling_container.dart';
+import 'package:boby_ai_case/core/shared/widgets/default_animated_container.dart';
 import 'package:boby_ai_case/domain/entities/movie/movie_entity.dart';
-import 'package:boby_ai_case/presentation/common/movie/store/movie_store.dart';
+import 'package:boby_ai_case/presentation/home/store/home_store.dart';
 import 'package:boby_ai_case/presentation/home/store/recommendation_store.dart';
 import 'package:boby_ai_case/core/extensions/visualization/build_context_toast_ext.dart';
 import 'package:boby_ai_case/core/failure/failure.dart';
@@ -37,19 +37,30 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   late final RecommendationStore _recommendationStore;
-
+  late final HomeStore _homeStore;
   late final List<ReactionDisposer> _disposers;
 
   @override
   void initState() {
     super.initState();
     _recommendationStore = getIt<RecommendationStore>();
+    _homeStore = getIt<HomeStore>();
     _setupReactions();
   }
 
   void _setupReactions() {
     _disposers = [
       reaction<Failure?>((_) => _recommendationStore.failure, (failure) {
+        if (failure != null && mounted) {
+          context.showFailureToast();
+        }
+      }),
+      reaction<Failure?>((_) => _homeStore.moviesFailure, (failure) {
+        if (failure != null && mounted) {
+          context.showFailureToast();
+        }
+      }),
+      reaction<Failure?>((_) => _homeStore.genresFailure, (failure) {
         if (failure != null && mounted) {
           context.showFailureToast();
         }
@@ -76,7 +87,7 @@ class _HomePageState extends State<HomePage> {
             children: [
               const HomePageForYouSection(),
               SizedBox(height: 32.h),
-              Divider(color: context.grayDark, height: 0.5),
+              Divider(color: context.colors.grayDark, height: 0.5),
               SizedBox(height: 16.h),
               const Expanded(child: HomePageMoviesSection()),
             ],

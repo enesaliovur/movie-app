@@ -1,6 +1,7 @@
+import 'package:boby_ai_case/core/extensions/screen_extension.dart';
 import 'package:boby_ai_case/core/extensions/theme/build_context_color_ext.dart';
 import 'package:boby_ai_case/core/extensions/theme/build_context_radius_ext.dart';
-import 'package:boby_ai_case/core/shared/widgets/scaling_container.dart';
+import 'package:boby_ai_case/core/shared/widgets/default_animated_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -32,18 +33,18 @@ class DefaultButton extends StatefulWidget {
 class _DefaultButtonState extends State<DefaultButton> {
   @override
   Widget build(BuildContext context) {
-    return ScalingContainer(
+    return DefaultAnimatedContainer(
       shrinkWrap: true,
       onTap: () {
         widget.onTap();
       },
       child: Container(
         height: widget.height ?? 56.h,
-        width: widget.width ?? 375.w,
+        width: widget.width ?? context.screenWidth,
         decoration: BoxDecoration(
           border: widget.border,
-          color: widget.color ?? context.redLight,
-          borderRadius: context.radius16,
+          color: widget.color ?? context.colors.redLight,
+          borderRadius: context.radius.radius16,
         ),
         child: Padding(
           padding: EdgeInsets.symmetric(

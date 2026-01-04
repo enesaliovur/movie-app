@@ -104,7 +104,7 @@ class _Header extends StatelessWidget {
                   width: double.infinity,
                   child: Text(
                     context.tr.onboarding.continueToNextStep,
-                    style: context.fs24W700,
+                    style: context.textStyles.fs24W700,
                   ),
                 )
               : SizedBox(
@@ -116,12 +116,12 @@ class _Header extends StatelessWidget {
                     children: [
                       Text(
                         context.tr.onboarding.welcome,
-                        style: context.fs24W700,
+                        style: context.textStyles.fs24W700,
                       ),
                       SizedBox(height: 12.h),
                       Text(
                         context.tr.onboarding.chooseMoviesTitle,
-                        style: context.fs20W500,
+                        style: context.textStyles.fs20W500,
                       ),
                     ],
                   ),
@@ -173,7 +173,7 @@ class _MovieList extends StatelessWidget {
                 left: 0,
                 right: 0,
                 child: ClipOval(
-                  child: Container(height: 40.h, color: context.black),
+                  child: Container(height: 40.h, color: context.colors.black),
                 ),
               ),
               Positioned(
@@ -181,7 +181,7 @@ class _MovieList extends StatelessWidget {
                 left: 0,
                 right: 0,
                 child: ClipOval(
-                  child: Container(height: 40.h, color: context.black),
+                  child: Container(height: 40.h, color: context.colors.black),
                 ),
               ),
             ],
@@ -201,12 +201,12 @@ class _MovieCardShimmer extends StatelessWidget {
       margin: EdgeInsets.symmetric(horizontal: 8.w),
       width: context.screenWidth * 0.5,
       child: Shimmer.fromColors(
-        baseColor: context.gray.withValues(alpha: 0.3),
-        highlightColor: context.gray.withValues(alpha: 0.1),
+        baseColor: context.colors.gray.withValues(alpha: 0.3),
+        highlightColor: context.colors.gray.withValues(alpha: 0.1),
         child: Container(
           decoration: BoxDecoration(
-            color: context.gray,
-            borderRadius: context.radius16,
+            color: context.colors.gray,
+            borderRadius: context.radius.radius16,
           ),
         ),
       ),
@@ -237,7 +237,7 @@ class _MovieCard extends StatelessWidget {
           child: Padding(
             padding: EdgeInsets.only(right: 16.w),
             child: ClipRRect(
-              borderRadius: context.radius8,
+              borderRadius: context.radius.radius8,
               child: SizedBox(
                 width: 180.w,
                 height: 252.h,
@@ -262,8 +262,8 @@ class _MovieCard extends StatelessWidget {
                           decoration: BoxDecoration(
                             gradient: RadialGradient(
                               colors: [
-                                context.transparent,
-                                context.redLight.withValues(alpha: 0.3),
+                                context.colors.transparent,
+                                context.colors.redLight.withValues(alpha: 0.3),
                               ],
                               center: Alignment.center,
                             ),
@@ -275,7 +275,7 @@ class _MovieCard extends StatelessWidget {
                         right: 8.w,
                         child: Icon(
                           Icons.check_circle_rounded,
-                          color: context.redLight,
+                          color: context.colors.redLight,
                           size: 24.sp,
                         ),
                       ),

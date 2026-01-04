@@ -69,7 +69,7 @@ class PaywallPageVersionB extends StatelessWidget {
                           SizedBox(height: context.screenHeight * 0.1),
                           Text(
                             AppConfig.appName,
-                            style: context.fs24W700.copyWith(
+                            style: context.textStyles.fs24W700.copyWith(
                               color: Colors.white,
                             ),
                             textAlign: TextAlign.center,

@@ -86,9 +86,9 @@ class _ProductCard extends StatelessWidget {
           Container(
             width: context.screenWidth,
             decoration: BoxDecoration(
-              borderRadius: context.radius12,
+              borderRadius: context.radius.radius12,
               border: Border.all(
-                color: isSelected ? context.redLight : context.white,
+                color: isSelected ? context.colors.redLight : context.colors.white,
               ),
             ),
             child: Padding(
@@ -104,12 +104,12 @@ class _ProductCard extends StatelessWidget {
                     children: [
                       Text(
                         title,
-                        style: context.fs16W600.copyWith(color: Colors.white),
+                        style: context.textStyles.fs16W600.copyWith(color: Colors.white),
                       ),
                       SizedBox(height: 4.h),
                       Text(
                         subPrice,
-                        style: context.fs12W400.copyWith(color: context.gray),
+                        style: context.textStyles.fs12W400.copyWith(color: context.colors.gray),
                       ),
                     ],
                   ),
@@ -117,7 +117,7 @@ class _ProductCard extends StatelessWidget {
                   Text(
                     price,
                     textAlign: TextAlign.end,
-                    style: context.fs16W600.copyWith(color: Colors.white),
+                    style: context.textStyles.fs16W600.copyWith(color: Colors.white),
                   ),
                 ],
               ),
@@ -130,14 +130,14 @@ class _ProductCard extends StatelessWidget {
               child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                 decoration: BoxDecoration(
-                  color: context.redLight,
-                  borderRadius: context.radius12,
+                  color: context.colors.redLight,
+                  borderRadius: context.radius.radius12,
                 ),
                 child: Text(
                   context.tr.paywall.bestValue,
                   textAlign: TextAlign.center,
-                  style: context.fs12W400.copyWith(
-                    color: context.white,
+                  style: context.textStyles.fs12W400.copyWith(
+                    color: context.colors.white,
                     fontWeight: FontWeight.w500,
                   ),
                 ),

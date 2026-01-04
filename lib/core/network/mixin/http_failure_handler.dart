@@ -23,16 +23,25 @@ class HttpFailureHandler {
   Failure? handleResult(int statusCode, Map<String, dynamic> result) {
     if (statusCode.toString().startsWith('2')) return null;
 
-    if (statusCode == 400) {
-      return const BadRequestFailure();
-    } else if (statusCode == 403) {
-      return const ForbiddenFailure();
-    } else if (statusCode == 404) {
-      return const NotFoundFailure();
-    } else if (statusCode == 500) {
-      return const ServerFailure();
-    } else {
-      return const UnknownFailure();
+    switch (statusCode) {
+      case 400:
+      case 405:
+      case 422:
+        return const BadRequestFailure();
+      case 401:
+        return const UnauthorizedFailure();
+      case 403:
+        return const ForbiddenFailure();
+      case 404:
+        return const NotFoundFailure();
+      case 500:
+      case 501:
+      case 503:
+        return const ServerFailure();
+      case 504:
+        return const ConnectionFailure();
+      default:
+        return const UnknownFailure();
     }
   }
 

@@ -24,15 +24,15 @@ class OnboardingContinueButton extends StatelessWidget {
             ignoring: !isValid,
             child: DefaultButton(
               onTap: () => onboardingStore.nextPage(),
-              color: isValid ? context.redLight : context.redDark,
+              color: isValid ? context.colors.redLight : context.colors.redDark,
 
               child: verifiedLoading
                   ? const DefaultProgressIndicator()
                   : Center(
                       child: Text(
                         context.tr.onboarding.continueBtn,
-                        style: context.fs16W600.copyWith(
-                          color: isValid ? context.white : context.gray,
+                        style: context.textStyles.fs16W600.copyWith(
+                          color: isValid ? context.colors.white : context.colors.gray,
                         ),
                       ),
                     ),

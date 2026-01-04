@@ -15,8 +15,8 @@ class HomePageForYouSection extends StatelessWidget {
           child: RichText(
             text: TextSpan(
               text: context.tr.home.forYou,
-              style: context.fs24W700,
-              children: [TextSpan(text: " ⭐️", style: context.fs24W700)],
+              style: context.textStyles.fs24W700,
+              children: [TextSpan(text: " ⭐️", style: context.textStyles.fs24W700)],
             ),
           ),
         ),
@@ -47,7 +47,7 @@ class HomePageForYouSection extends StatelessWidget {
                 child: Center(
                   child: Text(
                     context.tr.home.noRecommendations,
-                    style: context.fs14W400,
+                    style: context.textStyles.fs14W400,
                   ),
                 ),
               );
@@ -62,7 +62,7 @@ class HomePageForYouSection extends StatelessWidget {
                   final movie = recommendedMovies[index];
                   return MovieCard(
                     imageUrl: movie.posterUrl,
-                    borderRadius: context.radius100,
+                    borderRadius: context.radius.radius100,
                     width: 80.w,
                     height: 80.h,
                     margin: EdgeInsets.only(
@@ -100,7 +100,7 @@ class _ForYouSectionShimmer extends StatelessWidget {
               margin: EdgeInsets.only(right: 16.w, left: index == 0 ? 16.w : 0),
               decoration: BoxDecoration(
                 color: Colors.white,
-                borderRadius: context.radius100,
+                borderRadius: context.radius.radius100,
               ),
             );
           },

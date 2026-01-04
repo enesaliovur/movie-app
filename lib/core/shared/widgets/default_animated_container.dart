@@ -2,8 +2,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:matrix4_transform/matrix4_transform.dart';
 
-class ScalingContainer extends StatefulWidget {
-  const ScalingContainer({
+class DefaultAnimatedContainer extends StatefulWidget {
+  const DefaultAnimatedContainer({
     super.key,
     required this.child,
     this.onTap,
@@ -24,10 +24,11 @@ class ScalingContainer extends StatefulWidget {
   final Function()? onLongPress;
 
   @override
-  ScalingContainerState createState() => ScalingContainerState();
+  DefaultAnimatedContainerState createState() =>
+      DefaultAnimatedContainerState();
 }
 
-class ScalingContainerState extends State<ScalingContainer> {
+class DefaultAnimatedContainerState extends State<DefaultAnimatedContainer> {
   final _debounceDuration = const Duration(milliseconds: 200);
   final _scaleDuration = const Duration(milliseconds: 100);
   final _cancelDuration = const Duration(milliseconds: 110);
@@ -74,10 +75,7 @@ class ScalingContainerState extends State<ScalingContainer> {
           transform: Matrix4Transform()
               .scale(
                 isScale ? widget.scale : 1,
-                origin: Offset(
-                  measureSize.width / 2,
-                  measureSize.height / 2,
-                ),
+                origin: Offset(measureSize.width / 2, measureSize.height / 2),
               )
               .matrix4,
           child: widget.child,
@@ -91,11 +89,7 @@ class MeasureSize extends StatefulWidget {
   final Widget child;
   final OnWidgetSizeChange onChange;
 
-  const MeasureSize({
-    super.key,
-    required this.onChange,
-    required this.child,
-  });
+  const MeasureSize({super.key, required this.onChange, required this.child});
 
   @override
   MeasureSizeState createState() => MeasureSizeState();

@@ -1,5 +1,5 @@
 import 'package:boby_ai_case/core/di/setup_injector.dart';
-import 'package:boby_ai_case/presentation/common/movie/store/movie_store.dart';
+import 'package:boby_ai_case/presentation/home/store/home_store.dart';
 import 'package:boby_ai_case/presentation/home/store/recommendation_store.dart';
 import 'package:boby_ai_case/presentation/onboarding/store/onboarding_store.dart';
 import 'package:boby_ai_case/presentation/onboarding/widgets/onboarding_continue_button.dart';
@@ -24,24 +24,35 @@ class OnboardingPage extends StatefulWidget {
 
 class _OnboardingPageState extends State<OnboardingPage> {
   late final OnboardingStore _onboardingStore;
-  late final MovieStore _movieStore;
+  late final HomeStore _homeStore;
   late final RecommendationStore _recommendationStore;
+  late final PageController _pageController;
   late List<ReactionDisposer> _disposers;
 
   @override
   void initState() {
     super.initState();
     _onboardingStore = getIt<OnboardingStore>();
-    _movieStore = getIt<MovieStore>();
+    _homeStore = getIt<HomeStore>();
     _recommendationStore = getIt<RecommendationStore>();
+    _pageController = PageController();
 
     _disposers = [
       reaction((_) => _onboardingStore.onboardingCompleted, (bool completed) {
         if (completed && mounted) {
           _recommendationStore.fetchRecommendations();
-          _movieStore.fetchMovies();
-          _movieStore.fetchGenres();
+          _homeStore.fetchMovies();
+          _homeStore.fetchGenres();
           context.router.replace(GuardedPaywallRoute(fromOnboarding: true));
+        }
+      }),
+      reaction((_) => _onboardingStore.currentPage, (int page) {
+        if (mounted) {
+          _pageController.animateToPage(
+            page,
+            duration: const Duration(milliseconds: 300),
+            curve: Curves.easeInOut,
+          );
         }
       }),
       reaction<Failure?>((_) => _onboardingStore.moviesFailure, (failure) {
@@ -64,7 +75,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
 
   @override
   void dispose() {
-    _onboardingStore.dispose();
+    _pageController.dispose();
     for (final disposer in _disposers) {
       disposer();
     }
@@ -80,7 +91,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
           children: [
             Positioned.fill(
               child: PageView(
-                controller: _onboardingStore.pageController,
+                controller: _pageController,
                 physics: const NeverScrollableScrollPhysics(),
                 children: [
                   OnboardingMovieSelectionStep(

@@ -13,13 +13,13 @@ class PaywallRadioButton extends StatelessWidget {
       height: 24.w,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        color: isSelected ? context.redLight : Colors.transparent,
+        color: isSelected ? context.colors.redLight : Colors.transparent,
         border: isSelected
             ? null
-            : Border.all(color: context.white, width: 1.5),
+            : Border.all(color: context.colors.white, width: 1.5),
       ),
       child: isSelected
-          ? Icon(Icons.check, color: context.white, size: 16.sp)
+          ? Icon(Icons.check, color: context.colors.white, size: 16.sp)
           : null,
     );
   }

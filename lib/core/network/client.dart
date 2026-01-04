@@ -1,6 +1,6 @@
 import 'package:boby_ai_case/core/config/app_config.dart';
 import 'package:boby_ai_case/core/network/interceptors/http_interceptor.dart';
-import 'package:boby_ai_case/setup_environment.dart';
+import 'package:boby_ai_case/core/setup/setup_environment.dart';
 import 'package:dio/dio.dart';
 
 class Client {

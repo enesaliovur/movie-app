@@ -1,8 +1,6 @@
-import 'package:boby_ai_case/core/extensions/screen_extension.dart';
 import 'package:boby_ai_case/core/extensions/theme/build_context_color_ext.dart';
-import 'package:boby_ai_case/core/extensions/theme/build_context_radius_ext.dart';
 import 'package:boby_ai_case/core/extensions/theme/build_context_text_style_ext.dart';
-import 'package:boby_ai_case/core/shared/widgets/scaling_container.dart';
+import 'package:boby_ai_case/core/shared/widgets/default_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -13,26 +11,18 @@ class PaywallButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ScalingContainer(
+    return DefaultButton(
       onTap: () {},
-      child: Container(
-        width: context.screenWidth,
-        height: 56.h,
-        decoration: BoxDecoration(
-          color: context.redLight,
-          borderRadius: context.radius12,
-        ),
-        child: Stack(
-          alignment: Alignment.center,
-          children: [
-            Text(title, style: context.fs16W600.copyWith(color: context.white)),
-            if (icon != null)
-              Positioned(
-                right: 16.w,
-                child: Icon(icon, size: 24.sp, color: context.white),
-              ),
-          ],
-        ),
+      child: Stack(
+        alignment: Alignment.center,
+        children: [
+          Text(title, style: context.textStyles.fs16W600.copyWith(color: context.colors.white)),
+          if (icon != null)
+            Positioned(
+              right: 16.w,
+              child: Icon(icon, size: 24.sp, color: context.colors.white),
+            ),
+        ],
       ),
     );
   }

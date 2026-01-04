@@ -58,7 +58,7 @@ class _FeatureNameCell extends StatelessWidget {
       height: 20.w, // Match Status Icon Height (20)
       child: Align(
         alignment: Alignment.centerLeft,
-        child: Text(name, style: context.fs14W600),
+        child: Text(name, style: context.textStyles.fs14W600),
       ),
     );
   }
@@ -80,7 +80,7 @@ class _FreeColumn extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               SizedBox(height: 1.h),
-              Text(context.tr.paywall.free, style: context.fs16W600),
+              Text(context.tr.paywall.free, style: context.textStyles.fs16W600),
               SizedBox(height: 1.h),
             ],
           ),
@@ -199,7 +199,7 @@ class _ProColumnState extends State<_ProColumn> {
                 child: Center(
                   child: Icon(
                     Icons.cancel_rounded,
-                    color: context.white,
+                    color: context.colors.white,
                     size: 20.sp,
                   ),
                 ),
@@ -237,8 +237,8 @@ class _ProColumnState extends State<_ProColumn> {
     return Container(
       padding: EdgeInsets.all(8.w),
       decoration: BoxDecoration(
-        borderRadius: context.radius8,
-        border: Border.all(color: context.redLight, width: 1.w),
+        borderRadius: context.radius.radius8,
+        border: Border.all(color: context.colors.redLight, width: 1.w),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -278,7 +278,7 @@ class _ProHeader extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         const _ProGradient(),
-        Text(context.tr.paywall.pro, style: context.fs16W600),
+        Text(context.tr.paywall.pro, style: context.textStyles.fs16W600),
         const _ProGradient(),
       ],
     );
@@ -296,7 +296,7 @@ class _ProGradient extends StatelessWidget {
       margin: EdgeInsets.symmetric(horizontal: 4.w),
       decoration: BoxDecoration(
         gradient: LinearGradient(
-          colors: [Colors.transparent, context.redLight, Colors.transparent],
+          colors: [Colors.transparent, context.colors.redLight, Colors.transparent],
         ),
       ),
     );
@@ -335,7 +335,7 @@ class _StatusIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     return Icon(
       isAvailable ? Icons.check_circle_rounded : Icons.cancel_rounded,
-      color: isAvailable ? context.green : context.white,
+      color: isAvailable ? context.colors.green : context.colors.white,
       size: 20.sp,
     );
   }
@@ -350,7 +350,7 @@ class _AnimatedStatusIcon extends StatelessWidget {
     return Icon(
       isAvailable ? Icons.check_circle_rounded : Icons.cancel_rounded,
       key: ValueKey(isAvailable),
-      color: isAvailable ? context.green : context.white,
+      color: isAvailable ? context.colors.green : context.colors.white,
       size: 20.sp,
     );
   }

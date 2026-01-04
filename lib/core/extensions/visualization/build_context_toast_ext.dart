@@ -8,8 +8,8 @@ extension ToastExtension on BuildContext {
     Fluttertoast.showToast(
       msg: message ?? tr.common.somethingWentWrong,
       gravity: ToastGravity.TOP,
-      textColor: white,
-      backgroundColor: redLight,
+      textColor: colors.white,
+      backgroundColor: colors.redLight,
     );
   }
 }

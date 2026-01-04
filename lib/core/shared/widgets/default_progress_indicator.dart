@@ -15,8 +15,8 @@ class DefaultProgressIndicator extends StatelessWidget {
       width: size ?? 28.w,
       height: size ?? 28.h,
       child: Platform.isIOS
-          ? CupertinoActivityIndicator(color: color ?? context.white)
-          : CircularProgressIndicator(color: color ?? context.white),
+          ? CupertinoActivityIndicator(color: color ?? context.colors.white)
+          : CircularProgressIndicator(color: color ?? context.colors.white),
     );
   }
 }

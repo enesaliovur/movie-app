@@ -25,12 +25,12 @@ class PaywallFeatureList extends StatelessWidget {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(Icons.check, color: context.white, size: 20.sp),
+          Icon(Icons.check, color: context.colors.white, size: 20.sp),
           SizedBox(width: 12.w),
           Flexible(
             child: Text(
               text,
-              style: context.fs16W600,
+              style: context.textStyles.fs16W600,
               overflow: TextOverflow.ellipsis,
             ),
           ),

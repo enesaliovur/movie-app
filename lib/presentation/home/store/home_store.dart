@@ -5,12 +5,12 @@ import 'package:boby_ai_case/domain/entities/movie/paginated_movies_entity.dart'
 import 'package:boby_ai_case/domain/repositories/movie/i_movie_repository.dart';
 import 'package:mobx/mobx.dart';
 
-part 'movie_store.g.dart';
+part 'home_store.g.dart';
 
-class MovieStore = _MovieStore with _$MovieStore;
+class HomeStore = _HomeStore with _$HomeStore;
 
-abstract class _MovieStore with Store {
-  _MovieStore(this._movieRepository);
+abstract class _HomeStore with Store {
+  _HomeStore(this._movieRepository);
   final IMovieRepository _movieRepository;
 
   @observable

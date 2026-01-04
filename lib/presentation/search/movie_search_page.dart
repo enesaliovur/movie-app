@@ -65,7 +65,7 @@ class _MovieSearchPageState extends State<MovieSearchPage> {
       create: (context) => _store,
       child: Scaffold(
         appBar: AppBar(
-          title: Text(context.tr.search.title, style: context.fs20W600),
+          title: Text(context.tr.search.title, style: context.textStyles.fs20W600),
         ),
         body: Padding(
           padding: EdgeInsets.symmetric(horizontal: 16.w),
@@ -106,7 +106,7 @@ class _MovieSearchPageState extends State<MovieSearchPage> {
                       return Center(
                         child: Text(
                           context.tr.search.noResults,
-                          style: context.fs16W600,
+                          style: context.textStyles.fs16W600,
                         ),
                       );
                     }
@@ -129,7 +129,7 @@ class _MovieSearchPageState extends State<MovieSearchPage> {
                               final movie = movies[index];
                               return MovieCard(
                                 imageUrl: movie.posterUrl,
-                                borderRadius: context.radius12,
+                                borderRadius: context.radius.radius12,
                               );
                             },
                           ),
@@ -163,26 +163,26 @@ class _SearchBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: context.transparent,
+      color: context.colors.transparent,
       child: TextFormField(
         decoration: InputDecoration(
           filled: true,
-          fillColor: context.white,
+          fillColor: context.colors.white,
           contentPadding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 8.h),
           hintText: context.tr.search.searchHint,
-          hintStyle: context.fs17W400.copyWith(color: context.grayDark),
+          hintStyle: context.textStyles.fs17W400.copyWith(color: context.colors.grayDark),
           border: OutlineInputBorder(
-            borderRadius: context.radius12,
+            borderRadius: context.radius.radius10,
             borderSide: BorderSide.none,
           ),
           focusedBorder: OutlineInputBorder(
-            borderRadius: context.radius12,
+            borderRadius: context.radius.radius10,
             borderSide: BorderSide.none,
           ),
-          prefixIcon: Icon(Icons.search, color: context.grayDark, size: 24.sp),
-          suffixIcon: Icon(Icons.mic, color: context.grayDark, size: 24.sp),
+          prefixIcon: Icon(Icons.search, color: context.colors.grayDark, size: 24.sp),
+          suffixIcon: Icon(Icons.mic, color: context.colors.grayDark, size: 24.sp),
         ),
-        style: context.fs17W400.copyWith(color: context.black),
+        style: context.textStyles.fs17W400.copyWith(color: context.colors.black),
         autofocus: true,
         onChanged: (value) {
           _onSearch(context, query: value);

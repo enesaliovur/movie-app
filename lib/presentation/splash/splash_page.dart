@@ -6,7 +6,7 @@ import 'package:boby_ai_case/core/extensions/theme/build_context_text_style_ext.
 import 'package:boby_ai_case/core/extensions/visualization/build_context_toast_ext.dart';
 import 'package:boby_ai_case/core/failure/failure.dart';
 import 'package:boby_ai_case/core/router/app_router.dart';
-import 'package:boby_ai_case/presentation/common/movie/store/movie_store.dart';
+import 'package:boby_ai_case/presentation/home/store/home_store.dart';
 import 'package:boby_ai_case/presentation/home/store/recommendation_store.dart';
 import 'package:boby_ai_case/presentation/onboarding/store/onboarding_store.dart';
 import 'package:boby_ai_case/presentation/splash/store/splash_store.dart';
@@ -27,13 +27,13 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
   late final SplashStore _splashStore;
   late final OnboardingStore _onboardingStore;
   late final RecommendationStore _recommendationStore;
-  late final MovieStore _movieStore;
+  late final HomeStore _homeStore;
   late AnimationController _initialAnimationController;
   late AnimationController _pulseAnimationController;
   late Animation<double> _fadeAnimation;
   late Animation<double> _scaleAnimation;
   late Animation<double> _pulseAnimation;
-  late final List<ReactionDisposer> _disposers;
+  late List<ReactionDisposer> _disposers;
 
   @override
   void initState() {
@@ -42,7 +42,7 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
     _splashStore = getIt<SplashStore>();
     _onboardingStore = getIt<OnboardingStore>();
     _recommendationStore = getIt<RecommendationStore>();
-    _movieStore = getIt<MovieStore>();
+    _homeStore = getIt<HomeStore>();
     _setupReactions();
     _setupAnimations();
     _loadInitialData();
@@ -50,12 +50,12 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
 
   void _setupReactions() {
     _disposers = [
-      reaction<Failure?>((_) => _movieStore.moviesFailure, (failure) {
+      reaction<Failure?>((_) => _homeStore.moviesFailure, (failure) {
         if (failure != null && mounted) {
           context.showFailureToast();
         }
       }),
-      reaction<Failure?>((_) => _movieStore.genresFailure, (failure) {
+      reaction<Failure?>((_) => _homeStore.genresFailure, (failure) {
         if (failure != null && mounted) {
           context.showFailureToast();
         }
@@ -81,13 +81,14 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
         context.router.replace(const OnboardingRoute());
       }
     } else {
-      await _recommendationStore.fetchRecommendations();
-      await _movieStore.fetchMovies();
-      await _movieStore.fetchGenres();
-      if (!_movieStore.isGenresLoading && !_movieStore.isMoviesLoading) {
-        if (!mounted) return;
-        context.router.replace(const HomeRoute());
-      }
+      await Future.wait([
+        _recommendationStore.fetchRecommendations(),
+        _homeStore.fetchMovies(),
+        _homeStore.fetchGenres(),
+      ]);
+
+      if (!mounted) return;
+      context.router.replace(const HomeRoute());
     }
   }
 
@@ -134,6 +135,9 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
 
   @override
   void dispose() {
+    for (final disposer in _disposers) {
+      disposer();
+    }
     _initialAnimationController.dispose();
     _pulseAnimationController.dispose();
     super.dispose();
@@ -173,7 +177,10 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
                         height: 166.h,
                         fit: BoxFit.contain,
                       ),
-                      Text(AppConfig.appName, style: context.fs24W700),
+                      Text(
+                        AppConfig.appName,
+                        style: context.textStyles.fs24W700,
+                      ),
                     ],
                   ),
                 ),

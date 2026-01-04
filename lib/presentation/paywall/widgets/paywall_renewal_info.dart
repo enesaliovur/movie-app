@@ -11,11 +11,11 @@ class PaywallRenewalInfo extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Icon(Icons.check_circle_rounded, color: context.green, size: 16.w),
+        Icon(Icons.check_circle_rounded, color: context.colors.green, size: 16.w),
         SizedBox(width: 8.w),
         Text(
           'Auto Renewable, Cancel Anytime',
-          style: context.fs12W400.copyWith(color: context.gray),
+          style: context.textStyles.fs12W400.copyWith(color: context.colors.gray),
         ),
       ],
     );

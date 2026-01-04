@@ -70,19 +70,19 @@ class _AnimatedButtonState extends State<_AnimatedButton>
               width: _widthAnimation.value,
               height: 56.h,
               decoration: BoxDecoration(
-                color: context.redLight,
-                borderRadius: context.radius12,
+                color: context.colors.redLight,
+                borderRadius: context.radius.radius12,
               ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
                     context.tr.paywall.freeTrial,
-                    style: context.fs16W600.copyWith(color: context.white),
+                    style: context.textStyles.fs16W600.copyWith(color: context.colors.white),
                   ),
                   Text(
                     context.tr.paywall.noPaymentNow,
-                    style: context.fs16W600,
+                    style: context.textStyles.fs16W600,
                   ),
                 ],
               ),

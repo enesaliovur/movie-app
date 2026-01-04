@@ -55,28 +55,28 @@ class _FreeTrialContainer extends StatelessWidget {
         return Container(
           padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 8.h),
           decoration: BoxDecoration(
-            borderRadius: context.radius12,
-            border: Border.all(color: context.redLight),
+            borderRadius: context.radius.radius12,
+            border: Border.all(color: context.colors.redLight),
           ),
           child: Row(
             children: [
               Expanded(
                 child: Text(
                   context.tr.paywall.enableFreeTrial,
-                  style: context.fs16W600,
+                  style: context.textStyles.fs16W600,
                 ),
               ),
               AnimatedContainer(
                 duration: const Duration(milliseconds: 300),
                 decoration: BoxDecoration(
                   color: paywallStore.highlightFreeTrialSwitch
-                      ? context.blue.withValues(alpha: 0.2)
-                      : context.transparent,
-                  borderRadius: context.radius12,
+                      ? context.colors.blue.withValues(alpha: 0.2)
+                      : context.colors.transparent,
+                  borderRadius: context.radius.radius12,
                   border: Border.all(
                     color: paywallStore.highlightFreeTrialSwitch
-                        ? context.blue
-                        : context.transparent,
+                        ? context.colors.blue
+                        : context.colors.transparent,
                   ),
                 ),
                 child: CupertinoSwitch(
@@ -125,9 +125,9 @@ class _ProductListTile extends StatelessWidget {
       child: Container(
         width: context.screenWidth,
         decoration: BoxDecoration(
-          borderRadius: context.radius12,
+          borderRadius: context.radius.radius12,
           border: Border.all(
-            color: isSelected ? context.redLight : context.white,
+            color: isSelected ? context.colors.redLight : context.colors.white,
           ),
         ),
         child: Padding(
@@ -145,10 +145,10 @@ class _ProductListTile extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     spacing: 4.h,
                     children: [
-                      Text(product.period, style: context.fs16W600),
+                      Text(product.period, style: context.textStyles.fs16W600),
                       Text(
                         _getSubtitle(context),
-                        style: context.fs12W400.copyWith(color: context.gray),
+                        style: context.textStyles.fs12W400.copyWith(color: context.colors.gray),
                       ),
                     ],
                   ),
@@ -156,7 +156,7 @@ class _ProductListTile extends StatelessWidget {
                   Text(
                     _getPriceText(context),
                     textAlign: TextAlign.end,
-                    style: context.fs16W600,
+                    style: context.textStyles.fs16W600,
                   ),
                 ],
               ),
@@ -174,14 +174,14 @@ class _ProductListTile extends StatelessWidget {
                           vertical: 4,
                         ),
                         decoration: BoxDecoration(
-                          color: context.redLight,
-                          borderRadius: context.radius12,
+                          color: context.colors.redLight,
+                          borderRadius: context.radius.radius12,
                         ),
                         child: Text(
                           context.tr.paywall.bestValue,
                           textAlign: TextAlign.center,
-                          style: context.fs12W500.copyWith(
-                            color: context.white,
+                          style: context.textStyles.fs12W500.copyWith(
+                            color: context.colors.white,
                           ),
                         ),
                       ),

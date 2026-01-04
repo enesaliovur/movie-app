@@ -37,3 +37,7 @@ class UnknownFailure extends Failure {
 class TypeFailure extends Failure {
   const TypeFailure();
 }
+
+class UnauthorizedFailure extends Failure {
+  const UnauthorizedFailure();
+}

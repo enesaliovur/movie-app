@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 
 extension BuildContextColorExt on BuildContext {
+  AppColors get colors => const AppColors();
+}
+
+class AppColors {
+  const AppColors();
   Color get redLight => const Color(0xffCB2C2C);
   Color get redDark => const Color(0xff8C2626);
   Color get blue => const Color(0xff2C6BCB);

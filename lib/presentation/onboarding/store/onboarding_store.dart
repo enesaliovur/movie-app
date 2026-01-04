@@ -5,7 +5,7 @@ import 'package:boby_ai_case/domain/entities/movie/movie_entity.dart';
 import 'package:boby_ai_case/domain/entities/movie/movie_genre_entity.dart';
 import 'package:boby_ai_case/domain/entities/movie/paginated_movies_entity.dart';
 import 'package:boby_ai_case/domain/repositories/movie/i_movie_repository.dart';
-import 'package:flutter/material.dart';
+
 import 'package:mobx/mobx.dart';
 
 import 'package:boby_ai_case/domain/repositories/account/i_account_repository.dart';
@@ -20,11 +20,10 @@ abstract class _OnboardingStore with Store {
     this._accountRepository,
     this._movieRepository,
   );
+
   final ICacheService _cacheService;
   final IAccountRepository _accountRepository;
   final IMovieRepository _movieRepository;
-
-  final PageController pageController = PageController();
 
   @observable
   ObservableList<int> selectedMovieIds = ObservableList<int>();
@@ -143,11 +142,6 @@ abstract class _OnboardingStore with Store {
 
       isProcessing = false;
       currentPage = 1;
-      pageController.animateToPage(
-        1,
-        duration: const Duration(milliseconds: 300),
-        curve: Curves.easeInOut,
-      );
     } else if (currentPage == 1) {
       isProcessing = true;
       await _cacheService.writeBool(CacheKey.onboardingCompleted, true);
@@ -198,9 +192,5 @@ abstract class _OnboardingStore with Store {
     if (!hasMorePages || isMoviesLoading) return;
     final nextPage = movieInformation.page + 1;
     await getMovies(page: nextPage, loadMore: true);
-  }
-
-  void dispose() {
-    pageController.dispose();
   }
 }

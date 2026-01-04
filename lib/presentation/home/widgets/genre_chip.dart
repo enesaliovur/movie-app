@@ -16,16 +16,16 @@ class GenreChip extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(right: 8.w),
-      child: ScalingContainer(
+      child: DefaultAnimatedContainer(
         onTap: onTap,
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 200),
           padding: EdgeInsets.symmetric(horizontal: 16.w),
           decoration: BoxDecoration(
-            color: isSelected ? context.redLight : context.white,
-            borderRadius: context.radius100,
+            color: isSelected ? context.colors.redLight : context.colors.white,
+            borderRadius: context.radius.radius100,
             border: Border.all(
-              color: isSelected ? context.redLight : context.gray,
+              color: isSelected ? context.colors.redLight : context.colors.gray,
             ),
           ),
           child: Row(
@@ -34,14 +34,20 @@ class GenreChip extends StatelessWidget {
               if (isSelected) ...[
                 Padding(
                   padding: EdgeInsets.only(right: 4.w),
-                  child: Icon(Icons.check, color: context.white, size: 16.sp),
+                  child: Icon(
+                    Icons.check,
+                    color: context.colors.white,
+                    size: 16.sp,
+                  ),
                 ),
               ],
               Center(
                 child: Text(
                   name,
-                  style: context.fs16W400.copyWith(
-                    color: isSelected ? context.white : context.black,
+                  style: context.textStyles.fs16W400.copyWith(
+                    color: isSelected
+                        ? context.colors.white
+                        : context.colors.black,
                   ),
                 ),
               ),

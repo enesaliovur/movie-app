@@ -25,14 +25,14 @@ class MovieApp extends StatelessWidget {
           supportedLocales: context.supportedLocales,
           locale: context.locale,
           theme: ThemeData(
-            scaffoldBackgroundColor: context.black,
+            scaffoldBackgroundColor: context.colors.black,
             fontFamily: AssetConstants.fontFamilyInter,
             appBarTheme: AppBarTheme(
-              backgroundColor: context.black,
+              backgroundColor: context.colors.black,
               elevation: 0,
               systemOverlayStyle: SystemUiOverlayStyle.light,
-              titleTextStyle: context.fs16W600,
-              iconTheme: IconThemeData(color: context.white),
+              titleTextStyle: context.textStyles.fs16W600,
+              iconTheme: IconThemeData(color: context.colors.white),
             ),
           ),
           routerConfig: appRouter.config(),

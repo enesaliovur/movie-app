@@ -3,11 +3,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 extension BuildContextTextStyleExt on BuildContext {
+  AppTextStyles get textStyles => AppTextStyles(this);
+}
+
+class AppTextStyles {
+  final BuildContext _context;
+  AppTextStyles(this._context);
+
   TextStyle get fs8W400 {
     return TextStyle(
       fontSize: 8.sp,
       fontWeight: FontWeight.w400,
-      color: white,
+      color: _context.colors.white,
       letterSpacing: 0,
       height: 1,
     );
@@ -17,7 +24,7 @@ extension BuildContextTextStyleExt on BuildContext {
     return TextStyle(
       fontSize: 12.sp,
       fontWeight: FontWeight.w400,
-      color: white,
+      color: _context.colors.white,
       letterSpacing: 0,
       height: 1,
     );
@@ -27,7 +34,7 @@ extension BuildContextTextStyleExt on BuildContext {
     return TextStyle(
       fontSize: 12.sp,
       fontWeight: FontWeight.w500,
-      color: white,
+      color: _context.colors.white,
       letterSpacing: 0,
       height: 1,
     );
@@ -37,7 +44,7 @@ extension BuildContextTextStyleExt on BuildContext {
     return TextStyle(
       fontSize: 14.sp,
       fontWeight: FontWeight.w400,
-      color: white,
+      color: _context.colors.white,
       letterSpacing: 0,
       height: 1,
     );
@@ -47,7 +54,7 @@ extension BuildContextTextStyleExt on BuildContext {
     return TextStyle(
       fontSize: 14.sp,
       fontWeight: FontWeight.w600,
-      color: white,
+      color: _context.colors.white,
       letterSpacing: 0,
       height: 1,
     );
@@ -57,7 +64,7 @@ extension BuildContextTextStyleExt on BuildContext {
     return TextStyle(
       fontSize: 16.sp,
       fontWeight: FontWeight.w400,
-      color: white,
+      color: _context.colors.white,
       letterSpacing: 0,
       height: 1,
     );
@@ -67,7 +74,7 @@ extension BuildContextTextStyleExt on BuildContext {
     return TextStyle(
       fontSize: 16.sp,
       fontWeight: FontWeight.w600,
-      color: white,
+      color: _context.colors.white,
       letterSpacing: 0,
       height: 1,
     );
@@ -77,7 +84,7 @@ extension BuildContextTextStyleExt on BuildContext {
     return TextStyle(
       fontSize: 17.sp,
       fontWeight: FontWeight.w400,
-      color: white,
+      color: _context.colors.white,
       letterSpacing: 0,
       height: 1,
     );
@@ -87,7 +94,7 @@ extension BuildContextTextStyleExt on BuildContext {
     return TextStyle(
       fontSize: 18.sp,
       fontWeight: FontWeight.w600,
-      color: white,
+      color: _context.colors.white,
       letterSpacing: 0,
       height: 1,
     );
@@ -97,7 +104,7 @@ extension BuildContextTextStyleExt on BuildContext {
     return TextStyle(
       fontSize: 20.sp,
       fontWeight: FontWeight.w400,
-      color: white,
+      color: _context.colors.white,
       letterSpacing: 0,
       height: 1,
     );
@@ -107,7 +114,7 @@ extension BuildContextTextStyleExt on BuildContext {
     return TextStyle(
       fontSize: 20.sp,
       fontWeight: FontWeight.w500,
-      color: white,
+      color: _context.colors.white,
       letterSpacing: 0,
       height: 1,
     );
@@ -117,7 +124,7 @@ extension BuildContextTextStyleExt on BuildContext {
     return TextStyle(
       fontSize: 20.sp,
       fontWeight: FontWeight.w600,
-      color: white,
+      color: _context.colors.white,
       letterSpacing: 0,
       height: 1,
     );
@@ -127,7 +134,7 @@ extension BuildContextTextStyleExt on BuildContext {
     return TextStyle(
       fontSize: 24.sp,
       fontWeight: FontWeight.w700,
-      color: white,
+      color: _context.colors.white,
       letterSpacing: 0,
       height: 1,
     );
@@ -137,7 +144,7 @@ extension BuildContextTextStyleExt on BuildContext {
     return TextStyle(
       fontSize: 24.sp,
       fontWeight: FontWeight.w800,
-      color: white,
+      color: _context.colors.white,
     );
   }
 
@@ -145,7 +152,7 @@ extension BuildContextTextStyleExt on BuildContext {
     return TextStyle(
       fontSize: 28.sp,
       fontWeight: FontWeight.w600,
-      color: white,
+      color: _context.colors.white,
       letterSpacing: 0,
       height: 1,
     );
@@ -155,7 +162,7 @@ extension BuildContextTextStyleExt on BuildContext {
     return TextStyle(
       fontSize: 32.sp,
       fontWeight: FontWeight.w800,
-      color: white,
+      color: _context.colors.white,
       letterSpacing: 0,
       height: 1,
     );

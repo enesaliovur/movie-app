@@ -66,9 +66,9 @@ abstract class _RecommendationStore with Store {
       (data) async {
         favoriteMovieIds = ObservableList.of(data.movies.map((e) => e.id));
 
-        for (final id in favoriteMovieIds) {
-          await _fetchSimilarMovies(id);
-        }
+        await Future.wait(
+          favoriteMovieIds.map((id) => _fetchSimilarMovies(id)),
+        );
       },
     );
 

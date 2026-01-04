@@ -8,7 +8,7 @@ class HomePageMoviesSection extends StatefulWidget {
 }
 
 class _HomePageMoviesSectionState extends State<HomePageMoviesSection> {
-  late final MovieStore _movieStore;
+  late final HomeStore _homeStore;
 
   late final ScrollController _moviesScrollController;
 
@@ -27,13 +27,13 @@ class _HomePageMoviesSectionState extends State<HomePageMoviesSection> {
   @override
   void initState() {
     super.initState();
-    _movieStore = getIt<MovieStore>();
+    _homeStore = getIt<HomeStore>();
     _moviesScrollController = ScrollController();
     _chipScrollController = ScrollController();
 
     _moviesScrollController.addListener(_onMoviesScroll);
 
-    _disposer = reaction<List<dynamic>>((_) => _movieStore.availableGenres, (
+    _disposer = reaction<List<dynamic>>((_) => _homeStore.availableGenres, (
       genres,
     ) {
       for (final genre in genres) {
@@ -57,9 +57,9 @@ class _HomePageMoviesSectionState extends State<HomePageMoviesSection> {
   }
 
   void _selectFirstGenreIfNeeded() {
-    final genres = _movieStore.availableGenres;
-    if (genres.isNotEmpty && _movieStore.selectedGenreId == null) {
-      _movieStore.selectGenre(genres.first.id);
+    final genres = _homeStore.availableGenres;
+    if (genres.isNotEmpty && _homeStore.selectedGenreId == null) {
+      _homeStore.selectGenre(genres.first.id);
     }
   }
 
@@ -67,14 +67,14 @@ class _HomePageMoviesSectionState extends State<HomePageMoviesSection> {
     if (!_isUserScrolling) return;
     if (!_moviesScrollController.hasClients) return;
 
-    final genres = _movieStore.availableGenres;
+    final genres = _homeStore.availableGenres;
     if (genres.isEmpty) return;
 
     if (_moviesScrollController.position.pixels >=
         _moviesScrollController.position.maxScrollExtent - 20) {
       final lastGenreId = genres.last.id;
-      if (lastGenreId != _movieStore.selectedGenreId) {
-        _movieStore.selectGenre(lastGenreId);
+      if (lastGenreId != _homeStore.selectedGenreId) {
+        _homeStore.selectGenre(lastGenreId);
         _scrollChipToCenter(lastGenreId);
       }
       return;
@@ -111,8 +111,8 @@ class _HomePageMoviesSectionState extends State<HomePageMoviesSection> {
     }
 
     if (selectedGenreId != null &&
-        selectedGenreId != _movieStore.selectedGenreId) {
-      _movieStore.selectGenre(selectedGenreId);
+        selectedGenreId != _homeStore.selectedGenreId) {
+      _homeStore.selectGenre(selectedGenreId);
       _scrollChipToCenter(selectedGenreId);
     }
   }
@@ -120,7 +120,7 @@ class _HomePageMoviesSectionState extends State<HomePageMoviesSection> {
   void _onGenreTap(int genreId) {
     _isUserScrolling = false;
 
-    _movieStore.selectGenre(genreId);
+    _homeStore.selectGenre(genreId);
     _scrollChipToCenter(genreId);
 
     final key = _sectionKeys[genreId];
@@ -180,8 +180,8 @@ class _HomePageMoviesSectionState extends State<HomePageMoviesSection> {
           child: RichText(
             text: TextSpan(
               text: context.tr.home.movies,
-              style: context.fs24W700,
-              children: [TextSpan(text: " 🎬", style: context.fs24W700)],
+              style: context.textStyles.fs24W700,
+              children: [TextSpan(text: " 🎬", style: context.textStyles.fs24W700)],
             ),
           ),
         ),
@@ -198,8 +198,8 @@ class _HomePageMoviesSectionState extends State<HomePageMoviesSection> {
   Widget _buildGenreChips() {
     return Observer(
       builder: (context) {
-        final genres = _movieStore.availableGenres;
-        final selectedId = _movieStore.selectedGenreId;
+        final genres = _homeStore.availableGenres;
+        final selectedId = _homeStore.selectedGenreId;
 
         return SizedBox(
           height: 36.h,
@@ -231,28 +231,28 @@ class _HomePageMoviesSectionState extends State<HomePageMoviesSection> {
   Widget _buildMoviesList() {
     return Observer(
       builder: (context) {
-        final genres = _movieStore.availableGenres;
-        final groupedMovies = _movieStore.groupedMovies;
+        final genres = _homeStore.availableGenres;
+        final groupedMovies = _homeStore.groupedMovies;
         if (genres.isEmpty) {
-          if (_movieStore.isMoviesLoading) {
+          if (_homeStore.isMoviesLoading) {
             return const Center(child: DefaultProgressIndicator());
           }
 
-          if (_movieStore.moviesFailure != null) {
+          if (_homeStore.moviesFailure != null) {
             return Center(
               child: DefaultRetryButton(
                 onTap: () {
-                  _movieStore.fetchMovies();
+                  _homeStore.fetchMovies();
                 },
               ),
             );
           }
 
-          if (_movieStore.movies.isEmpty) {
+          if (_homeStore.movies.isEmpty) {
             return Center(
               child: Text(
                 context.tr.home.noMoviesFound,
-                style: context.fs18W600,
+                style: context.textStyles.fs18W600,
               ),
             );
           }

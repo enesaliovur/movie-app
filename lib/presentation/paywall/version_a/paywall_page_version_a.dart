@@ -44,7 +44,7 @@ class PaywallPageVersionA extends StatelessWidget {
                   child: Column(
                     children: [
                       SizedBox(height: 20.h),
-                      Text(AppConfig.appName, style: context.fs24W700),
+                      Text(AppConfig.appName, style: context.textStyles.fs24W700),
                       SizedBox(height: 12.h),
                       const PaywallFeaturesTable(),
                       SizedBox(height: 28.h),
@@ -56,7 +56,7 @@ class PaywallPageVersionA extends StatelessWidget {
               Positioned(
                 right: 8.w,
                 child: IconButton(
-                  icon: Icon(Icons.close, color: context.gray, size: 24.sp),
+                  icon: Icon(Icons.close, color: context.colors.gray, size: 24.sp),
                   onPressed: () {
                     if (fromOnboarding) {
                       context.router.replace(const HomeRoute());

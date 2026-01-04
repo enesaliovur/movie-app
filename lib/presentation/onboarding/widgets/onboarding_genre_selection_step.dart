@@ -1,6 +1,8 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:boby_ai_case/core/extensions/localization/build_context_tr_ext.dart';
 import 'package:boby_ai_case/core/extensions/theme/build_context_color_ext.dart';
 import 'package:boby_ai_case/core/extensions/theme/build_context_text_style_ext.dart';
+import 'package:boby_ai_case/core/shared/widgets/default_animated_container.dart';
 import 'package:boby_ai_case/domain/entities/movie/movie_genre_entity.dart';
 import 'package:boby_ai_case/presentation/onboarding/store/onboarding_store.dart';
 import 'package:flutter/material.dart';
@@ -61,9 +63,9 @@ class _Header extends StatelessWidget {
                     children: [
                       Text(
                         context.tr.onboarding.thankYou,
-                        style: context.fs24W700,
+                        style: context.textStyles.fs24W700,
                       ),
-                      Text(" 👍", style: context.fs24W700),
+                      Text(" 👍", style: context.textStyles.fs24W700),
                     ],
                   ),
                 )
@@ -76,12 +78,12 @@ class _Header extends StatelessWidget {
                     children: [
                       Text(
                         context.tr.onboarding.welcome,
-                        style: context.fs24W700,
+                        style: context.textStyles.fs24W700,
                       ),
                       SizedBox(height: 12.h),
                       Text(
                         context.tr.onboarding.chooseGenresTitle,
-                        style: context.fs20W500,
+                        style: context.textStyles.fs20W500,
                       ),
                     ],
                   ),
@@ -103,17 +105,15 @@ class _GenreGrid extends StatelessWidget {
       builder: (context) {
         final genres = onboardingStore.genres;
         return GridView.builder(
-          padding: EdgeInsets.only(
-            top: 24.h,
-            left: 24.w,
-            right: 24.w,
-            bottom: 100.h,
-          ),
+          padding: EdgeInsets.symmetric(
+            horizontal: 20.w,
+          ).copyWith(top: 24.h, bottom: 100.h),
           itemCount: genres.length,
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
-            crossAxisSpacing: 64.w,
-            mainAxisSpacing: 16.h,
+            crossAxisSpacing: 55.w,
+            mainAxisSpacing: 20.h,
+            childAspectRatio: 1,
           ),
           itemBuilder: (context, index) {
             final genre = genres[index];
@@ -136,7 +136,7 @@ class _GenreItem extends StatelessWidget {
     return Observer(
       builder: (context) {
         final isSelected = onboardingStore.isFavoriteGenre(genre);
-        return GestureDetector(
+        return DefaultAnimatedContainer(
           onTap: () {
             if (isSelected) {
               onboardingStore.removeFavoriteGenre(genre);
@@ -148,20 +148,28 @@ class _GenreItem extends StatelessWidget {
             children: [
               Container(
                 decoration: BoxDecoration(
-                  color: context.white,
+                  color: context.colors.white,
                   shape: BoxShape.circle,
                   border: Border.all(
-                    color: isSelected ? context.redLight : context.transparent,
+                    color: isSelected
+                        ? context.colors.redLight
+                        : context.colors.transparent,
                     width: 2.w,
                   ),
                 ),
                 child: Center(
-                  child: Text(
-                    genre.name,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: context.fs20W600.copyWith(color: context.black),
-                    textAlign: TextAlign.center,
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 8.w),
+                    child: AutoSizeText(
+                      genre.name,
+                      maxLines: 1,
+                      minFontSize: 12,
+                      overflow: TextOverflow.ellipsis,
+                      style: context.textStyles.fs20W600.copyWith(
+                        color: context.colors.black,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
                   ),
                 ),
               ),
@@ -171,14 +179,14 @@ class _GenreItem extends StatelessWidget {
                   right: 8.w,
                   child: Container(
                     decoration: BoxDecoration(
-                      color: context.redLight,
+                      color: context.colors.redLight,
                       shape: BoxShape.circle,
                     ),
                     child: Padding(
                       padding: EdgeInsets.all(2.w),
                       child: Icon(
                         Icons.check,
-                        color: context.white,
+                        color: context.colors.white,
                         size: 20.sp,
                       ),
                     ),

@@ -7,28 +7,30 @@ class HomePageSearchBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 16.sp),
-      child: ScalingContainer(
+      child: DefaultAnimatedContainer(
         onTap: () {
-          context.router.push(GuardedPaywallRoute(fromOnboarding: false));
+          context.router.push(const MovieSearchRoute());
         },
         child: DecoratedBox(
           decoration: BoxDecoration(
-            color: context.white,
-            borderRadius: context.radius16,
+            color: context.colors.white,
+            borderRadius: context.radius.radius10,
           ),
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 8.h),
             child: Row(
               children: [
-                Icon(Icons.search, color: context.grayDark, size: 24.sp),
+                Icon(Icons.search, color: context.colors.grayDark, size: 24.sp),
                 SizedBox(width: 4.w),
                 Expanded(
                   child: Text(
                     context.tr.search.searchHint,
-                    style: context.fs17W400.copyWith(color: context.grayDark),
+                    style: context.textStyles.fs17W400.copyWith(
+                      color: context.colors.grayDark,
+                    ),
                   ),
                 ),
-                Icon(Icons.mic, color: context.grayDark, size: 24.sp),
+                Icon(Icons.mic, color: context.colors.grayDark, size: 24.sp),
               ],
             ),
           ),
