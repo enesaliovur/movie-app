@@ -1,4 +1,4 @@
-# Boby AI Case - Movie App
+# Movie App
 
 App Screen Recording: https://drive.google.com/file/d/188CljdLbt4L5SHAke9oHYQX7VaReVclb/view?usp=share_link
 
