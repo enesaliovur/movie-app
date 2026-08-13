@@ -1,7 +1,5 @@
 # Movie App
 
-App Screen Recording: https://drive.google.com/file/d/188CljdLbt4L5SHAke9oHYQX7VaReVclb/view?usp=share_link
-
 ### App Icon Dev
 <img src="https://github.com/user-attachments/assets/a3796bfc-8cef-46a0-82ae-5d41d57691ba" width="100">
 
